@@ -36,7 +36,7 @@
           }
         } catch (_) {}
         try {
-          var supported = /^(en|fr|it|ja|zh)$/;
+          var supported = /^(en|fr|it|ja|zh|pl)$/;
           var lang = "";
           try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
           if (!supported.test(lang)) {
@@ -72,7 +72,7 @@
       <header class="pp-header" id="pp-header">
         <a class="pp-back-link" href="../">
           <svg viewBox="0 0 24 24" aria-hidden="true" class="pp-back-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-          back to photography
+          <span data-i18n="photo.back">back to photography</span>
         </a>
         <span class="pp-header-caption" id="pp-header-caption" aria-hidden="true"></span>
       </header>
@@ -82,12 +82,12 @@
 
         <div class="pp-loading" id="pp-loading">
           <div class="pp-spinner"></div>
-          <p>loading…</p>
+          <p data-i18n="photo.loading">loading…</p>
         </div>
 
         <div class="pp-error" id="pp-error" hidden>
-          <p>Photo not found.</p>
-          <a class="pp-back-link" href="../">← back to photography</a>
+          <p data-i18n="photo.notFound">Photo not found.</p>
+          <a class="pp-back-link" href="../">← <span data-i18n="photo.back">back to photography</span></a>
         </div>
 
         <article class="pp-article" id="pp-article" hidden>
@@ -111,8 +111,8 @@
 
           <!-- Map (shown when lat/lng available) -->
           <div class="pp-map-wrap" id="pp-map-wrap" hidden>
-            <div class="pp-map-label">location</div>
-            <iframe class="pp-map" id="pp-map" src="" loading="lazy" title="Photo location map"
+            <div class="pp-map-label" data-i18n="photo.location">location</div>
+            <iframe class="pp-map" id="pp-map" src="" loading="lazy" title="Photo location map" data-i18n-title="photo.mapTitle"
               referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe>
             <div class="pp-map-coords" id="pp-map-coords"></div>
           </div>
@@ -121,13 +121,13 @@
           <div class="pp-tags" id="pp-tags"></div>
 
           <!-- Prev / next navigation -->
-          <nav class="pp-nav" aria-label="Browse photos">
+          <nav class="pp-nav" aria-label="Browse photos" data-i18n-aria="photo.browse">
             <a class="pp-nav-btn pp-nav-prev" id="pp-nav-prev" href="#">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-              previous
+              <span data-i18n="photo.previous">previous</span>
             </a>
             <a class="pp-nav-btn pp-nav-next" id="pp-nav-next" href="#">
-              next
+              <span data-i18n="photo.next">next</span>
               <svg viewBox="0 0 24 24" aria-hidden="true" style="transform:scaleX(-1)"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
             </a>
           </nav>
@@ -136,7 +136,7 @@
           <div class="pp-post-footer">
             <a class="pp-back-link pp-back-link--bottom" href="../">
               <svg viewBox="0 0 24 24" aria-hidden="true" class="pp-back-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
-              back to photography
+              <span data-i18n="photo.back">back to photography</span>
             </a>
           </div>
 
@@ -226,6 +226,10 @@
              + '<td class="pp-meta-value">' + esc(String(value)) + '</td></tr>';
       }
 
+      function photoText(key, vars) {
+        return window.portfolioI18n ? window.portfolioI18n.t(key, vars) : key;
+      }
+
       function show(el) { el.hidden = false; }
       function hide(el) { el.hidden = true; }
 
@@ -238,7 +242,7 @@
         var parsed = parseCaption(rawCaption);
 
         // Page title
-        document.title = (parsed.title || rawCaption) + " | Your Name";
+        document.title = photoText("photo.titleSuffix", { title: parsed.title || rawCaption });
 
         // Sticky header caption
         var hc = document.getElementById("pp-header-caption");
@@ -249,7 +253,7 @@
         if (eyebrow) {
           var parts = [];
           if (parsed.date) parts.push(parsed.date);
-          parts.push("Photo " + (index + 1) + " of " + photos.length);
+          parts.push(photoText("photo.counter", { current: index + 1, total: photos.length }));
           eyebrow.textContent = parts.join("  ·  ");
         }
 
@@ -268,18 +272,18 @@
         var metaEl = document.getElementById("pp-meta-block");
         if (metaEl) {
           var rows = "";
-          if (parsed.location) rows += metaRow("location", parsed.location);
-          if (parsed.date)     rows += metaRow("date", parsed.date);
+          if (parsed.location) rows += metaRow(photoText("photo.location"), parsed.location);
+          if (parsed.date)     rows += metaRow(photoText("photo.meta.date"), parsed.date);
           if (photo.width && photo.height)
-            rows += metaRow("dimensions", photo.width + " × " + photo.height + " px");
-          if (photo.camera)      rows += metaRow("camera", photo.camera);
-          if (photo.lens)        rows += metaRow("lens", photo.lens);
-          if (photo.focal)       rows += metaRow("focal length", photo.focal);
-          if (photo.shutter)     rows += metaRow("shutter", photo.shutter);
-          if (photo.aperture)    rows += metaRow("aperture", photo.aperture);
-          if (photo.iso)         rows += metaRow("ISO", photo.iso);
+            rows += metaRow(photoText("photo.meta.dimensions"), photo.width + " × " + photo.height + " px");
+          if (photo.camera)      rows += metaRow(photoText("photo.meta.camera"), photo.camera);
+          if (photo.lens)        rows += metaRow(photoText("photo.meta.lens"), photo.lens);
+          if (photo.focal)       rows += metaRow(photoText("photo.meta.focal"), photo.focal);
+          if (photo.shutter)     rows += metaRow(photoText("photo.meta.shutter"), photo.shutter);
+          if (photo.aperture)    rows += metaRow(photoText("photo.meta.aperture"), photo.aperture);
+          if (photo.iso)         rows += metaRow(photoText("photo.meta.iso"), photo.iso);
           if (photo.lat != null && photo.lng != null)
-            rows += metaRow("coordinates", photo.lat.toFixed(6) + ",  " + photo.lng.toFixed(6));
+            rows += metaRow(photoText("photo.meta.coordinates"), photo.lat.toFixed(6) + ",  " + photo.lng.toFixed(6));
 
           if (rows) {
             metaEl.innerHTML = '<table class="pp-meta-table"><tbody>' + rows + '</tbody></table>';
@@ -356,17 +360,24 @@
       }, { passive: true });
 
       /* ── Bootstrap ─────────────────────────────────────────── */
+      var loadedPhotos = null;
+      var loadedIndex = 0;
       fetch(PHOTOS_JSON + "?_=" + Date.now())
         .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
         .then(function (photos) {
           var i = getIndex();
           if (isNaN(i) || i < 0 || i >= photos.length) i = 0;
+          loadedPhotos = photos;
+          loadedIndex = i;
           render(photos, i);
         })
         .catch(function (e) {
           console.error("Photo load failed:", e);
           showError();
         });
+      document.addEventListener("portfolio:language-change", function () {
+        if (loadedPhotos) render(loadedPhotos, loadedIndex);
+      });
     })();
     </script>
   </body>

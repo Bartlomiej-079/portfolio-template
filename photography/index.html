@@ -58,7 +58,7 @@
           }
         } catch (_) {}
         try {
-          var supported = /^(en|fr|it|ja|zh)$/;
+          var supported = /^(en|fr|it|ja|zh|pl)$/;
           var lang = "";
           try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
           if (!supported.test(lang)) {
@@ -143,7 +143,7 @@
 
           <div class="tab is-active photo-tab">
             <main class="gallery" id="gallery">
-              <p class="loading-msg" id="loading-msg">loading…</p>
+              <p class="loading-msg" id="loading-msg" data-i18n="photo.loading">loading…</p>
             </main>
           </div>
         </section>
@@ -156,16 +156,16 @@
     </main><!-- /.page-shell -->
 
     <!-- ── Lightbox ──────────────────────────────────────────── -->
-    <div class="photo-lb" id="photo-lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+    <div class="photo-lb" id="photo-lb" role="dialog" aria-modal="true" aria-label="Photo viewer" data-i18n-aria="photo.viewer" hidden>
       <div class="lb-top-bar">
-        <a class="lb-newtab" id="lb-newtab" href="#" target="_blank" rel="noopener noreferrer" aria-label="Open image in new tab">
+        <a class="lb-newtab" id="lb-newtab" href="#" target="_blank" rel="noopener noreferrer" aria-label="Open image in new tab" data-i18n-aria="photo.openImage">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
-          open
+          <span data-i18n="btn.open">open ↗</span>
         </a>
-        <button class="lb-close" id="lb-close" aria-label="Close">close</button>
+        <button class="lb-close" id="lb-close" aria-label="Close" data-i18n-aria="aria.close" data-i18n="btn.close">close</button>
       </div>
-      <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous">&#8249;</button>
-      <button class="lb-nav lb-next" id="lb-next" aria-label="Next">&#8250;</button>
+      <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous" data-i18n-aria="aria.prevImage">&#8249;</button>
+      <button class="lb-nav lb-next" id="lb-next" aria-label="Next" data-i18n-aria="aria.nextImage">&#8250;</button>
       <figure class="lb-figure">
         <img class="lb-img" id="lb-img" src="" alt="" />
         <figcaption class="lb-caption" id="lb-caption"></figcaption>
@@ -227,7 +227,8 @@
           const detailBtn = document.createElement("a");
           detailBtn.className = "gallery-detail-btn";
           detailBtn.href = `photo/?i=${i}`;
-          detailBtn.textContent = "view details";
+          detailBtn.dataset.i18n = "btn.viewDetails";
+          window.portfolioI18n?.apply(detailBtn);
           detailBtn.addEventListener("click", e => e.stopPropagation());
           overlayBottom.appendChild(detailBtn);
 
@@ -301,7 +302,7 @@
         .then(items => { photos = items; buildGallery(items); })
         .catch(() => {
           const msg = document.getElementById("loading-msg");
-          if (msg) msg.textContent = "Could not load photos.";
+          if (msg) msg.textContent = window.portfolioI18n?.t("photo.loadError") || "Could not load photos.";
         });
     </script>
   </body>

@@ -40,7 +40,7 @@
           }
         } catch (_) {}
         try {
-          var supported = /^(en|fr|it|ja|zh)$/;
+          var supported = /^(en|fr|it|ja|zh|pl)$/;
           var lang = "";
           try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
           if (!supported.test(lang)) {

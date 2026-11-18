@@ -26,5 +26,10 @@ Usa i **filtri** per restringere gli articoli per *tag* o *anno*.
 
 Scrivi una o due frasi su ciò di cui scrivi. Gli articoli sono file markdown nella cartella `posts/`; esegui `npm run build` per aggiornare l'indice.
 
+::pl
+Użyj **filtrów**, aby zawęzić wpisy według *tagu* lub *roku*.
+
+Napisz kilka słów o tematyce swoich tekstów. Wpisy to pliki Markdown w folderze `posts/`; uruchom `npm run build`, aby odświeżyć indeks.
+
 ```
 ::vspace 1em

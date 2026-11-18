@@ -17,6 +17,9 @@ Toutes les heures sont en UTC (GMT+0). Les numéros de version suivent v{majeur}
 ::it
 Tutti gli orari sono in UTC (GMT+0). I numeri di versione seguono v{major}.{minor}.{patch}, con sotto-patch per le correzioni minori. Le note sono in ordine cronologico inverso, le più recenti in alto.
 
+::pl
+Wszystkie godziny podano w strefie UTC (GMT+0). Numery wersji mają format v{major}.{minor}.{patch}; drobne poprawki mogą otrzymać dodatkowy numer podwersji. Historia zmian jest uporządkowana odwrotnie chronologicznie — najnowsze wpisy znajdują się na górze.
+
 ```
 
 <details class="md-accordion">

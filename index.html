@@ -22,6 +22,7 @@
     <link rel="alternate" hreflang="it" href="https://example.com/" />
     <link rel="alternate" hreflang="ja" href="https://example.com/" />
     <link rel="alternate" hreflang="zh" href="https://example.com/" />
+    <link rel="alternate" hreflang="pl" href="https://example.com/" />
     <link rel="alternate" hreflang="x-default" href="https://example.com/" />
     <link rel="alternate" type="text/plain" href="https://example.com/llms.txt" title="LLM instructions" />
     <link rel="manifest" href="site.webmanifest" />
@@ -89,7 +90,7 @@
               { "@type": "Language", "name": "English", "alternateName": "en" }
             ]
           },
-          "inLanguage": ["en-GB", "fr", "it", "ja", "zh"]
+          "inLanguage": ["en-GB", "fr", "it", "ja", "zh", "pl-PL"]
         },
         {
           "@type": "WebSite",
@@ -98,7 +99,7 @@
           "name": "Your Name",
           "alternateName": ["example.com"],
           "publisher": { "@id": "https://example.com/#person" },
-          "inLanguage": ["en-GB", "fr", "it", "ja", "zh"]
+          "inLanguage": ["en-GB", "fr", "it", "ja", "zh", "pl-PL"]
         }
       ]
     }
@@ -121,7 +122,7 @@
           // No URLSearchParams: fall through and render the site as normal.
         }
         try {
-          var supported = /^(en|fr|it|ja|zh)$/;
+          var supported = /^(en|fr|it|ja|zh|pl)$/;
           var lang = "";
           try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
           if (!supported.test(lang)) {

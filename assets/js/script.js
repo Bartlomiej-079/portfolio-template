@@ -3532,7 +3532,7 @@ function getLanguageOptions(languageContent) {
 }
 
 const LANGUAGE_PREF_KEY = "portfolio-language";
-const SUPPORTED_LANGUAGE_PREFS = ["en", "fr", "it", "ja", "zh"];
+const SUPPORTED_LANGUAGE_PREFS = ["en", "fr", "it", "ja", "zh", "pl"];
 
 const LANGUAGE_NAMES = {
   en: "English",
@@ -7597,7 +7597,7 @@ if (IS_DEV) {
     if (typeof getPreferredLanguage === "function") return getPreferredLanguage();
     try {
       const v = String(localStorage.getItem("portfolio-language") || "").toLowerCase();
-      if (["en", "fr", "it", "ja", "zh"].includes(v)) return v;
+      if (["en", "fr", "it", "ja", "zh", "pl"].includes(v)) return v;
     } catch (_) {}
     return "en";
   }
@@ -7616,7 +7616,7 @@ if (IS_DEV) {
     scope.querySelectorAll(".lang-dropdown-mount").forEach((mount) => {
       if (mount.dataset.bound === "true") return;
       mount.dataset.bound = "true";
-      const opts = String(mount.dataset.options || "en,fr,it,ja,zh")
+      const opts = String(mount.dataset.options || "en,fr,it,ja,zh,pl")
         .split(",")
         .map((s) => s.trim().toLowerCase())
         .filter(Boolean);
@@ -7726,7 +7726,7 @@ if (IS_DEV) {
           <div class="settings-row settings-row-dropdown">
             <div class="settings-row-icon" style="background:linear-gradient(135deg,#11998e,#38ef7d);">🌐</div>
             <span class="settings-row-label">Language</span>
-            <div class="lang-dropdown-mount" data-options="en,fr,it,ja,zh" aria-label="Default language"></div>
+            <div class="lang-dropdown-mount" data-options="en,fr,it,ja,zh,pl" aria-label="Default language"></div>
           </div>
           <div class="settings-row settings-row-toggle">
             <div class="settings-row-icon" style="background:linear-gradient(135deg,#f7971e,#ffd200);">⚡</div>

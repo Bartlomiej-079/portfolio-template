@@ -26,6 +26,11 @@ Una raccolta di risorse: note, schede, liste e link che hai trovato utili. Sosti
 
 Usa i filtri qui sotto per restringere per tipo o tag.
 
+::pl
+Zbiór przydatnych materiałów: notatek, ściąg, list i linków. Zastąp ten tekst własnym wprowadzeniem.
+
+Użyj poniższych filtrów, aby zawęzić wyniki według typu lub tagu.
+
 ```
 
 > "Therefore, since brevity is the soul of wit,  
@@ -321,6 +326,52 @@ Usa i filtri qui sotto per restringere per tipo o tag.
       "template",
       "design"
     ]
+  }
+]
+```
+
+::pl
+```resources-data
+[
+  {
+    "title": "Wybrana lista",
+    "type": "Lista",
+    "source": "Your Name",
+    "year": "2026",
+    "description": "Krótki opis pierwszego materiału.",
+    "link": "./blog/?post=2026-01-15-link-roundup",
+    "linkLabel": "czytaj więcej",
+    "tags": ["lista", "linki"]
+  },
+  {
+    "title": "Notatki do nauki",
+    "type": "Notatki",
+    "source": "Your Name",
+    "year": "2025",
+    "description": "Krótki opis drugiego materiału.",
+    "link": "https://github.com/your-username/notes",
+    "linkLabel": "zobacz na GitHubie",
+    "tags": ["notatki", "nauka"]
+  },
+  {
+    "title": "Ściąga",
+    "type": "Ściąga",
+    "source": "Your Name",
+    "year": "2024",
+    "description": "Krótki opis trzeciego materiału.",
+    "link": "https://github.com/your-username/cheat-sheet",
+    "linkLabel": "zobacz na GitHubie",
+    "tags": ["ściąga", "materiały"]
+  },
+  {
+    "title": "Krój pisma lub szablon",
+    "type": "Szablon",
+    "source": "Your Name",
+    "year": "2023",
+    "description": "Krótki opis czwartego materiału.",
+    "link": "https://github.com/your-username/template",
+    "linkLabel": "zobacz na GitHubie",
+    "tags": ["szablon", "projektowanie"]
   }
 ]
 ```

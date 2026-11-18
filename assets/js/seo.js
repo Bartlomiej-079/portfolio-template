@@ -238,7 +238,7 @@
           "isPartOf": { "@id": WEBSITE_ID },
           "about": { "@id": PERSON_ID },
           "mainEntity": person,
-          "inLanguage": ["en-GB", "fr", "it", "ja", "zh"]
+          "inLanguage": ["en-GB", "fr", "it", "ja", "zh", "pl-PL"]
         },
         {
           "@type": "WebSite",
@@ -247,7 +247,7 @@
           "name": "Your Name",
           "alternateName": ["example.com"],
           "publisher": { "@id": PERSON_ID },
-          "inLanguage": ["en-GB", "fr", "it", "ja", "zh"]
+          "inLanguage": ["en-GB", "fr", "it", "ja", "zh", "pl-PL"]
         }
       ]
     };

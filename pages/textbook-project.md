@@ -26,4 +26,9 @@ Questa pagina è una scheda di riserva che puoi usare per un progetto in evidenz
 
 Vedi l'articolo [Hello, world](blog/?post=2026-01-01-hello-world) per un esempio di collegamento da un articolo.
 
+::pl
+Ta strona to wolna karta, na której możesz zaprezentować wyróżniony projekt, pracę do portfolio lub coś innego, co zasługuje na osobną stronę.
+
+Zobacz wpis [Hello, world](blog/?post=2026-01-01-hello-world), aby sprawdzić, jak prowadzić do niej z artykułu.
+
 ```

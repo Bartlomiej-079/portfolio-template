@@ -26,6 +26,11 @@ Una selezione di progetti a cui ho lavorato. Sostituisci questo paragrafo con un
 
 *Aggiungi qui una citazione o un motto.* {.wow .animated .fadeInUp data-wow-delay="0.05s"}
 
+::pl
+Wybrane projekty, nad którymi pracowałem. Zastąp ten akapit krótkim opisem swojej pracy.
+
+*Dodaj tutaj ulubiony cytat lub motto.* {.wow .animated .fadeInUp data-wow-delay="0.05s"}
+
 ```
 
 ```language-content hide
@@ -421,6 +426,62 @@ Una selezione di progetti a cui ho lavorato. Sostituisci questo paragrafo con un
     "images": [
       "assets/images/placeholder-2.jpg"
     ],
+    "links": {
+      "github": "https://github.com/your-username",
+      "demo": "https://example.com"
+    }
+  }
+]
+```
+
+::pl
+```projects-data
+[
+  {
+    "title": "Projekt pierwszy: aplikacja internetowa",
+    "year": "sty 2026 – obecnie",
+    "event": "Internet",
+    "description": "Jedno lub dwa zdania podsumowujące projekt: czym jest i dla kogo powstał.",
+    "details": "Dłuższy opis wyświetlany po rozwinięciu karty. Opisz problem, swoje podejście, użyte technologie i rezultat.",
+    "skills": ["React", "TypeScript", "Projektowanie"],
+    "images": ["assets/images/placeholder-1.jpg", "assets/images/placeholder-2.jpg"],
+    "links": {
+      "demo": "https://example.com",
+      "github": "https://github.com/your-username"
+    }
+  },
+  {
+    "title": "Projekt drugi: eksperyment z uczeniem maszynowym",
+    "year": "wrz 2025 – gru 2025",
+    "event": "Uczenie maszynowe",
+    "description": "Jedno lub dwa zdania podsumowujące projekt.",
+    "details": "Opisz zbiór danych, model, wyniki i to, czego się nauczyłeś. Możesz dodać link do opisu projektu lub repozytorium.",
+    "skills": ["Python", "PyTorch", "Statystyka"],
+    "images": ["assets/images/placeholder-3.jpg"],
+    "links": {
+      "github": "https://github.com/your-username"
+    }
+  },
+  {
+    "title": "Projekt trzeci: projekt hackathonowy",
+    "year": "mar 2025",
+    "event": "Hackathon",
+    "description": "Jedno lub dwa zdania podsumowujące projekt.",
+    "details": "Opisz wydarzenie, swój zespół, to, co udało się zbudować w dostępnym czasie, oraz ewentualne nagrody lub wyróżnienia.",
+    "skills": ["API", "Praca zespołowa"],
+    "images": ["assets/images/placeholder-4.jpg"],
+    "links": {
+      "website": "https://example.com"
+    }
+  },
+  {
+    "title": "Projekt czwarty: narzędzie open source",
+    "year": "2024",
+    "event": "Open source",
+    "description": "Jedno lub dwa zdania podsumowujące projekt.",
+    "details": "Napisz, jaki problem rozwiązuje narzędzie, jak można z niego korzystać i jak dołączyć do jego rozwoju.",
+    "skills": ["Python", "CLI", "Dokumentacja"],
+    "images": ["assets/images/placeholder-2.jpg"],
     "links": {
       "github": "https://github.com/your-username",
       "demo": "https://example.com"

@@ -181,4 +181,40 @@ Décrivez ici le morceau : quand vous l'avez écrit, de quoi il parle, comment i
 
 Descrivi qui il brano: quando l'hai scritto, di cosa parla, come è stato registrato. Il file audio si trova in `assets/audio/` ed è elencato sotto `mp3s` nel blocco `post-data` qui sopra.
 
+::pl
+```post-data
+{
+  "title": "Przykładowy utwór",
+  "date": "2026-01-01",
+  "tags": [
+    "kompozycja",
+    "przykład"
+  ],
+  "summary": "Przykładowy wpis prezentujący odtwarzacz muzyki i metadane.",
+  "artist": "Your Name",
+  "composer": "Your Name",
+  "key": "C-dur",
+  "timeSignature": "4/4",
+  "bpm": "andante",
+  "instrumentation": [
+    "fortepian"
+  ],
+  "mp3s": [
+    {
+      "title": "Przykładowe nagranie",
+      "url": "assets/audio/sample-tone.wav"
+    }
+  ],
+  "sheetMusic": [
+    {
+      "title": "Melodia z akompaniamentem",
+      "url": "music/scores/sample.pdf",
+      "type": "pdf"
+    }
+  ]
+}
+```
+
+Opisz utwór: kiedy powstał, o czym opowiada i jak został nagrany. Plik audio znajduje się w `assets/audio/` i jest wymieniony w polu `mp3s` powyższego bloku `post-data`.
+
 ```

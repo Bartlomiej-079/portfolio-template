@@ -2,7 +2,7 @@
 
 A multilingual, markdown-driven personal site: home, projects, experience, resources, music, blog, photography, a standalone CV and portfolio, an apps launcher, light/dark themes, video and bubble backgrounds, and a settings page. It is a static site (no build step beyond two tiny index generators) and deploys as-is to GitHub Pages, Netlify or any static host.
 
-Every page ships in **English, French, Italian, Japanese and Mandarin Chinese**. All text is placeholder text: replace it, or delete the languages you don't need.
+Every page ships in **English, French, Italian, Japanese, Mandarin Chinese and Polish**. All text is placeholder text: replace it, or delete the languages you don't need.
 
 ## Quick start
 
@@ -72,7 +72,7 @@ Pages are plain markdown plus a few fenced blocks. `pages/demo.md` (served at `/
 
 ### Removing a language
 
-Delete its `::xx` sections from the markdown pages, its entries in `assets/js/i18n.js`, and its option in `pages/settings.md` (`data-options="en,fr,it,ja,zh"`).
+Delete its `::xx` sections from the markdown pages, its entries in `assets/js/i18n.js`, and its option in `pages/settings.md` (`data-options="en,fr,it,ja,zh,pl"`).
 
 ## Automation (optional, GitHub Actions)
 

@@ -16,6 +16,9 @@ Postes, formation et activités, du plus récent au plus ancien. Remplacez ce pa
 ::it
 Ruoli, formazione e attività, dal più recente. Sostituisci questo paragrafo con un riassunto in una riga del tuo percorso.
 
+::pl
+Stanowiska, edukacja i aktywności — od najnowszych. Zastąp ten akapit krótkim, jednowierszowym podsumowaniem swojej ścieżki zawodowej.
+
 ```
 
 ```language-content hide
@@ -219,6 +222,47 @@ Ruoli, formazione e attività, dal più recente. Sostituisci questo paragrafo co
     "organization": "La tua scuola",
     "year": "2015 - 2022",
     "description": "Qualifiche, premi e attività.",
+    "image": "assets/images/cv/school.png"
+  }
+]
+```
+
+::pl
+```experience-data
+[
+  {
+    "title": "Nazwa stanowiska",
+    "organization": "Twoja firma",
+    "year": "2026 – obecnie",
+    "description": "Opisz swoje obowiązki, zrealizowane projekty i ich wpływ. Najlepiej sprawdzą się dwa lub trzy zdania. Możesz użyć **pogrubienia**, *kursywy* i [linków](https://example.com).",
+    "image": "assets/images/cv/employer-1.png"
+  },
+  {
+    "title": "Poprzednie stanowisko",
+    "organization": "Inna firma",
+    "year": "2025 – 2026",
+    "description": "Opisz rolę w podobny sposób: zakres obowiązków, osiągnięcia i wykorzystane umiejętności.",
+    "image": "assets/images/cv/employer-2.png"
+  },
+  {
+    "title": "Prezes organizacji studenckiej",
+    "organization": "Twoja organizacja studencka",
+    "year": "2024 – 2025",
+    "description": "Możesz tu również opisać role liderskie, wolontariat i aktywności pozaszkolne.",
+    "image": "assets/images/cv/society.png"
+  },
+  {
+    "title": "Licencjat z wybranego kierunku",
+    "organization": "Twój uniwersytet",
+    "year": "2022 – 2025",
+    "description": "Podaj uzyskany tytuł, ocenę, ważne przedmioty, pracę dyplomową lub nagrody.",
+    "image": "assets/images/cv/university.png"
+  },
+  {
+    "title": "Liceum / szkoła średnia",
+    "organization": "Twoja szkoła",
+    "year": "2015 – 2022",
+    "description": "Wymień kwalifikacje, nagrody i aktywności.",
     "image": "assets/images/cv/school.png"
   }
 ]

@@ -70,6 +70,18 @@ function _startTyping(el, text) {
 }
 
 /* ── Title: fetch photography.md, extract H1 + intro ─────────── */
+function localizePhotoMarkdown(markdown) {
+  const i18n = window.portfolioI18n;
+  if (!i18n || typeof i18n.splitMarkdownByLanguageContent !== "function") return markdown;
+
+  const lang = i18n.getLang();
+  return i18n.splitMarkdownByLanguageContent(markdown).map(part => {
+    if (part.type !== "lang") return part.raw;
+    const localized = i18n.parseLanguageContent(part.raw);
+    return localized[lang] || localized.en || "";
+  }).join("\n\n");
+}
+
 async function initPhotoTitle() {
   const titleEl = document.getElementById("photo-title");
   const introEl = document.getElementById("photo-intro");
@@ -79,7 +91,7 @@ async function initPhotoTitle() {
   try {
     const res = await fetch("photography.md?" + Date.now());
     if (res.ok) {
-      const md = await res.text();
+      const md = localizePhotoMarkdown(await res.text());
       const h1 = md.match(/^#\s+(.+)$/m);
       if (h1) title = h1[1].trim().toLowerCase();
 
@@ -130,3 +142,4 @@ function setupGalleryReveal() {
 window.setupGalleryReveal = setupGalleryReveal;
 
 document.addEventListener("DOMContentLoaded", initPhotoTitle);
+document.addEventListener("portfolio:language-change", initPhotoTitle);

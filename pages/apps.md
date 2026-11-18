@@ -16,6 +16,9 @@ La grille ci-dessous est la copie locale du lanceur. La source de vérité est [
 ::it
 La griglia sotto è la copia locale del launcher. La fonte di verità è [`/switcher/apps.json`](/switcher/apps.json) — aggiungi un'app lì (e l'icona in `/switcher/icons/`) e compare anche nel popover delle app.
 
+::pl
+Poniższa siatka to lokalna kopia launchera. Główne źródło danych znajduje się w pliku [`/switcher/apps.json`](/switcher/apps.json) — dodaj tam aplikację (oraz jej ikonę w `/switcher/icons/`), a pojawi się również w menu aplikacji.
+
 ```
 
 <div class="ios-app-grid">

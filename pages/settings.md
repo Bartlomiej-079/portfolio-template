@@ -15,7 +15,7 @@
   <div class="settings-row settings-row-dropdown" data-setting="language">
     <div class="settings-row-icon" style="background: linear-gradient(135deg,#11998e,#38ef7d);">🌐</div>
     <span class="settings-row-label" data-i18n="settings.language">Language</span>
-    <div class="lang-dropdown-mount" data-options="en,fr,it,ja,zh" aria-label="Default language" data-i18n-aria="aria.defaultLanguage"></div>
+    <div class="lang-dropdown-mount" data-options="en,fr,it,ja,zh,pl" aria-label="Default language" data-i18n-aria="aria.defaultLanguage"></div>
   </div>
   <div class="settings-row settings-row-toggle" data-setting="perf">
     <div class="settings-row-icon" style="background: linear-gradient(135deg,#f7971e,#ffd200);">⚡</div>

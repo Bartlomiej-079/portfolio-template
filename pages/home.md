@@ -14,6 +14,9 @@
 ::it
 ## 👋 Ciao, sono Your Name! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
 
+::pl
+## 👋 Cześć, jestem Your Name! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
+
 ```
 
 ```rotations
@@ -64,7 +67,8 @@
             "🇻🇦: Salvē(te), mihi placet te convenīre. Eligite linguam in quā communicāre possimus simul: (vide [Optiones]{settings})",
             "🇬🇷: Χαῖρε, χαίρω τῷ σε ἰδεῖν. Ἐπίλεξον, παρακαλῶ, γλῶτταν ᾗ δυνάμεθα διαλέγεσθαι: (βλ. [Ρυθμίσεις]{settings})",
             "🇳🇱: Welkom, leuk je te ontmoeten. Kies een taal waarin we met elkaar kunnen communiceren: (zie [Instellingen]{settings})",
-            "🇪🇸: Bienvenido, me alegro de conocerte. Elige un idioma en el que podamos comunicarnos: (ver [Configuración]{settings})"
+            "🇪🇸: Bienvenido, me alegro de conocerte. Elige un idioma en el que podamos comunicarnos: (ver [Configuración]{settings})",
+            "🇵🇱: Witaj, miło mi Cię poznać. Wybierz język, w którym możemy się porozumiewać: (zobacz [Ustawienia]{settings})"
 
         ]
     }
@@ -157,6 +161,23 @@ sur un petit écran ? [ouvrez les réglages]{settings} pour ajuster les bulles, 
 ::mobile
 schermo piccolo? [apri le impostazioni]{settings} per regolare bolle, modalità prestazioni, sfondo video e modalità Marie Kondo.
 ```
+
+::pl
+```tcolorbox wskazówka {.wow .animated .bounceIn}
+
+1. Nie przepadasz za efektami? Włącz tryb Marie Kondo skrótem [cmd]{kbd} + [m]{kbd} ([Mac]{fa:brands/apple}) lub [ctrl]{kbd} + [m]{kbd} ([Windows]{fa:brands/windows} [Linux]{fa:brands/linux}).
+
+2. Witryna działa wolno? Przełącz tryb wydajności skrótem [cmd]{kbd} + [/]{kbd} ([Mac]{fa:brands/apple}) lub [ctrl]{kbd} + [/]{kbd} ([Windows]{fa:brands/windows} [Linux]{fa:brands/linux}).
+
+3. Nie podoba Ci się tło wideo? Wyłącz je skrótem [cmd]{kbd} + [;]{kbd} ([Mac]{fa:brands/apple}) lub [ctrl]{kbd} + [;]{kbd} ([Windows]{fa:brands/windows} [Linux]{fa:brands/linux}).
+
+4. Wolisz bąbelki zamiast tła wideo? Przełącz je skrótem [cmd]{kbd} + [\]{kbd} ([Mac]{fa:brands/apple}) lub [ctrl]{kbd} + [\]{kbd} ([Windows]{fa:brands/windows} [Linux]{fa:brands/linux}).
+
+5. **Ważne**: otwórz [ustawienia]{settings} skrótem [cmd]{kbd} + [,]{kbd} ([Mac]{fa:brands/apple}) lub [ctrl]{kbd} + [,]{kbd} ([Windows]{fa:brands/windows} [Linux]{fa:brands/linux}).
+
+::mobile
+Korzystasz z małego ekranu? [Otwórz ustawienia]{settings}, aby dostosować bąbelki, tryb wydajności, tło wideo i tryb Marie Kondo.
+```
 ```
 
 # bienvenue à mon site internet!!
@@ -175,7 +196,8 @@ schermo piccolo? [apri le impostazioni]{settings} per regolare bolle, modalità 
         "ようこそ、私のウェブサイトへ！",
         "salvē(te) in situ meō!!",
         "velkommen til min nettside!!",
-        "ἰδοὺ τῷ ἱστοτόπῳ μου!!"
+        "ἰδοὺ τῷ ἱστοτόπῳ μου!!",
+        "Witaj na mojej stronie!!"
     ]
 }
 ```
@@ -203,6 +225,10 @@ schermo piccolo? [apri le impostazioni]{settings} per regolare bolle, modalità 
 ## ☕ Su di me {.wow .animated .fadeInUp data-wow-delay="0.05s"}
 *N.B. Sostituisci questa nota con una curiosità su di te.* {.about-me-note .wow .animated .fadeIn data-wow-delay="0.15s"}
 
+::pl
+## ☕ O mnie {.wow .animated .fadeInUp data-wow-delay="0.05s"}
+*Uwaga: zastąp tę notkę ciekawostką o sobie.* {.about-me-note .wow .animated .fadeIn data-wow-delay="0.15s"}
+
 ```
 
 
@@ -210,7 +236,7 @@ schermo piccolo? [apri le impostazioni]{settings} per regolare bolle, modalità 
     <a href="https://github.com/your-username"><img src="https://img.shields.io/badge/status-updating-brightgreen.svg"></a>
     <a href="https://github.com/python/cpython"><img src="https://img.shields.io/badge/Python-3.12-FF1493.svg"></a>
     <a href="https://github.com/your-username"><img src="https://img.shields.io/badge/open%20to-opportunities-blue.svg"></a>
-    <a href="./resources"><img src="https://img.shields.io/badge/languages-5-orange.svg"></a>
+    <a href="./resources"><img src="https://img.shields.io/badge/languages-6-orange.svg"></a>
 </p>
 
 ```language-content hide
@@ -289,6 +315,21 @@ Una frase che riassume cosa fai e cosa ti sta a cuore. È il primo paragrafo che
 
 Aperto a nuove opportunità. Mi trovi a [hello@example.com](mailto:hello@example.com). {.wow .animated .fadeIn data-wow-delay="0.75s"}
 
+::pl
+<figure class="home-profile">
+  <img src="assets/images/profile.png" alt="Your Name" width="176" height="176" />
+</figure>
+
+Jednym zdaniem podsumuj, czym się zajmujesz i co jest dla Ciebie ważne. To pierwszy akapit, który czytają odwiedzający — warto go dobrze wykorzystać. {.wow .animated .fadeIn data-wow-delay="0.35s"}
+
+🎛️ 💻 W **Twojej firmie** opisz, co udało Ci się stworzyć, dla kogo i jaki był mierzalny efekt. Wyróżnij kilka słów, aby tekst łatwo się czytało. {.wow .animated .fadeIn data-wow-delay="0.45s"}
+
+💬 🌍 W **innej firmie** lub na **Twojej uczelni** dodaj kolejny ważny punkt: projekt, dyplom, stanowisko albo badania. {.wow .animated .fadeIn data-wow-delay="0.55s"}
+
+📈 📊 Napisz, co interesuje Cię teraz: jakich stanowisk, współpracy lub problemów szukasz. {.wow .animated .fadeIn data-wow-delay="0.65s"}
+
+Szukam nowych możliwości. Najłatwiej skontaktować się ze mną przez [hello@example.com](mailto:hello@example.com). {.wow .animated .fadeIn data-wow-delay="0.75s"}
+
 ```
 ::vspace 1em
 
@@ -307,6 +348,9 @@ Aperto a nuove opportunità. Mi trovi a [hello@example.com](mailto:hello@example
 
 ::it
 ## 🎉 Cose divertenti {.wow .animated .fadeInUp data-wow-delay="0.05s"}
+
+::pl
+## 🎉 Po godzinach {.wow .animated .fadeInUp data-wow-delay="0.05s"}
 
 ```
 ```language-content hide borderless
@@ -575,6 +619,59 @@ Un'altra diapositiva. Rimanda al tuo blog, alla tua lista di letture o a qualsia
 Ti interessa? [Leggi il blog →](./blog)
 ```
 
+::pl
+Skoro wiesz już o mnie co nieco, zobacz, czym zajmuję się poza pracą. Przesuwaj slajdy, używaj strzałek albo wybierz etykietę poniżej. {.wow .animated .fadeIn data-wow-delay="0.25s"}
+
+```carousel
+--- 📸 Fotografia
+### Fotografia
+Napisz kilka zdań o tym hobby. Każdy slajd karuzeli odpowiada sekcji `---` w pliku `pages/home.md`; tekst po kreskach staje się etykietą.
+
+Chcesz zobaczyć więcej? [Otwórz galerię zdjęć →](./photography)
+
+```ipod-coverflow
+[
+  { "src": "assets/images/home-carousel/placeholder-1.jpg", "alt": "Przykładowe zdjęcie 1", "caption": "Przykładowy podpis 1" },
+  { "src": "assets/images/home-carousel/placeholder-2.jpg", "alt": "Przykładowe zdjęcie 2", "caption": "Przykładowy podpis 2" },
+  { "src": "assets/images/home-carousel/placeholder-3.jpg", "alt": "Przykładowe zdjęcie 3", "caption": "Przykładowy podpis 3" },
+  { "src": "assets/images/home-carousel/placeholder-4.jpg", "alt": "Przykładowe zdjęcie 4", "caption": "Przykładowy podpis 4" },
+  { "src": "assets/images/home-carousel/placeholder-5.jpg", "alt": "Przykładowe zdjęcie 5", "caption": "Przykładowy podpis 5" },
+  { "src": "assets/images/home-carousel/placeholder-6.jpg", "alt": "Przykładowe zdjęcie 6", "caption": "Przykładowy podpis 6" }
+]
+```
+*Przeglądaj powyższe okładki **klawiszami strzałek** lub klikając wybraną okładkę.*
+
+--- 🎵 Muzyka
+### Muzyka
+> „Bez muzyki życie byłoby pomyłką”.
+> — Friedrich Nietzsche
+
+Slajdy mogą zawierać cytaty, akapity, linki, listy i rozwijane sekcje.
+
+Chcesz posłuchać? [Odtwórz nagrania →](./music)
+
+<details class="md-accordion">
+<summary>Lista rozwijana (kliknij, aby rozwinąć)</summary>
+<ol>
+  <li>Element listy 1</li>
+  <li>Element listy 2</li>
+  <li>Element listy 3</li>
+</ol>
+</details>
+
+--- 🎨 Sztuka i projektowanie
+### Sztuka i projektowanie
+Dodawaj dowolną liczbę slajdów lub usuwaj te, których nie potrzebujesz. Etykiety mogą mieć ikony emoji lub Font Awesome (`fa:book-open`).
+
+Chcesz zobaczyć więcej? [Zobacz moje projekty →](./projects){new-tab}
+
+--- fa:book-open Czytanie i pisanie
+### Czytanie i pisanie
+Kolejny slajd. Dodaj link do bloga, listy lektur lub innego miejsca, które chcesz wyróżnić.
+
+Chcesz poczytać? [Przejdź do bloga →](./blog)
+```
+
 ```
 
 ```language-content hide borderless
@@ -592,6 +689,9 @@ Ti interessa? [Leggi il blog →](./blog)
 
 ::it
 ## 🎉 Link rapidi {.wow .animated .fadeInUp data-wow-delay="0.05s"}
+
+::pl
+## 🎉 Przydatne linki {.wow .animated .fadeInUp data-wow-delay="0.05s"}
 
 ```
 
@@ -661,6 +761,17 @@ Vuoi collaborare o contattarmi? [Trova i miei contatti →](./info) {.wow .anima
 Ti interessa la mia musica? [Guarda le mie composizioni →](./music) {.wow .animated .fadeIn data-wow-delay="0.55s"}
 
 Ti interessano le mie risorse? [Guarda le collezioni e le liste →](./resources) {.wow .animated .fadeIn data-wow-delay="0.65s"}
+
+::pl
+Aby znaleźć moje profile i dane kontaktowe, zajrzyj do [[strony z linkami](./info)]{tip: Znajdziesz tu moje profile społecznościowe i sposoby kontaktu. Najszybciej odpowiadam na e-mail lub WhatsApp.} — tam dowiesz się, jak skontaktować się ze mną na różnych platformach. {.wow .animated .fadeIn data-wow-delay="0.25s"}
+
+Chcesz dowiedzieć się więcej o mojej pracy? [Zobacz moje projekty →](./projects) {.wow .animated .fadeIn data-wow-delay="0.35s"}
+
+Chcesz nawiązać współpracę lub napisać do mnie? [Znajdź dane kontaktowe →](./info) {.wow .animated .fadeIn data-wow-delay="0.45s"}
+
+Interesuje Cię moja muzyka? [Poznaj moje kompozycje →](./music) {.wow .animated .fadeIn data-wow-delay="0.55s"}
+
+Szukasz materiałów? [Zobacz wybrane kolekcje i listy →](./resources) {.wow .animated .fadeIn data-wow-delay="0.65s"}
 
 ```
 

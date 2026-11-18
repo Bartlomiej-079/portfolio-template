@@ -62,7 +62,7 @@
         else if (!siteRoot.endsWith("/")) siteRoot += "/";
         window.__SITE_ROOT__ = siteRoot;
         try {
-          var supported = /^(en|fr|it|ja|zh)$/;
+          var supported = /^(en|fr|it|ja|zh|pl)$/;
           var lang = "";
           try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
           if (!supported.test(lang)) {

@@ -241,4 +241,52 @@ $$
 
 Duplica questo file in `posts/`, dagli una nuova data nel nome, modifica il blocco `post-data`, poi esegui `npm run build` per aggiornare l'indice. Vedi anche [la pagina del progetto in evidenza](./textbook-project).
 
+::pl
+```post-data
+{
+  "date": "2026-01-01",
+  "justify": true,
+  "tags": [
+    "wprowadzenie",
+    "przykład"
+  ],
+  "coverImage": "assets/images/placeholder-1.jpg",
+  "summary": "Pierwszy wpis prezentujący możliwości bloga: nagłówki, obrazy, kod, wzory matematyczne i nie tylko.",
+  "title": "Witaj, świecie"
+}
+```
+
+Witaj na swoim nowym blogu. Ten wpis pokazuje funkcje obsługiwane przez silnik Markdown. Usuń go lub przeredaguj, gdy przygotujesz własną treść.
+
+## Nagłówki i tekst
+
+Zwykły tekst obsługuje **pogrubienie**, *kursywę*, `kod w tekście` i [linki](https://example.com). Użyj `::vspace 1em`, aby dodać odstęp w pionie.
+
+> Cytat to dobre miejsce na ulubioną myśl.
+
+## Obrazy
+
+![Przykładowy obraz](assets/images/placeholder-1.jpg){w=80% align=center caption="Obrazom można ustawić szerokość, wyrównanie i podpis."}
+
+## Kod
+
+```python
+def greet(name: str) -> str:
+    return f"Hello, {name}!"
+
+print(greet("world"))
+```
+
+## Matematyka
+
+Możesz używać wzorów w tekście, takich jak $E = mc^2$, oraz osobnych równań:
+
+$$
+\int_0^1 x^2\,dx = \frac{1}{3}
+$$
+
+## Co dalej?
+
+Skopiuj ten plik do folderu `posts/`, nadaj mu nową datę w nazwie, edytuj blok `post-data`, a następnie uruchom `npm run build`, aby odświeżyć indeks. Zobacz też [stronę wyróżnionego projektu](./textbook-project).
+
 ```

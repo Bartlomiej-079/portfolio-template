@@ -8,6 +8,6 @@ LinkedIn: https://www.linkedin.com/in/your-username
 
 /* SITE */
 Standards: HTML5, CSS3, JSON-LD, Schema.org Person
-Language: en-GB, fr, it, ja, zh
+Language: en-GB, fr, it, ja, zh, pl-PL
 Doctype: HTML5
 Components: GitHub Pages

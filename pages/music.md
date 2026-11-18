@@ -26,4 +26,9 @@ Una raccolta di registrazioni, composizioni e note d'ascolto. Sostituisci questo
 
 Ogni voce qui sotto è un file markdown nella cartella `music/`, con un file audio, spartiti opzionali e tag.
 
+::pl
+Zbiór nagrań, kompozycji i notatek o muzyce. Zastąp ten tekst wprowadzeniem do swojej twórczości: napisz, na czym grasz, co komponujesz i jak zaczęła się Twoja przygoda z muzyką.
+
+Każdy wpis poniżej to plik Markdown w folderze `music/`, zawierający plik audio, opcjonalne nuty i tagi.
+
 ```

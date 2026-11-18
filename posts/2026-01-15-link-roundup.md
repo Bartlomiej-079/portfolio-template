@@ -150,6 +150,37 @@ title: An Example Article
 description: Link previews show a title, a description and an image for any URL.
 ```
 
+::pl
+```post-data
+{
+  "date": "2026-01-15",
+  "justify": false,
+  "tags": [
+    "lista",
+    "linki"
+  ],
+  "coverImage": "assets/images/placeholder-2.jpg",
+  "summary": "Przykład udostępniania ciekawych linków z rozbudowanymi podglądami.",
+  "title": "Przegląd ciekawych linków"
+}
+```
+
+## Warto przeczytać
+
+Blok `link-preview` zamienia adres URL w kartę. Tytuł i opis są opcjonalne.
+
+```link-preview
+url: https://example.com
+title: Przykładowy artykuł
+description: Podgląd linku może zawierać tytuł, opis i obraz dowolnej strony.
+```
+
+```link-preview
+url: https://developer.mozilla.org/en-US/docs/Web/HTML
+title: HTML: HyperText Markup Language
+description: Dokumentacja HTML w serwisie MDN.
+```
+
 ```link-preview
 url: https://developer.mozilla.org/en-US/docs/Web/HTML
 title: HTML: HyperText Markup Language
