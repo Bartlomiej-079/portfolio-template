@@ -289,6 +289,7 @@ html:not([data-marie-kondo="on"]) body * {
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: 0.55rem;
   position: sticky;
   top: 0;
@@ -392,7 +393,7 @@ html:not([data-marie-kondo="on"]) body * {
 }
 
 .sidebar-actions {
-  margin: 0 0 0 auto;
+  margin: 0;
   flex-shrink: 0;
   border: 2px solid var(--border);
   background: var(--surface-solid);
@@ -424,6 +425,12 @@ html:not([data-marie-kondo="on"]) body * {
   position: relative;
   overflow: auto;
   padding: 1rem;
+  text-align: center;
+}
+
+.content > :not(.content-bg):not(.animals-layer) {
+  width: min(100%, 1100px);
+  margin-inline: auto;
 }
 
 .animals-layer {
@@ -444,6 +451,10 @@ html:not([data-marie-kondo="on"]) body * {
 
 .shared-title {
   margin-bottom: 1rem;
+}
+
+.content .welcome {
+  justify-content: center;
 }
 
 .content-bg {
@@ -689,6 +700,7 @@ html:not([data-marie-kondo="on"]) body * {
   background-size: 260% 260%;
   box-shadow: 4px 4px 0 rgba(20, 83, 45, 0.2);
   padding: clamp(1rem, 3vw, 2rem);
+  margin-inline: auto;
   max-width: 930px;
   position: relative;
   overflow: hidden;
@@ -704,7 +716,7 @@ html:not([data-marie-kondo="on"]) body * {
 }
 
 .intro-card p {
-  margin: 0 0 1rem;
+  margin: 0 auto 1rem;
   max-width: 65ch;
   color: var(--text-soft);
   line-height: 1.6;
@@ -749,6 +761,10 @@ html:not([data-marie-kondo="on"]) body * {
   color: var(--text-soft);
   line-height: 1.6;
   font-size: clamp(0.95rem, 1.8vw, 1.12rem);
+}
+
+.markdown-content p {
+  margin-inline: auto;
 }
 
 /* Utility classes to adjust font size for block-level markdown elements */
@@ -1865,9 +1881,9 @@ html:not([data-marie-kondo="on"]) body * {
 
 .markdown-content .home-profile {
   position: relative;
-  float: right;
+  float: none;
   width: min(42%, 176px);
-  margin: 0.15rem 0 1.15rem 1.25rem;
+  margin: 0 auto 1.15rem;
   shape-outside: inset(0 round 24%);
   overflow: visible;
   z-index: 2;
@@ -4081,7 +4097,7 @@ html.motion-ready:is([data-perf-mode="on"], [data-marie-kondo="on"]) .markdown-c
 
   .markdown-content .home-profile {
     width: min(38%, 132px);
-    margin: 0.1rem 0 0.9rem 0.85rem;
+    margin: 0 auto 0.9rem;
   }
 
   .markdown-content pre code.hljs,
