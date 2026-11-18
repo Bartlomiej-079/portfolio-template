@@ -28,5 +28,6 @@ Wszystkie godziny podano w strefie UTC (GMT+0). Numery wersji mają format v{maj
 <li>v1.0.0 (2026-01-01 00:00): Initial release, created from the portfolio template.</li>
 <li data-commit="191c814">v1.0.1 (2026-11-18 15:31): first commit</li>
 <li data-commit="4695772">v1.0.2 (2026-11-18 15:49): innit</li>
+<li data-commit="40211f4">v1.0.3 (2026-11-18 16:13): Add Polish localization</li>
 </ul>
 </details>
