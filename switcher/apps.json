@@ -1,0 +1,34 @@
+{
+  "title": "My Apps",
+  "home": "https://example.com/apps",
+  "apps": [
+    {
+      "id": "portfolio",
+      "name": "Portfolio",
+      "href": "https://example.com",
+      "icon": "portfolio.png",
+      "description": "my personal site — projects, writing, music, and more."
+    },
+    {
+      "id": "app-one",
+      "name": "App One",
+      "href": "https://app-one.example.com",
+      "icon": "app-one.png",
+      "description": "a one-line description of your first app."
+    },
+    {
+      "id": "app-two",
+      "name": "App Two",
+      "href": "https://app-two.example.com",
+      "icon": "app-two.png",
+      "description": "a one-line description of your second app."
+    },
+    {
+      "id": "app-three",
+      "name": "App Three",
+      "href": "https://app-three.example.com",
+      "icon": "app-three.png",
+      "description": "a one-line description of your third app."
+    }
+  ]
+}

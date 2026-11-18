@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Photography — Your Name</title>
+    <meta name="description" content="Landscape, cityscape, and architecture photography by Your Name." />
+    <meta name="author" content="Your Name" />
+    <link rel="canonical" href="https://example.com/photography/" />
+    <link rel="author" href="https://example.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Your Name" />
+    <meta property="og:title" content="Photography — Your Name" />
+    <meta property="og:description" content="Landscape, cityscape, and architecture photography by Your Name." />
+    <meta property="og:url" content="https://example.com/photography/" />
+    <meta property="og:image" content="https://example.com/assets/images/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@yourusername" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Photography — Your Name",
+      "url": "https://example.com/photography/",
+      "author": { "@id": "https://example.com/#person" }
+    }
+    </script>
+    <!-- Read theme from localStorage before paint to avoid flash -->
+    <script>
+      (function () {
+        try {
+          var key = "portfolio-theme";
+          var stored = localStorage.getItem(key);
+          var theme = (stored === "dark" || stored === "light")
+            ? stored
+            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.style.colorScheme = theme;
+        } catch (_) {}
+        try {
+          // Default off; only enable when the user explicitly chose on.
+          if (localStorage.getItem("portfolio-perf-mode") === "on")
+            document.documentElement.setAttribute("data-perf-mode", "on");
+        } catch (_) {}
+        try {
+          // Default on; only skip when the user explicitly chose off.
+          if (localStorage.getItem("portfolio-video-bg") !== "off") {
+            document.documentElement.setAttribute("data-video-bg", "on");
+          }
+        } catch (_) {
+          document.documentElement.setAttribute("data-video-bg", "on");
+        }
+        try {
+          // Default off; only an explicit "on" enables the bubbles.
+          if (localStorage.getItem("portfolio-animations") === "on") {
+            document.documentElement.setAttribute("data-animations", "on");
+          }
+        } catch (_) {}
+        try {
+          var supported = /^(en|fr|it|ja|zh)$/;
+          var lang = "";
+          try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
+          if (!supported.test(lang)) {
+            lang = "";
+            var list = [];
+            try {
+              if (navigator.languages) list = list.concat(Array.prototype.slice.call(navigator.languages));
+              if (navigator.language) list.push(navigator.language);
+            } catch (_) {}
+            for (var li = 0; li < list.length && !lang; li += 1) {
+              var raw = String(list[li] || "").toLowerCase().replace(/_/g, "-");
+              var base = raw.split("-")[0];
+              if (supported.test(raw)) lang = raw;
+              else if (supported.test(base)) lang = base;
+            }
+          }
+          if (supported.test(lang)) document.documentElement.lang = lang;
+        } catch (_) {}
+      })();
+    </script>
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Reuse the main portfolio glass variables + component styles -->
+    <link rel="stylesheet" href="../assets/css/glass.css" />
+    <link rel="stylesheet" href="../assets/css/motion.css?v=20260912" />
+    <link rel="stylesheet" href="../assets/css/styles.css" />
+    <!-- Photography-specific overrides -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <main class="page-shell">
+      <canvas id="bubbles" class="bubbles-canvas" aria-hidden="true"></canvas>
+      <div class="app-frame">
+
+        <!-- ── Sidebar ─────────────────────────────────────────── -->
+        <aside class="sidebar">
+          <a class="nav-btn" href="../" data-i18n="nav.home">introduction</a>
+          <a class="nav-btn" href="../projects" data-i18n="nav.projects">personal projects</a>
+          <a class="nav-btn" href="../experience" data-i18n="nav.experience">experience</a>
+          <a class="nav-btn" href="../resources" data-i18n="nav.resources">resources</a>
+          <a class="nav-btn" href="../music" data-i18n="nav.music">music</a>
+          <a class="nav-btn" href="../blog" data-i18n="nav.blog">blog</a>
+          <a class="nav-btn is-active" href="./" data-i18n="nav.photography">photography</a>
+
+          <div class="sidebar-actions">
+            <a class="button" href="mailto:hello@example.com?subject=send%20a%20copy%20of%20your%20CV%20please" data-i18n="nav.getCv">get cv</a>
+            <div class="socials">
+              <a class="icon-link" rel="me" href="https://github.com/your-username" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0C5.373 0 0 5.373 0 12a12 12 0 0 0 8.207 11.387c.6.111.793-.261.793-.577v-2.234c-3.338.727-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.808 1.305 3.493.998.107-.776.418-1.305.762-1.604-2.665-.304-5.467-1.334-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.304-.535-1.525.117-3.177 0 0 1.008-.322 3.301 1.23A11.52 11.52 0 0 1 12 5.8c1.02.005 2.047.138 3.006.404 2.292-1.552 3.3-1.23 3.3-1.23.653 1.653.242 2.874.118 3.177.768.84 1.236 1.91 1.236 3.22 0 4.609-2.806 5.626-5.479 5.922.43.372.823 1.102.823 2.222v3.293c0 .319.192.688.801.576A12.004 12.004 0 0 0 24 12c0-6.627-5.373-12-12-12Z"/></svg>
+              </a>
+              <a class="icon-link" rel="me" href="https://www.linkedin.com/in/your-username" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.978 0 1.778-.773 1.778-1.729V1.729C24 .774 23.2 0 22.225 0ZM7.119 20.452H3.555V9h3.564v11.452ZM5.337 7.433a2.065 2.065 0 1 1 0-4.129 2.065 2.065 0 0 1 0 4.129ZM20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286Z"/></svg>
+              </a>
+              <a class="icon-link" href="../info" aria-label="Info" title="info">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2.182c5.423 0 9.818 4.395 9.818 9.818 0 5.423-4.395 9.818-9.818 9.818-5.423 0-9.818-4.395-9.818-9.818C2.182 6.577 6.577 2.182 12 2.182zm-.545 4.363a1.636 1.636 0 1 0 1.09 0v.002zm-.273 3.819v7.272h1.636V10.364h-1.636z"/></svg>
+              </a>
+              <a class="icon-link" href="../apps" aria-label="Apps" title="apps">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+              </a>
+              <a class="icon-link" href="../settings" aria-label="Settings" title="settings">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.49.49 0 0 0 .12-.61l-1.92-3.32a.488.488 0 0 0-.59-.22l-2.39.96a7.02 7.02 0 0 0-1.62-.94l-.36-2.54a.484.484 0 0 0-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.48.48 0 0 0-.59.22L2.74 8.87a.47.47 0 0 0 .12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58a.47.47 0 0 0-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.37 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.57 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32a.47.47 0 0 0-.12-.61l-2.01-1.58zM12 15.6a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2z"/></svg>
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <!-- ── Content panel ──────────────────────────────────── -->
+        <section class="content photo-content" id="content">
+          <div class="content-bg"></div>
+
+          <header class="tab-title-wrap">
+            <h1 class="welcome shared-title">
+              <span id="photo-title">photography</span>
+              <img src="../assets/images/turtleshrunk.png" alt="" class="turtle-inline turtle-cursor" aria-hidden="true" />
+            </h1>
+            <p class="photo-intro" id="photo-intro"></p>
+          </header>
+
+          <div class="markdown-content" id="photo-description"></div>
+
+          <div class="tab is-active photo-tab">
+            <main class="gallery" id="gallery">
+              <p class="loading-msg" id="loading-msg">loading…</p>
+            </main>
+          </div>
+        </section>
+
+      </div><!-- /.app-frame -->
+
+      <!-- ── Footer (auto-populated by theme.js from pages/footer.md) ── -->
+      <footer class="site-footer" role="contentinfo"></footer>
+
+    </main><!-- /.page-shell -->
+
+    <!-- ── Lightbox ──────────────────────────────────────────── -->
+    <div class="photo-lb" id="photo-lb" role="dialog" aria-modal="true" aria-label="Photo viewer" hidden>
+      <div class="lb-top-bar">
+        <a class="lb-newtab" id="lb-newtab" href="#" target="_blank" rel="noopener noreferrer" aria-label="Open image in new tab">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+          open
+        </a>
+        <button class="lb-close" id="lb-close" aria-label="Close">close</button>
+      </div>
+      <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous">&#8249;</button>
+      <button class="lb-nav lb-next" id="lb-next" aria-label="Next">&#8250;</button>
+      <figure class="lb-figure">
+        <img class="lb-img" id="lb-img" src="" alt="" />
+        <figcaption class="lb-caption" id="lb-caption"></figcaption>
+      </figure>
+    </div>
+
+    <div id="custom-cursor" class="custom-cursor" aria-hidden="true">🚀</div>
+
+    <script src="../assets/js/bubbles.js"></script>
+    <script src="../assets/js/i18n.js?v=20260913b"></script>
+    <script src="../assets/js/theme.js"></script>
+    <script src="../assets/js/carousel.js?v=20260823"></script>
+    <script src="../assets/js/markdown.js"></script>
+    <script src="../assets/js/reveal.js?v=20260912"></script>
+    <script src="../assets/js/cursor.js?v=20260913b"></script>
+    <script src="photo.js"></script>
+    <script>
+      /* ── Gallery ──────────────────────────────────────────── */
+      const PHOTOS_JSON = "../photos/index.json";
+      let photos = [];
+      let activeIndex = 0;
+
+      async function loadPhotos() {
+        const res = await fetch(PHOTOS_JSON + "?_=" + Date.now());
+        if (!res.ok) throw new Error("failed");
+        return res.json();
+      }
+
+      function buildGallery(items) {
+        const gallery = document.getElementById("gallery");
+        document.getElementById("loading-msg").remove();
+        items.forEach((photo, i) => {
+          const item = document.createElement("div");
+          item.className = "gallery-item";
+          const ar = (photo.width && photo.height)
+            ? `${photo.width} / ${photo.height}`
+            : "4 / 3";
+          item.style.aspectRatio = ar;
+
+          const img = document.createElement("img");
+          img.src = photo.src;
+          img.alt = photo.alt || "";
+          img.loading = "lazy";
+          img.decoding = "async";
+
+          const overlay = document.createElement("div");
+          overlay.className = "gallery-overlay";
+
+          const overlayBottom = document.createElement("div");
+          overlayBottom.className = "gallery-overlay-bottom";
+
+          if (photo.caption) {
+            const cap = document.createElement("span");
+            cap.className = "gallery-caption";
+            cap.textContent = photo.caption;
+            overlayBottom.appendChild(cap);
+          }
+
+          const detailBtn = document.createElement("a");
+          detailBtn.className = "gallery-detail-btn";
+          detailBtn.href = `photo/?i=${i}`;
+          detailBtn.textContent = "view details";
+          detailBtn.addEventListener("click", e => e.stopPropagation());
+          overlayBottom.appendChild(detailBtn);
+
+          overlay.appendChild(overlayBottom);
+          item.appendChild(img);
+          item.appendChild(overlay);
+          item.addEventListener("click", () => openLightbox(i));
+          gallery.appendChild(item);
+        });
+
+        window.setupGalleryReveal?.();
+      }
+
+      /* ── Lightbox ─────────────────────────────────────────── */
+      const lb       = document.getElementById("photo-lb");
+      const lbImg    = document.getElementById("lb-img");
+      const lbCap    = document.getElementById("lb-caption");
+      const lbNewtab = document.getElementById("lb-newtab");
+
+      function triggerImgAnim(cls) {
+        lbImg.classList.remove("lb-anim-open", "lb-anim-next", "lb-anim-prev");
+        void lbImg.offsetWidth; /* reflow to restart animation */
+        lbImg.classList.add(cls);
+      }
+
+      function openLightbox(index, animClass = "lb-anim-open") {
+        activeIndex = ((index % photos.length) + photos.length) % photos.length;
+        const p = photos[activeIndex];
+        lbImg.src = p.src;
+        lbImg.alt = p.alt || "";
+        lbCap.textContent = p.caption || "";
+        if (lbNewtab) lbNewtab.href = p.src;
+        lb.hidden = false;
+        document.body.style.overflow = "hidden";
+        triggerImgAnim(animClass);
+      }
+
+      function closeLightbox() {
+        lb.hidden = true;
+        lbImg.src = "";
+        lbImg.classList.remove("lb-anim-open", "lb-anim-next", "lb-anim-prev");
+        if (lbNewtab) lbNewtab.href = "#";
+        document.body.style.overflow = "";
+      }
+
+      function navigate(dir) {
+        openLightbox(activeIndex + dir, dir > 0 ? "lb-anim-next" : "lb-anim-prev");
+      }
+
+      document.getElementById("lb-close").addEventListener("click", closeLightbox);
+      document.getElementById("lb-prev").addEventListener("click", () => navigate(-1));
+      document.getElementById("lb-next").addEventListener("click", () => navigate(1));
+      lb.addEventListener("click", e => { if (e.target === lb) closeLightbox(); });
+
+      document.addEventListener("keydown", e => {
+        if (lb.hidden) return;
+        if (e.key === "Escape")     closeLightbox();
+        if (e.key === "ArrowLeft")  navigate(-1);
+        if (e.key === "ArrowRight") navigate(1);
+      });
+
+      let touchStartX = 0;
+      lb.addEventListener("touchstart", e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+      lb.addEventListener("touchend", e => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) navigate(dx < 0 ? 1 : -1);
+      });
+
+      /* ── Init ─────────────────────────────────────────────── */
+      loadPhotos()
+        .then(items => { photos = items; buildGallery(items); })
+        .catch(() => {
+          const msg = document.getElementById("loading-msg");
+          if (msg) msg.textContent = "Could not load photos.";
+        });
+    </script>
+  </body>
+</html>

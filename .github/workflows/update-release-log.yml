@@ -1,0 +1,47 @@
+name: Update Release Log
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  append-release:
+    runs-on: ubuntu-latest
+    # Avoid recursion: skip when the head commit was made by a bot
+    # or already targets the release log / content indexes.
+    if: >-
+      github.actor != 'github-actions[bot]' &&
+      !contains(github.event.head_commit.message, 'chore: auto-update release log') &&
+      !contains(github.event.head_commit.message, 'chore: refresh content indexes')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Append release entry and update footer
+        run: node scripts/update-release-log.mjs
+
+      - name: Commit and push updates
+        run: |
+          if git diff --quiet -- pages/releases.md pages/footer.md; then
+            echo "No release-log updates required."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pages/releases.md pages/footer.md
+          git commit -m "chore: auto-update release log [skip ci]"
+          git push

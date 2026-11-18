@@ -1,0 +1,43 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Generate Post Index",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"scripts/generate-post-index.mjs"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Generate Music Index",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"scripts/generate-music-index.mjs"
+			],
+			"isBackground": false
+		},
+		{
+			"label": "Watch Music Index",
+			"type": "shell",
+			"command": "node",
+			"args": [
+				"scripts/generate-music-index.mjs",
+				"--watch"
+			],
+			"isBackground": true
+		},
+		{
+			"label": "Run Local Site",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"scripts/local_server.py",
+				"5500"
+			],
+			"isBackground": true
+		}
+	]
+}

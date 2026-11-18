@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="robots" content="noindex, follow" />
+    <title data-i18n="error404.documentTitle">404 | Page Not Found</title>
+    <script>
+      (function () {
+        var KNOWN_TABS = ["home", "projects", "experience", "resources", "music", "blog", "info", "photography", "releases", "apps", "settings", "textbook-project"];
+        /* The CV lives at /cv/ as a standalone document, so it is served
+           directly and never reaches this page. These are only the legacy
+           tab-style paths, kept redirecting so old links still land. */
+        var CV_SUBTABS = ["awards", "skills", "languages", "references"];
+        var hostname = window.location.hostname || "";
+        var pathname = window.location.pathname || "/";
+        var segments = pathname.split("/").filter(Boolean);
+        var isGhPages = /\.github\.io$/i.test(hostname);
+        var siteRootOffset = isGhPages && segments.length > 0 ? 1 : 0;
+        var siteRoot = siteRootOffset > 0 ? "/" + segments[0] + "/" : "/";
+        var pathParts = segments.slice(siteRootOffset);
+        if (pathParts.length === 1 && KNOWN_TABS.indexOf(pathParts[0].toLowerCase()) !== -1) {
+          window.location.replace(siteRoot + "?tab=" + encodeURIComponent(pathParts[0].toLowerCase()));
+        } else if (pathParts.length === 2 && pathParts[0].toLowerCase() === "blog" && pathParts[1]) {
+          window.location.replace(siteRoot + "blog/?post=" + encodeURIComponent(pathParts[1]));
+        } else if (pathParts.length === 1 && /^cv-/.test(pathParts[0].toLowerCase()) && CV_SUBTABS.indexOf(pathParts[0].toLowerCase().slice(3)) !== -1) {
+          window.location.replace(siteRoot + "cv/" + encodeURIComponent(pathParts[0].toLowerCase().slice(3)) + "/");
+        } else if (pathParts.length >= 1 && pathParts[0].toLowerCase() === "cv") {
+          var sub = pathParts[1] ? pathParts[1].toLowerCase() : "";
+          var cvTarget =
+            siteRoot + "cv/" + (CV_SUBTABS.indexOf(sub) !== -1 ? encodeURIComponent(sub) + "/" : "");
+          /* Guarded so a missing /cv/ can never bounce this page forever. */
+          if (cvTarget !== pathname) window.location.replace(cvTarget);
+        }
+      })();
+    </script>
+    <script>
+      (function () {
+        try {
+          var key = "portfolio-theme";
+          var stored = localStorage.getItem(key);
+          var useStored = stored === "dark" || stored === "light";
+          var theme = useStored
+            ? stored
+            : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.style.colorScheme = theme;
+        } catch (_) {
+          // Use CSS defaults when storage is unavailable.
+        }
+        try {
+          var supported = /^(en|fr|it|ja|zh)$/;
+          var lang = "";
+          try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
+          if (!supported.test(lang)) {
+            lang = "";
+            var list = [];
+            try {
+              if (navigator.languages) list = list.concat(Array.prototype.slice.call(navigator.languages));
+              if (navigator.language) list.push(navigator.language);
+            } catch (_) {}
+            for (var li = 0; li < list.length && !lang; li += 1) {
+              var raw = String(list[li] || "").toLowerCase().replace(/_/g, "-");
+              var base = raw.split("-")[0];
+              if (supported.test(raw)) lang = raw;
+              else if (supported.test(base)) lang = base;
+            }
+          }
+          if (supported.test(lang)) document.documentElement.lang = lang;
+        } catch (_) {}
+      })();
+    </script>
+    <script>
+      (function () {
+        var assetVersion = "20260913b";
+        var pathname = window.location.pathname || "/";
+        var hostname = window.location.hostname || "";
+        var segments = pathname.split("/").filter(Boolean);
+        var isGithubPagesHost = /\.github\.io$/i.test(hostname);
+        var siteRoot = isGithubPagesHost && segments.length > 0 ? "/" + segments[0] + "/" : "/";
+
+        window.__SITE_ROOT__ = siteRoot;
+        window.__ASSET_VERSION__ = assetVersion;
+
+        var head = document.head;
+        var create = function (tagName, attrs) {
+          var node = document.createElement(tagName);
+          Object.keys(attrs).forEach(function (key) {
+            node.setAttribute(key, attrs[key]);
+          });
+          head.appendChild(node);
+        };
+
+        create("link", { rel: "preconnect", href: "https://fonts.googleapis.com" });
+        create("link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" });
+        create("link", {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap"
+        });
+        create("link", { rel: "stylesheet", href: siteRoot + "assets/css/motion.css?v=" + assetVersion });
+        create("link", { rel: "stylesheet", href: siteRoot + "assets/css/styles.css?v=" + assetVersion });
+        create("link", { rel: "stylesheet", href: siteRoot + "assets/css/blockquotes.css?v=" + assetVersion });
+        create("link", { rel: "icon", type: "image/png", href: siteRoot + "assets/images/favicon.png?v=" + assetVersion });
+      })();
+    </script>
+  </head>
+  <body class="error404-body error404-variant-b">
+    <main class="error404-shell">
+      <div class="error404-noise" aria-hidden="true"></div>
+      <aside class="error404-brand" aria-hidden="true">
+        <span class="error404-brand-line"></span>
+        <span class="error404-code" data-text="404">404</span>
+      </aside>
+
+      <section class="error404-card" aria-live="polite">
+        <p class="error404-eyebrow" data-i18n="error404.eyebrow">Your Name's Portfolio</p>
+        <p class="error404-kicker" data-i18n="error404.kicker">error 404</p>
+        <h1 class="error404-title" data-i18n="error404.title">Page Not Found</h1>
+        <div class="error404-lang" id="error404-lang"></div>
+        <article id="error404-markdown" class="markdown-content error404-markdown"></article>
+        <nav class="error404-actions" aria-label="404 actions" data-i18n-aria="aria.404actions">
+          <a class="error404-link" id="error404-home-link" href="/" data-i18n="btn.backToHome">Back to home</a>
+          <a class="error404-link" href="https://github.com/your-username" target="_blank" rel="noreferrer">GitHub</a>
+        </nav>
+      </section>
+      <footer class="site-footer" role="contentinfo"></footer>
+    </main>
+
+    <div id="custom-cursor" class="custom-cursor" aria-hidden="true">😠</div>
+
+    <script>
+      (function () {
+        var siteRoot = window.__SITE_ROOT__ || "/";
+        var assetVersion = window.__ASSET_VERSION__ || "1";
+        var scripts = ["assets/js/i18n.js", "assets/js/theme.js", "assets/js/reveal.js", "assets/js/404.js"];
+
+        var appendScript = function (index) {
+          if (index >= scripts.length) return;
+          var script = document.createElement("script");
+          script.src = siteRoot + scripts[index] + "?v=" + assetVersion;
+          script.onload = function () {
+            appendScript(index + 1);
+          };
+          document.body.appendChild(script);
+        };
+
+        appendScript(0);
+      })();
+    </script>
+  </body>
+</html>

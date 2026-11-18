@@ -1,0 +1,1569 @@
+/* ══════════════════════════════════════════════════════════════════
+   /cv — an interactive recreation of
+   assets/documents/cv_latest.pdf (612 × 792 pt, 1 page).
+
+   Same machinery as /portfolio: geometry is expressed in the PDF's
+   own coordinate system, and every --s / --lh / --gap below is a PDF
+   point multiplied by --u (one PDF point, in CSS pixels) at paint
+   time. Unlike the portfolio sheet — a fixed magazine layout — a CV
+   is a column of dense running text, so the blocks *flow* at the
+   PDF's metrics rather than being pinned to absolute coordinates.
+   Type sizes, leading, indents and colours are lifted straight from
+   the file; only the stacking is allowed to give.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── Fraunces 72pt (variable: opsz, wght, SOFT, WONK) ───────────── */
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/fraunces/Fraunces-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Fraunces";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/fraunces/Fraunces-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Fraunces";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/fraunces/Fraunces-Italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Fraunces";
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../assets/fonts/fraunces/Fraunces-Italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ── CMU Sans Serif — the CV's text face, all four styles ───────── */
+@font-face {
+  font-family: "CMU Sans Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/cmu/CMUSansSerif-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "CMU Sans Serif";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/cmu/CMUSansSerif-Bold.woff2") format("woff2");
+}
+@font-face {
+  font-family: "CMU Sans Serif";
+  font-style: oblique 12deg;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/cmu/CMUSansSerif-Oblique.woff2") format("woff2");
+}
+@font-face {
+  font-family: "CMU Sans Serif";
+  font-style: oblique 12deg;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../assets/fonts/cmu/CMUSansSerif-BoldOblique.woff2") format("woff2");
+}
+
+/* ── Instrument Serif — the CV's italic run-in labels ───────────── */
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/instrument-serif/InstrumentSerif-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/instrument-serif/InstrumentSerif-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/instrument-serif/InstrumentSerif-Italic-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Instrument Serif";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonts/instrument-serif/InstrumentSerif-Italic-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7,
+    U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+    U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* ── Tokens ─────────────────────────────────────────────────────── */
+:root {
+  /* Wider than the portfolio sheet: the CV sets 7pt text, and this is
+     the width at which that lands near 14px — the PDF's proportions,
+     at a size a screen can actually read. */
+  --sheet-max: 1240px;
+  --page-w: 612;
+  --u: calc(min(100vw, var(--sheet-max)) / 612);
+  --vw: 100vw;
+
+  --ink: #000;
+  --paper: #fff;
+  --link: #7f7f7f;          /* the PDF's own 50% grey for hyperlinks */
+  --link-hot: #467785;      /* the portfolio sheet's teal, on hover  */
+  --accent: #f2aa83;        /* and its apricot, for the sweep        */
+
+  /* Fraunces "72pt SuperSoft" == opsz 72, SOFT 100. The CV's PDF sets
+     WONK 0 — its ampersands and 'a's are the plain forms, not the
+     turned/wonky alternates the portfolio sheet uses. */
+  --soft: "opsz" 72, "SOFT" 100, "WONK" 0;
+  --hard: "opsz" 72, "SOFT" 0, "WONK" 0;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ── Reset / page ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "CMU Sans Serif", "DejaVu Sans", "Helvetica Neue", Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+
+a {
+  color: var(--link);
+  /* Painted as two stacked backgrounds rather than a text-decoration,
+     so the accent sweep animates in from the left without ever
+     changing the text's metrics. */
+  text-decoration: none;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-image: linear-gradient(90deg, var(--accent), var(--link-hot)),
+    linear-gradient(currentColor, currentColor);
+  background-size: 0% 0.09em, 100% 0.05em;
+  background-position: 0 calc(100% - 0.02em), 0 calc(100% - 0.02em);
+  background-repeat: no-repeat;
+  transition: color 0.25s ease, background-size 0.45s var(--ease-out);
+}
+a:hover,
+a:focus-visible {
+  color: var(--link-hot);
+  background-size: 100% 0.09em, 100% 0.05em;
+}
+
+:focus-visible { outline: 2px solid var(--link-hot); outline-offset: 3px; }
+
+/* ── Scroll progress + floating nav ─────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 60;
+  background: rgba(0, 0, 0, 0.06);
+  pointer-events: none;
+}
+.scroll-progress i {
+  display: block;
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--link-hot), var(--accent));
+  transform-origin: 0 50%;
+}
+
+.floating-nav {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 61;
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(-8px);
+  animation: nav-in 0.8s var(--ease-out) 0.9s forwards;
+}
+.floating-nav .pill {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variation-settings: var(--hard);
+  letter-spacing: 0.01em;
+  color: #22252b;
+  text-decoration: none;
+  background-image: none;
+  padding: 7px 13px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.07);
+  -webkit-backdrop-filter: blur(9px) saturate(1.4);
+  backdrop-filter: blur(9px) saturate(1.4);
+  transition: background-color 0.28s ease, transform 0.28s var(--ease-out),
+    color 0.28s ease, border-color 0.28s ease;
+}
+.floating-nav .pill:hover {
+  background-color: #fff;
+  border-color: rgba(0, 0, 0, 0.28);
+  color: #14161a;
+  transform: translateY(-2px);
+}
+
+@keyframes nav-in { to { opacity: 1; transform: none; } }
+
+/* ══════════════════════════════════════════════════════════════════
+   THE SHEET
+   ══════════════════════════════════════════════════════════════════ */
+.sheet {
+  position: relative;
+  width: 100%;
+  max-width: var(--sheet-max);
+  margin: 0 auto;
+  /* The PDF's 10.8pt side margins. */
+  padding: 0 calc(10.8 * var(--u)) calc(40 * var(--u));
+  overflow: visible;
+}
+
+.chapter {
+  position: relative;
+  /* Baseline-to-baseline from the last body line of one section to
+     the next section's heading is 17.88pt in the file. */
+  padding-top: calc(9.4 * var(--u));
+}
+
+/* ── Watermarks ─────────────────────────────────────────────────
+   The CV carries no engravings, so its own crests stand in: one
+   institution mark per section, blown up and faded almost to the
+   paper, drifting behind the type on the same parallax rig the
+   portfolio sheet uses for its plates. */
+.mark {
+  position: absolute;
+  left: calc(var(--x) * 1%);
+  top: calc(var(--y) * 1%);
+  width: calc(var(--w) * var(--u));
+  /* Never let a watermark push past its section's right edge — at the
+     widths where the sheet fills the viewport that would widen the page. */
+  max-width: calc((100 - var(--x, 0)) * 1%);
+  /* Behind the running text but above the page's white — the chapter
+     is positioned without a z-index, so it never traps this. */
+  z-index: -1;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: var(--o, 0.032);
+  transform: translate3d(var(--px, 0px), var(--py, 0px), 0)
+    rotate(var(--rz, 0deg)) skewY(var(--skew, 0deg));
+}
+.mark img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(1) contrast(1.2);
+  transform: translate3d(0, var(--arty, 0px), 0) scale(var(--arts, 1));
+}
+
+/* ── Section headings ───────────────────────────────────────────
+   Faux small caps, exactly as the file sets them: the initial at
+   9.96pt, the rest uppercase at 7.97pt, with a hairline rule 3.3pt
+   under the baseline running the full measure. */
+.rule-head {
+  position: relative;
+  margin: 0 0 calc(6.9 * var(--u));
+  padding-bottom: calc(3.4 * var(--u));
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(7.97 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--soft);
+  line-height: 1.24;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  cursor: default;
+}
+.rule-head .cap { font-size: calc(9.96 / 7.97 * 1em); }
+.rule-head::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: max(0.6px, calc(0.4 * var(--u)));
+  background: var(--ink);
+  transform: scaleX(var(--rw, 1));
+  transform-origin: 0 50%;
+}
+/* A second, coloured rule rides over the black one on hover. */
+.rule-head::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: max(1.4px, calc(1 * var(--u)));
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--link-hot), var(--accent) 62%, transparent);
+  transform: scaleX(var(--uw, 0));
+  transform-origin: 0 50%;
+  transition: transform 0.55s var(--ease-out);
+}
+.rule-head:hover { --uw: 1; }
+
+/* ── Sub-headings: "Awards, Activities & Commendations", etc. ──── */
+.sub-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(12 * var(--u));
+  margin: 0 0 calc(2.6 * var(--u));
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(9.96 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--soft);
+  line-height: 1.24;
+}
+.sub-head .more {
+  flex: none;
+  font-size: 1em;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.sub-head h3 { margin: 0; font: inherit; cursor: default; }
+
+/* ── Entries ────────────────────────────────────────────────────
+   One school or job. The head row pins the title left and the dates
+   right on a single baseline, as the file does with a \hfill. */
+.entry {
+  position: relative;
+  margin: 0 0 calc(4.7 * var(--u));
+}
+.entry:last-child { margin-bottom: 0; }
+
+.entry-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(10 * var(--u));
+  line-height: 1.19;
+}
+.entry-row + .entry-row { margin-top: calc(1.5 * var(--u)); }
+
+.entry-title,
+.entry-date,
+.entry-role,
+.entry-where {
+  margin: 0;
+  font-size: calc(7.97 * var(--u));
+}
+.entry-title {
+  font-weight: 700;
+  cursor: default;
+}
+
+/* An entry doubles as a sheet trigger: clicking anywhere in it — the
+   title, the dates, the bullets below — opens its summary, while the
+   crest and org links nested inside still go where they always did
+   (sheets.js lets those through). The hit area bleeds a little past
+   the running text via matched negative margin/padding, so the tint
+   doesn't nudge anything else on the page. */
+.entry[data-sheet-target] {
+  cursor: pointer;
+  margin-left: calc(-8 * var(--u));
+  margin-right: calc(-8 * var(--u));
+  padding: calc(3 * var(--u)) calc(8 * var(--u));
+  border-radius: calc(4 * var(--u));
+  transition: background-color 0.3s ease;
+}
+.entry[data-sheet-target]:hover,
+.entry[data-sheet-target]:focus-visible {
+  background-color: rgba(70, 119, 133, 0.055);
+}
+.entry[data-sheet-target] .entry-title { position: relative; cursor: pointer; padding-right: calc(13 * var(--u)); }
+.entry[data-sheet-target] .entry-title::after {
+  content: "\2197";
+  position: absolute;
+  right: 0;
+  top: 0.08em;
+  font-family: "CMU Sans Serif", sans-serif;
+  font-size: 0.62em;
+  font-weight: 700;
+  color: var(--link);
+  opacity: 0;
+  transform: translate(-4px, 2px);
+  transition: opacity 0.3s ease, transform 0.3s var(--ease-out), color 0.3s ease;
+}
+.entry[data-sheet-target]:hover .entry-title::after,
+.entry[data-sheet-target]:focus-visible .entry-title::after {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--link-hot);
+}
+.entry-date,
+.entry-where {
+  flex: none;
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums lining-nums;
+  transition: transform 0.4s var(--ease-out), color 0.3s ease;
+}
+.entry-role { font-style: oblique 12deg; }
+
+/* The greyed-out employer / product half of a job title. */
+.entry-title .org { color: var(--link); font-weight: 700; }
+
+/* ── Crests ─────────────────────────────────────────────────────
+   Inline institution marks, set at the PDF's own heights (they sit
+   on the cap line, ~9.6pt tall next to 7.97pt text). */
+.crest {
+  display: inline-block;
+  height: calc(var(--ch, 9.56) * var(--u));
+  width: auto;
+  /* Sits on the cap line beside 7.97pt text, as in the file. */
+  vertical-align: -0.2em;
+  margin-left: calc(1.6 * var(--u));
+  transform-origin: 50% 70%;
+  transition: transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.5s ease, opacity 0.5s ease;
+}
+.crest:hover {
+  transform: scale(1.32) rotate(-5deg);
+  filter: drop-shadow(0 0 calc(3.5 * var(--u)) rgba(70, 119, 133, 0.55)) saturate(1.3);
+}
+a .crest { cursor: pointer; }
+
+/* ── Running prose ──────────────────────────────────────────────
+   7.47pt, 9.46pt leading — the education / experience measure. */
+.prose {
+  margin: calc(1.6 * var(--u)) 0 0;
+  font-size: calc(7.47 * var(--u));
+  line-height: calc(9.46 / 7.47);
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+.prose p { margin: 0; position: relative; transition: opacity 0.45s ease; }
+.prose p + p { margin-top: calc(1.2 * var(--u)); }
+
+/* ── Bullet lists ───────────────────────────────────────────────
+   The file hangs its bullets at 23pt with the runover at 30.7pt —
+   a 7.7pt hang, measured from a 12.2pt indent. */
+.bullets {
+  margin: calc(4.2 * var(--u)) 0 0;
+  padding: 0 0 0 calc(19.9 * var(--u));
+  list-style: none;
+  font-size: calc(7.47 * var(--u));
+  line-height: calc(8.97 / 7.47);
+  text-align: justify;
+  text-justify: inter-word;
+}
+.bullets li {
+  position: relative;
+  transition: opacity 0.45s ease;
+}
+.bullets li + li { margin-top: 0; }
+.bullets li::before {
+  content: "\2022";
+  position: absolute;
+  left: calc(-7.7 * var(--u));
+  top: 0;
+  color: var(--ink);
+  transition: color 0.35s ease, transform 0.4s var(--ease-out);
+}
+
+/* The freelance block and everything below "Selected Work" drop to
+   6.97pt on 8.97pt leading. */
+.bullets--small,
+.prose--small {
+  font-size: calc(6.97 * var(--u));
+  line-height: calc(8.97 / 6.97);
+}
+.bullets--tight {
+  padding-left: calc(10.5 * var(--u));
+  margin-top: calc(3 * var(--u));
+}
+.bullets--tight li::before { left: calc(-7 * var(--u)); }
+
+/* A projects bullet: body left, date pinned right. */
+.dated {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: calc(8 * var(--u));
+}
+.dated .when {
+  flex: none;
+  white-space: nowrap;
+  text-align: right;
+  font-variant-numeric: tabular-nums lining-nums;
+  transition: transform 0.4s var(--ease-out), color 0.3s ease;
+}
+
+/* ── Inline type ────────────────────────────────────────────────── */
+b, strong { font-weight: 700; }
+.o  { font-style: oblique 12deg; }             /* CMU Sans Oblique  */
+.bo { font-style: oblique 12deg; font-weight: 700; }
+/* A project title with no link behind it still takes the file's grey. */
+.muted { color: var(--link); }
+.is,
+.isr {
+  font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
+  /* Instrument Serif runs small on the same em; the file's labels sit
+     optically level with the CMU text around them at this ratio. */
+  font-size: 1.1em;
+}
+.is { font-style: italic; }
+.isr { font-style: normal; }
+.dot { font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif; }
+.hanzi-name { font-family: "Ma Shan Zheng", "Noto Serif JP", serif; }
+
+/* Inline emphasis lights up on its own, as on the portfolio sheet. */
+.prose b,
+.bullets b { transition: color 0.3s ease, text-shadow 0.3s ease; }
+.prose b:hover,
+.bullets b:hover {
+  color: var(--link-hot);
+  text-shadow: 0 0 calc(7 * var(--u)) rgba(70, 119, 133, 0.35);
+}
+
+/* A bullet whose category label (Hackathons:, Modelling & Finance:,
+   etc.) doubles as a sheet trigger — clicking anywhere in that bullet,
+   not just the label, opens its summary. Same matched negative-margin
+   trick as .entry, so the hover tint bleeds past the text without
+   nudging the bullet's own hanging-indent marker. */
+.bullets li[data-sheet-target] {
+  cursor: pointer;
+  margin-left: calc(-6 * var(--u));
+  margin-right: calc(-6 * var(--u));
+  padding: calc(1.6 * var(--u)) calc(6 * var(--u));
+  border-radius: calc(3 * var(--u));
+  transition: background-color 0.3s ease;
+}
+.bullets li[data-sheet-target]:hover,
+.bullets li[data-sheet-target]:focus-visible {
+  background-color: rgba(70, 119, 133, 0.055);
+}
+.bullets li[data-sheet-target]:focus-visible { outline: 2px solid var(--link-hot); outline-offset: -2px; }
+
+/* ══════════════════════════════════════════════════════════════════
+   MASTHEAD
+   ══════════════════════════════════════════════════════════════════ */
+.chapter--masthead {
+  padding-top: calc(2 * var(--u));
+  padding-bottom: calc(8 * var(--u));
+  text-align: center;
+}
+.chapter--masthead .mark {
+  left: 50%;
+  top: calc(-10 * var(--u));
+  width: calc(150 * var(--u));
+  margin-left: calc(-75 * var(--u));
+  --o: 0.05;
+}
+
+.hanzi {
+  margin: 0;
+  font-family: "Ma Shan Zheng", "Noto Serif JP", serif;
+  font-size: calc(7.97 * var(--u));
+  line-height: 1.25;
+  cursor: default;
+  transition: transform 0.5s var(--ease-out), letter-spacing 0.5s var(--ease-out);
+}
+.hanzi:hover { transform: translateY(calc(-0.6 * var(--u))); letter-spacing: 0.16em; }
+
+.name {
+  margin: calc(1.6 * var(--u)) 0 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(17.215 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--soft);
+  line-height: 1.15;
+  perspective: 700px;
+  cursor: default;
+}
+
+.tagline {
+  margin: calc(1.4 * var(--u)) 0 0;
+  font-size: calc(6.974 * var(--u));
+  line-height: 1.25;
+}
+.whereabouts {
+  margin: calc(2.6 * var(--u)) 0 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 400;
+  font-variation-settings: var(--soft);
+  font-size: calc(6.974 * var(--u));
+  line-height: 1.25;
+}
+.contact {
+  margin: calc(1.9 * var(--u)) 0 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 300;
+  font-variation-settings: var(--soft);
+  font-size: calc(6.3765 * var(--u));
+  line-height: 1.25;
+}
+.whereabouts .flag,
+.tagline .flag { font-style: normal; }
+
+/* The little FontAwesome glyphs in front of each contact route are
+   redrawn here as inline SVG so nothing has to load a whole icon
+   font for six marks. */
+.ico {
+  display: inline-block;
+  width: 0.86em;
+  height: 0.86em;
+  vertical-align: -0.06em;
+  margin-right: 0.14em;
+  fill: var(--ink);
+  transition: fill 0.3s ease, transform 0.4s var(--ease-out);
+}
+a:hover .ico { fill: var(--link-hot); transform: translateY(-0.12em) scale(1.12); }
+
+/* ══════════════════════════════════════════════════════════════════
+   ENTRANCE / SCROLL ANIMATION
+   ══════════════════════════════════════════════════════════════════ */
+.js .reveal,
+.js .rule-head,
+.js .sub-head,
+.js .entry,
+.js .prose,
+.js .bullets,
+.js .chips,
+.js .note {
+  opacity: 0;
+  transform: translateY(calc(1.4 * var(--u) + 8px));
+  transition: opacity 0.85s var(--ease-out) var(--d, 0ms),
+    transform 0.85s var(--ease-out) var(--d, 0ms);
+}
+.js .rule-head { --rw: 0; }
+.js .rule-head::before { transition: transform 0.95s var(--ease-out) calc(var(--d, 0ms) + 120ms); }
+.js .mark img {
+  opacity: 0;
+  --arts: 1.06;
+  transition: opacity 1.3s var(--ease-out) var(--d, 0ms),
+    --arts 1.3s var(--ease-out) var(--d, 0ms);
+}
+.js .crest {
+  opacity: 0;
+  transform: scale(0.5) rotate(-16deg);
+}
+
+.js .reveal.is-in,
+.js .rule-head.is-in,
+.js .sub-head.is-in,
+.js .entry.is-in,
+.js .prose.is-in,
+.js .bullets.is-in,
+.js .chips.is-in,
+.js .note.is-in { opacity: 1; transform: none; }
+.js .rule-head.is-in { --rw: 1; }
+.js .mark.is-in img { opacity: 1; --arts: 1; }
+.js .crest.is-in { opacity: 1; transform: none; }
+
+/* Once settled, the watermarks breathe. */
+.js .mark.is-in img {
+  animation: mark-breathe var(--bd, 16s) ease-in-out infinite;
+  animation-delay: calc(var(--d, 0ms) + 1600ms);
+}
+@keyframes mark-breathe {
+  0%, 100% { --arts: 1; }
+  50%      { --arts: 1.035; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   HOVER — the reading aids
+   ══════════════════════════════════════════════════════════════════ */
+/* Pointing at a paragraph or a bullet brings it forward and dims its
+   siblings, exactly as on the portfolio sheet. */
+.prose:hover p,
+.bullets:hover li { opacity: 0.4; }
+.prose:hover p:hover,
+.bullets:hover li:hover { opacity: 1; }
+.bullets li:hover::before { color: var(--link-hot); transform: translateX(calc(-0.8 * var(--u))); }
+
+.prose p::before {
+  content: "";
+  position: absolute;
+  left: calc(-7 * var(--u));
+  top: 0.1em;
+  bottom: 0.1em;
+  width: max(2px, calc(1.5 * var(--u)));
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--link-hot), var(--accent));
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  opacity: 0;
+  transition: transform 0.5s var(--ease-out), opacity 0.3s ease;
+}
+.prose p:hover::before { transform: scaleY(1); opacity: 1; }
+
+/* An entry lifts its dates and warms its rule when you point at it. */
+.entry:hover .entry-date,
+.entry:hover .entry-where,
+.dated:hover .when {
+  transform: translateX(calc(-1.4 * var(--u)));
+  color: var(--link-hot);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SPLIT HEADINGS — cv.js dices these into words and letters
+   ══════════════════════════════════════════════════════════════════ */
+.split .wd {
+  display: inline-block;
+  white-space: nowrap;
+  transform-style: preserve-3d;
+}
+.split .ch {
+  display: inline-block;
+  transition: color 0.3s ease;
+}
+
+@keyframes ch-wave {
+  0%   { transform: none; }
+  38%  { transform: translateY(-0.17em) rotate(-4deg); }
+  70%  { transform: translateY(0.04em) rotate(1.5deg); }
+  100% { transform: none; }
+}
+@keyframes ch-flip {
+  0%   { transform: none; }
+  36%  { transform: translateY(-0.09em) rotateX(38deg) scale(1.07); }
+  72%  { transform: translateY(0.015em) rotateX(-8deg) scale(0.995); }
+  100% { transform: none; }
+}
+
+.rule-head:hover .ch,
+.sub-head h3:hover .ch,
+.entry-title:hover .ch {
+  animation: ch-wave 0.62s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 24ms);
+}
+.rule-head .ch:hover,
+.sub-head h3 .ch:hover,
+.entry-title .ch:hover { color: var(--link-hot); }
+
+.name:hover .ch {
+  animation: ch-flip 0.8s var(--ease-out) both;
+  animation-delay: calc(var(--i) * 32ms);
+}
+.name .ch:hover { color: var(--accent); }
+
+/* ══════════════════════════════════════════════════════════════════
+   CHIPS — used by the skills and languages pages
+   ══════════════════════════════════════════════════════════════════ */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(3 * var(--u)) calc(3.4 * var(--u));
+  margin: calc(3 * var(--u)) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.chip {
+  position: relative;
+  font-size: calc(6.97 * var(--u));
+  line-height: 1.2;
+  padding: calc(2.4 * var(--u)) calc(4.6 * var(--u));
+  border: max(0.6px, calc(0.45 * var(--u))) solid rgba(0, 0, 0, 0.28);
+  border-radius: 999px;
+  background: #fff;
+  cursor: default;
+  transition: transform 0.4s var(--ease-out), border-color 0.35s ease,
+    box-shadow 0.4s ease, color 0.3s ease;
+}
+.chip:hover,
+.chip:focus-visible {
+  transform: translateY(calc(-0.9 * var(--u)));
+  border-color: var(--link-hot);
+  color: var(--link-hot);
+  box-shadow: 0 calc(1.4 * var(--u)) calc(4 * var(--u)) rgba(20, 24, 34, 0.14);
+}
+/* Tooltip, rendered from data-tip so nothing has to ship a library.
+   Kept out of flow until it is wanted: a hidden-but-laid-out tooltip on
+   a chip near the right margin would widen the whole page. */
+.chip[data-tip]::after {
+  content: attr(data-tip);
+  display: none;
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.5 * var(--u) + 4px);
+  z-index: 20;
+  width: max-content;
+  max-width: min(calc(150 * var(--u)), 60vw);
+  padding: calc(2.6 * var(--u)) calc(4 * var(--u));
+  border-radius: calc(2.5 * var(--u));
+  background: rgba(18, 20, 24, 0.94);
+  color: #fff;
+  font-size: calc(6.2 * var(--u));
+  line-height: 1.3;
+  text-align: left;
+  white-space: normal;
+  transform: translate(-50%, 0);
+  pointer-events: none;
+}
+.chip[data-tip]:hover::after,
+.chip[data-tip]:focus-visible::after {
+  display: block;
+  animation: tip-in 0.24s var(--ease-out) both;
+}
+@keyframes tip-in {
+  from { opacity: 0; transform: translate(-50%, 4px); }
+  to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.chip-group { margin: calc(6 * var(--u)) 0 0; }
+.chip-group > h4 {
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: calc(8.6 * var(--u));
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+/* ── A standalone note block (references page, page intros) ─────── */
+.note {
+  margin: calc(4 * var(--u)) 0 0;
+  font-size: calc(7.47 * var(--u));
+  line-height: calc(9.9 / 7.47);
+  max-width: calc(430 * var(--u));
+}
+.note p { margin: 0; }
+.note p + p { margin-top: calc(5 * var(--u)); }
+
+/* ── The portfolio callout ───────────────────────────────────────
+   References, on this site, effectively already live in the
+   portfolio — quotes from the people worked with, contact details,
+   the same work at length. This is the loud version of that link:
+   used on the CV's References section, its sheet, and the
+   references/ page itself. */
+.port-callout {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  margin: calc(6 * var(--u)) 0 0;
+  max-width: calc(430 * var(--u));
+  padding: calc(7 * var(--u)) calc(8 * var(--u));
+  border: max(0.8px, calc(0.6 * var(--u))) solid rgba(70, 119, 133, 0.35);
+  border-radius: calc(5 * var(--u));
+  background: linear-gradient(135deg, rgba(70, 119, 133, 0.09), rgba(242, 170, 131, 0.1));
+  color: var(--ink);
+  background-image: none;
+  cursor: pointer;
+  transition: transform 0.4s var(--ease-out), border-color 0.35s ease,
+    box-shadow 0.45s ease;
+}
+.port-callout::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: max(1.6px, calc(1.1 * var(--u)));
+  background: linear-gradient(90deg, var(--link-hot), var(--accent) 62%, transparent);
+}
+.port-callout:hover,
+.port-callout:focus-visible {
+  transform: translateY(calc(-1.6 * var(--u)));
+  border-color: var(--link-hot);
+  box-shadow: 0 calc(5 * var(--u)) calc(16 * var(--u)) rgba(70, 119, 133, 0.22);
+}
+.port-callout-kicker {
+  display: block;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-style: italic;
+  font-size: calc(6.97 * var(--u));
+  color: var(--link-hot);
+}
+.port-callout-title {
+  display: block;
+  margin-top: calc(1.4 * var(--u));
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(11.5 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--soft);
+  line-height: 1.2;
+}
+.port-callout-note {
+  display: block;
+  margin-top: calc(2 * var(--u));
+  font-size: calc(6.97 * var(--u));
+  line-height: calc(8.97 / 6.97);
+  color: #3d4046;
+}
+
+/* ── Sub-page masthead: the CV's name block, at half volume ─────── */
+.chapter--sub {
+  padding-top: calc(16 * var(--u));
+  padding-bottom: calc(6 * var(--u));
+  text-align: left;
+}
+.crumb {
+  margin: 0 0 calc(4 * var(--u));
+  font-size: calc(7 * var(--u));
+  letter-spacing: 0.02em;
+}
+.page-title {
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(20 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--soft);
+  line-height: 1.16;
+  cursor: default;
+}
+.standfirst {
+  margin: calc(3.4 * var(--u)) 0 0;
+  font-size: calc(7.97 * var(--u));
+  line-height: 1.35;
+  max-width: calc(400 * var(--u));
+  font-style: oblique 12deg;
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   SPARKLES (spawned by cv.js on hover)
+   ══════════════════════════════════════════════════════════════════ */
+.spark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--sz, 14px);
+  height: var(--sz, 14px);
+  margin: calc(var(--sz, 14px) / -2) 0 0 calc(var(--sz, 14px) / -2);
+  z-index: 9;
+  pointer-events: none;
+  color: var(--sc, #f2aa83);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: spark-pop var(--dur, 900ms) cubic-bezier(0.22, 0.8, 0.3, 1) forwards;
+}
+.spark svg { width: 100%; height: 100%; display: block; }
+
+@keyframes spark-pop {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--tx0), var(--ty0), 0) scale(0.1) rotate(var(--rot0));
+  }
+  22% { opacity: 1; }
+  55% {
+    transform: translate3d(var(--tx1), var(--ty1), 0) scale(1) rotate(var(--rot1));
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--tx2), var(--ty2), 0) scale(0.16) rotate(var(--rot2));
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   MOTION PRIMITIVES
+   Registered so a single `transform` can be composed from parallax +
+   reveal + breathing without any two of them overwriting each other.
+   ══════════════════════════════════════════════════════════════════ */
+@property --px    { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --py    { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --rz    { syntax: "<angle>";  inherits: false; initial-value: 0deg; }
+@property --skew  { syntax: "<angle>";  inherits: true;  initial-value: 0deg; }
+@property --arty  { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --arts  { syntax: "<number>"; inherits: false; initial-value: 1; }
+@property --uw    { syntax: "<number>"; inherits: true;  initial-value: 0; }
+@property --rw    { syntax: "<number>"; inherits: true;  initial-value: 1; }
+@property --i     { syntax: "<number>"; inherits: false; initial-value: 0; }
+
+/* ══════════════════════════════════════════════════════════════════
+   REFLOW — below 900px the PDF's 7pt column is unreadable, so the
+   same content restacks at screen sizes.
+   ══════════════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  :root { --u: 1px; }
+
+  .sheet { max-width: 720px; padding: 0 20px 56px; }
+
+  /* The watermarks are a background wash in the single column; clipping
+     each section to its own box stops them widening the page. */
+  .chapter { padding-top: 24px; overflow: hidden; }
+  .chapter--masthead { padding: 26px 0 10px; overflow: hidden; }
+  .chapter--masthead .mark { width: 260px; margin-left: -130px; top: -6px; }
+
+  .hanzi { font-size: 17px; }
+  .name { font-size: clamp(38px, 11vw, 54px); margin-top: 6px; }
+  .tagline { font-size: 14px; margin-top: 10px; }
+  .whereabouts { font-size: 13.5px; margin-top: 10px; line-height: 1.6; }
+  .contact { font-size: 13px; margin-top: 8px; line-height: 1.6; }
+
+  .rule-head {
+    font-size: 15px;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+  }
+  .rule-head::before { height: 1px; }
+  .rule-head::after { height: 2px; }
+
+  .sub-head { font-size: 20px; display: block; margin-bottom: 8px; }
+  .sub-head .more { display: block; font-size: 14px; margin-top: 3px; }
+
+  .entry { margin-bottom: 22px; }
+  .entry-row { display: block; }
+  .entry-title, .entry-date, .entry-role, .entry-where { font-size: 16px; }
+  .entry-date, .entry-where { text-align: left; margin-top: 1px; color: #55585e; }
+  .entry-row + .entry-row { margin-top: 6px; }
+
+  .crest { height: 17px; }
+
+  .prose { font-size: 15.5px; line-height: 1.5; margin-top: 9px; text-align: left; }
+  .prose p + p { margin-top: 9px; }
+  .prose p::before { left: -12px; }
+
+  .bullets {
+    font-size: 15.5px;
+    line-height: 1.5;
+    margin-top: 10px;
+    padding-left: 19px;
+    text-align: left;
+  }
+  .bullets--small, .prose--small { font-size: 15px; line-height: 1.5; }
+  .bullets--tight { padding-left: 19px; }
+  .bullets li + li { margin-top: 8px; }
+  .bullets li::before,
+  .bullets--tight li::before { left: -19px; }
+
+  .dated { display: block; }
+  .dated .when { display: block; text-align: left; margin-top: 2px; color: #55585e; }
+
+  .chips { gap: 7px 7px; margin-top: 10px; }
+  .chip { font-size: 13.5px; padding: 5px 10px; border-width: 1px; }
+  .chip[data-tip]::after { font-size: 12.5px; max-width: 240px; padding: 6px 9px; }
+  .chip-group { margin-top: 18px; }
+  .chip-group > h4 { font-size: 19px; }
+
+  .note { font-size: 15.5px; line-height: 1.6; max-width: none; margin-top: 14px; }
+  .note p + p { margin-top: 12px; }
+
+  .port-callout { max-width: none; margin-top: 16px; padding: 18px 20px; border-radius: 12px; }
+  .port-callout-kicker { font-size: 14px; }
+  .port-callout-title { font-size: 26px; margin-top: 6px; }
+  .port-callout-note { font-size: 15.5px; line-height: 1.55; margin-top: 8px; }
+
+  .chapter--sub { padding-top: 34px; }
+  .page-title { font-size: clamp(30px, 9vw, 42px); }
+  .standfirst { font-size: 16px; max-width: none; margin-top: 12px; }
+  .crumb { font-size: 14px; }
+
+  .floating-nav { top: auto; bottom: 12px; right: 12px; }
+  .floating-nav .pill {
+    font-size: 11.5px;
+    padding: 6px 11px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+  }
+
+  /* The watermarks become a light wash behind each section. */
+  .mark { opacity: 0.045 !important; }
+}
+
+@media (max-width: 420px) {
+  .sheet { padding: 0 15px 40px; }
+  .prose, .bullets { font-size: 15px; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Reduced motion / print
+   ══════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal,
+  .js .rule-head,
+  .js .sub-head,
+  .js .entry,
+  .js .prose,
+  .js .bullets,
+  .js .chips,
+  .js .note,
+  .js .crest,
+  .js .mark img {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+  .js .rule-head { --rw: 1; }
+  .rule-head:hover .ch,
+  .sub-head h3:hover .ch,
+  .entry-title:hover .ch,
+  .name:hover .ch { animation: none !important; }
+  .crest:hover { transform: none !important; }
+  .hanzi:hover { transform: none !important; }
+  .floating-nav { animation: none; opacity: 1; transform: none; }
+  .spark { display: none !important; }
+}
+
+@media print {
+  .floating-nav,
+  .scroll-progress { display: none !important; }
+  .mark { display: none !important; }
+  .sheet { max-width: none; padding: 0; }
+  .js .reveal,
+  .js .rule-head,
+  .js .sub-head,
+  .js .entry,
+  .js .prose,
+  .js .bullets,
+  .js .chips,
+  .js .note,
+  .js .crest,
+  .js .mark img {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .js .rule-head { --rw: 1; }
+  .rule-head::after,
+  .prose p::before { display: none !important; }
+  a { color: #000; background-image: none; }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   THE REST OF THE FILE — index cards, and the section sheets they
+   (and every section heading) morph into.
+
+   A one-page CV compresses; these are the decompressions. The cards
+   are ordinary links to ordinary pages, so the section works with no
+   JavaScript at all; sheets.js then intercepts the click and expands
+   the card in place, /city-optimise style, with the real page one
+   hand-off away at the bottom of the panel.
+   ══════════════════════════════════════════════════════════════════ */
+
+/* ── A heading with a trigger parked at the end of its rule ─────── */
+.head-row { position: relative; }
+
+/* Only shown once sheets.js has wired itself up, so the page never
+   carries a button that does nothing. The cards below need no such
+   guard — they are ordinary links to ordinary pages. */
+.head-open { display: none; }
+.sheets-ready .head-open { display: inline-block; }
+
+.head-open {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(6.6 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--hard);
+  letter-spacing: 0.02em;
+  color: var(--link);
+  white-space: nowrap;
+  cursor: pointer;
+  padding: calc(1.6 * var(--u)) calc(4.4 * var(--u));
+  border: max(0.6px, calc(0.45 * var(--u))) solid rgba(0, 0, 0, 0.22);
+  border-radius: 999px;
+  background: var(--paper);
+  transition: color 0.28s ease, border-color 0.28s ease,
+    transform 0.32s var(--ease-out), box-shadow 0.35s ease, opacity 0.4s ease;
+}
+.head-row .head-open {
+  position: absolute;
+  right: 0;
+  top: calc(-0.4 * var(--u));
+}
+.head-open:hover,
+.head-open:focus-visible {
+  color: var(--link-hot);
+  border-color: var(--link-hot);
+  transform: translateY(calc(-0.9 * var(--u)));
+  box-shadow: 0 calc(1.4 * var(--u)) calc(4 * var(--u)) rgba(20, 24, 34, 0.14);
+}
+.head-open:active { transform: scale(0.95); }
+
+/* The sub-heads already carry a "See More" link; the trigger joins it
+   on the same right-hand end, ahead of it. */
+.head-tools {
+  flex: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: calc(6 * var(--u));
+}
+
+/* ── The index of detail pages ──────────────────────────────────── */
+.index-lede {
+  margin: 0 0 calc(5 * var(--u));
+  font-size: calc(7.47 * var(--u));
+  line-height: calc(9.46 / 7.47);
+  max-width: calc(400 * var(--u));
+  font-style: oblique 12deg;
+  color: #3d4046;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(150 * var(--u)), 1fr));
+  gap: calc(5 * var(--u));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: calc(1.8 * var(--u));
+  height: 100%;
+  overflow: hidden;
+  padding: calc(7 * var(--u)) calc(7.5 * var(--u)) calc(6 * var(--u));
+  border: max(0.6px, calc(0.45 * var(--u))) solid rgba(0, 0, 0, 0.16);
+  border-radius: calc(4.5 * var(--u));
+  background-color: var(--paper);
+  /* Kill the inherited link underline-sweep; the card sweeps instead. */
+  background-image: none;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.42s var(--ease-out), border-color 0.35s ease,
+    box-shadow 0.45s ease, opacity 0.4s ease;
+}
+/* The accent rule from .rule-head, wiped across the top of the card. */
+.page-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: max(1.4px, calc(1 * var(--u)));
+  background: linear-gradient(90deg, var(--link-hot), var(--accent) 62%, transparent);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.55s var(--ease-out);
+}
+.page-card:hover,
+.page-card:focus-visible {
+  transform: translateY(calc(-1.6 * var(--u)));
+  border-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 calc(4 * var(--u)) calc(14 * var(--u)) rgba(20, 24, 34, 0.13);
+}
+.page-card:hover::before,
+.page-card:focus-visible::before { transform: scaleX(1); }
+
+.page-card-kicker {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(6.4 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--hard);
+  letter-spacing: 0.14em;
+  color: var(--link);
+}
+.page-card-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(9.96 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--soft);
+  line-height: 1.18;
+}
+.page-card-note {
+  font-size: calc(6.97 * var(--u));
+  line-height: calc(8.97 / 6.97);
+  color: #3d4046;
+}
+.page-card-path {
+  margin-top: auto;
+  padding-top: calc(3.4 * var(--u));
+  font-size: calc(6.4 * var(--u));
+  letter-spacing: 0.05em;
+  color: var(--link);
+  transition: color 0.3s ease;
+}
+.page-card:hover .page-card-path { color: var(--link-hot); }
+
+/* ── The portfolio card — a firebox, not a sheet of paper ─────────
+   This is the loudest link on the page: the same work at length,
+   with the referee quotes and contact details this section keeps
+   pointing at. It gets its own dark, glowing treatment, with a
+   handful of embers that flare and drift down through it forever. */
+.page-card--portfolio {
+  background: radial-gradient(140% 130% at 50% 115%, #431c09 0%, #23120a 45%, #0e0806 100%);
+  border-color: rgba(242, 170, 131, 0.4);
+  color: #f2e7dc;
+}
+.page-card--portfolio::before {
+  background: linear-gradient(90deg, #ff7a30, #ffd68a 55%, #ff7a30);
+  opacity: 0.85;
+}
+.page-card--portfolio:hover,
+.page-card--portfolio:focus-visible {
+  border-color: #ffb27a;
+  box-shadow: 0 calc(4 * var(--u)) calc(14 * var(--u)) rgba(20, 24, 34, 0.13),
+    0 0 calc(30 * var(--u)) rgba(255, 130, 55, 0.28);
+}
+.page-card--portfolio .page-card-kicker { color: #ffb27a; }
+.page-card--portfolio .page-card-title { color: #fff4e8; text-shadow: 0 0 calc(12 * var(--u)) rgba(255, 170, 110, 0.4); }
+.page-card--portfolio .page-card-note { color: #d9c4b3; }
+.page-card--portfolio .page-card-path { color: #ffb27a; }
+.page-card--portfolio:hover .page-card-path { color: #ffd6ab; }
+/* The running text sits in its own stacking context, above the
+   embers layer, regardless of DOM order. */
+.page-card--portfolio .page-card-kicker,
+.page-card--portfolio .page-card-title,
+.page-card--portfolio .page-card-note,
+.page-card--portfolio .page-card-path {
+  position: relative;
+  z-index: 1;
+}
+
+.embers {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.ember {
+  position: absolute;
+  bottom: 10%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff2d9 0%, #ffab5e 46%, rgba(255, 122, 48, 0) 76%);
+  box-shadow: 0 0 6px 1px rgba(255, 150, 60, 0.85);
+  opacity: 0;
+  animation: ember-fall 5s ease-in infinite;
+}
+/* Fourteen hand-placed sparks: each with its own spot, drift, size
+   and timing, so the fire never looks like it's looping in sync. */
+.ember:nth-child(1)  { left: 4%;  width: 3px; height: 3px; --dx: 9px;  animation-delay: 0s;    animation-duration: 4.4s; }
+.ember:nth-child(2)  { left: 12%; width: 5px; height: 5px; --dx: -7px; animation-delay: 0.7s;  animation-duration: 5.3s; }
+.ember:nth-child(3)  { left: 20%; width: 3px; height: 3px; --dx: 5px;  animation-delay: 1.6s;  animation-duration: 4.8s; }
+.ember:nth-child(4)  { left: 29%; width: 4px; height: 4px; --dx: -10px; animation-delay: 0.3s; animation-duration: 5.6s; }
+.ember:nth-child(5)  { left: 37%; width: 6px; height: 6px; --dx: 6px;  animation-delay: 2.1s;  animation-duration: 4.6s; }
+.ember:nth-child(6)  { left: 45%; width: 3px; height: 3px; --dx: -4px; animation-delay: 1.1s;  animation-duration: 5.9s; }
+.ember:nth-child(7)  { left: 53%; width: 4px; height: 4px; --dx: 8px;  animation-delay: 0.5s;  animation-duration: 4.3s; }
+.ember:nth-child(8)  { left: 60%; width: 5px; height: 5px; --dx: -8px; animation-delay: 2.6s;  animation-duration: 5.4s; }
+.ember:nth-child(9)  { left: 68%; width: 3px; height: 3px; --dx: 6px;  animation-delay: 1.4s;  animation-duration: 4.9s; }
+.ember:nth-child(10) { left: 75%; width: 4px; height: 4px; --dx: -6px; animation-delay: 0.2s;  animation-duration: 5.7s; }
+.ember:nth-child(11) { left: 82%; width: 6px; height: 6px; --dx: 10px; animation-delay: 1.9s;  animation-duration: 4.5s; }
+.ember:nth-child(12) { left: 89%; width: 3px; height: 3px; --dx: -5px; animation-delay: 0.9s;  animation-duration: 5.2s; }
+.ember:nth-child(13) { left: 95%; width: 4px; height: 4px; --dx: 7px;  animation-delay: 2.3s;  animation-duration: 4.7s; }
+.ember:nth-child(14) { left: 56%; width: 3px; height: 3px; --dx: -9px; animation-delay: 1.3s;  animation-duration: 6.1s; }
+
+@keyframes ember-fall {
+  0%   { transform: translate3d(0, 8px, 0) scale(0.5); opacity: 0; }
+  14%  { opacity: 1; }
+  38%  { transform: translate3d(var(--dx, 6px), -22px, 0) scale(1); }
+  100% { transform: translate3d(calc(var(--dx, 6px) * 2), 78px, 0) scale(0.55); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ember { animation: none !important; opacity: 0.5; }
+}
+
+/* The card (or button) that opened the sheet dims and stays put, so
+   the page behind still reads as "there", the way an iOS icon does. */
+[data-sheet-target].is-source { opacity: 0.22; }
+
+/* ── The sheet itself ───────────────────────────────────────────── */
+.cv-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(18, 20, 26, 0.38);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.cv-sheet-backdrop.is-open { opacity: 1; }
+.cv-sheet-backdrop[hidden] { display: none; }
+
+.cv-sheet {
+  position: fixed;
+  z-index: 201;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: calc(4.5 * var(--u));
+  background: var(--paper);
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.45);
+  /* left/top/width/height are driven from sheets.js; this transition
+     is what actually performs the morph from trigger rect → sheet. */
+  transition: left 0.52s var(--ease-out), top 0.52s var(--ease-out),
+    width 0.52s var(--ease-out), height 0.52s var(--ease-out),
+    border-radius 0.52s var(--ease-out), opacity 0.25s ease;
+}
+.cv-sheet[hidden] { display: none; }
+.cv-sheet.is-open { border-radius: 14px; }
+
+.cv-sheet-scroll {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.cv-sheet-bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px 18px;
+  background: rgba(255, 255, 255, 0.88);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  -webkit-backdrop-filter: blur(10px) saturate(1.4);
+  backdrop-filter: blur(10px) saturate(1.4);
+}
+.cv-sheet-bar-title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variation-settings: var(--hard);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--link);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cv-sheet-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  padding: 6px 13px;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 999px;
+  background: var(--paper);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-variation-settings: var(--hard);
+  color: #22252b;
+  cursor: pointer;
+  transition: transform 0.28s var(--ease-out), border-color 0.28s ease,
+    color 0.28s ease;
+}
+.cv-sheet-close svg { fill: currentColor; }
+.cv-sheet-close:hover { border-color: var(--link-hot); color: var(--link-hot); }
+.cv-sheet-close:active { transform: scale(0.93); }
+
+.cv-sheet-body {
+  padding: calc(14 * var(--u)) calc(16 * var(--u)) calc(24 * var(--u));
+  /* Contents arrive just after the frame lands, rather than being
+     stretched along with it. */
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.4s ease 0.12s, transform 0.4s var(--ease-out) 0.12s;
+}
+.cv-sheet.is-open .cv-sheet-body { opacity: 1; transform: none; }
+
+.cv-sheet-body h2 {
+  margin: calc(2.4 * var(--u)) 0 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(17 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--soft);
+  line-height: 1.16;
+}
+.cv-sheet-body h3 {
+  margin: calc(9 * var(--u)) 0 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: calc(9.6 * var(--u));
+  font-weight: 400;
+  line-height: 1.25;
+}
+.cv-sheet-body .lede {
+  margin: calc(3.4 * var(--u)) 0 0;
+  font-size: calc(7.97 * var(--u));
+  line-height: 1.4;
+  font-style: oblique 12deg;
+}
+.cv-sheet-body .bullets { margin-top: calc(4.4 * var(--u)); }
+
+/* A sheet is a summary; this is its hand-off to the whole page. */
+.cv-sheet-more {
+  margin: calc(9 * var(--u)) 0 0;
+  padding-top: calc(5 * var(--u));
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: calc(8.4 * var(--u));
+  font-weight: 600;
+  font-variation-settings: var(--soft);
+}
+.cv-sheet-more a { color: #22252b; }
+.cv-sheet-more a:hover { color: var(--link-hot); }
+
+/* While a sheet is open the page behind is locked. */
+body.is-cv-sheet-open { overflow: hidden; }
+
+@media (max-width: 900px) {
+  /* No room to park the trigger on the rule; it drops below instead,
+     with enough air that it doesn't crowd the sub-head under it. */
+  .head-row .head-open { position: static; display: inline-block; margin: 10px 0 6px; }
+  .head-open { font-size: 13px; padding: 5px 11px; border-width: 1px; }
+  .head-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 5px; }
+  .head-tools .more { display: inline; font-size: 14px; margin-top: 0; }
+
+  .index-lede { font-size: 15.5px; line-height: 1.55; max-width: none; }
+  .page-grid { grid-template-columns: 1fr; gap: 12px; }
+  .page-card { padding: 16px 17px 14px; border-radius: 10px; gap: 4px; }
+  .page-card-kicker { font-size: 12px; }
+  .page-card-title { font-size: 20px; }
+  .page-card-note { font-size: 15px; line-height: 1.5; }
+  .page-card-path { font-size: 12.5px; padding-top: 9px; }
+
+  .cv-sheet-body { padding: 22px 18px 40px; }
+  .cv-sheet-body h2 { font-size: clamp(26px, 7.5vw, 34px); }
+  .cv-sheet-body h3 { font-size: 19px; margin-top: 20px; }
+  .cv-sheet-body .lede { font-size: 16px; margin-top: 9px; }
+  .cv-sheet-more { font-size: 16px; margin-top: 22px; padding-top: 14px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-sheet,
+  .cv-sheet-body,
+  .cv-sheet-backdrop,
+  .page-card,
+  .page-card::before,
+  .head-open { transition: none !important; }
+  .page-card:hover,
+  .head-open:hover { transform: none !important; }
+  .cv-sheet-body { opacity: 1 !important; transform: none !important; }
+}
+
+@media print {
+  .cv-sheet,
+  .cv-sheet-backdrop,
+  .head-open { display: none !important; }
+  .page-card { break-inside: avoid; }
+  .page-card::before { display: none !important; }
+  .embers { display: none !important; }
+}

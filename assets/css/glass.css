@@ -1,0 +1,64 @@
+/*
+ * ════════════════════════════════════════════════════════════════════
+ *  LIQUID GLASS — Universal Control File
+ *  Edit values here to change blur / transparency across the whole site.
+ * ════════════════════════════════════════════════════════════════════
+ *
+ *  QUICK REFERENCE
+ *  ───────────────
+ *  --glass-blur          Main blur radius on panels, sidebar, modal.
+ *                        ↑ more = heavier frosted-glass look
+ *                        ↓ less = more transparent / lighter feel
+ *                        Sensible range: 8px – 40px
+ *
+ *  --glass-saturate      Colour saturation boost behind the glass.
+ *                        ↑ more = background colours pop through strongly
+ *                        ↓ less = neutral, closer to plain frosted
+ *                        Sensible range: 100% – 220%
+ *
+ *  --glass-bg            Background fill of glass surfaces (light mode).
+ *                        Lower the alpha for more transparency.
+ *                        e.g. rgba(255,255,255,0.28) = very transparent
+ *                             rgba(255,255,255,0.65) = nearly opaque
+ *
+ *  --glass-bg-strong     Same but for elevated surfaces (intro card, etc.)
+ *
+ *  --glass-border        Border colour on glass panels.
+ *
+ *  --glass-highlight     Top-edge highlight (thin 1px inset line).
+ *                        Lower alpha = subtler edge glow
+ *
+ *  --glass-blur-card     Blur used specifically on project / blog cards.
+ *
+ *  --glass-blur-modal    Blur used inside modals and the lightbox.
+ *
+ *  --glass-blur-subtle   Blur for small elements (chips, nav buttons).
+ *
+ *  --glass-blur-sidebar  Blur specifically on the sidebar panel.
+ * ════════════════════════════════════════════════════════════════════
+ */
+
+/* ── Light mode ─────────────────────────────────────────────────── */
+:root {
+  --glass-blur:          14px;   /* was 24px — reduce to taste */
+  --glass-saturate:      150%;   /* was 180% */
+  --glass-blur-card:     12px;   /* cards */
+  --glass-blur-modal:    24px;   /* modals / lightbox */
+  --glass-blur-subtle:   7px;    /* chips, nav buttons */
+  --glass-blur-sidebar:  16px;   /* sidebar panel */
+
+  --glass-bg:            rgba(255, 255, 255, 0.40);  /* was 0.52 */
+  --glass-bg-strong:     rgba(255, 255, 255, 0.60);  /* was 0.72 */
+  --glass-border:        rgba(255, 255, 255, 0.62);
+  --glass-shadow:        rgba(20, 83, 45, 0.10);
+  --glass-highlight:     rgba(255, 255, 255, 0.78);  /* was 0.88 */
+}
+
+/* ── Dark mode ──────────────────────────────────────────────────── */
+:root[data-theme="dark"] {
+  --glass-bg:            rgba(12, 24, 18, 0.45);    /* was 0.52 */
+  --glass-bg-strong:     rgba(15, 30, 22, 0.62);    /* was 0.72 */
+  --glass-border:        rgba(255, 255, 255, 0.09);
+  --glass-shadow:        rgba(0, 0, 0, 0.38);
+  --glass-highlight:     rgba(255, 255, 255, 0.05); /* was 0.06 */
+}

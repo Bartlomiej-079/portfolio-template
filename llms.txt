@@ -1,0 +1,44 @@
+# Your Name
+
+> Your Job Title at Your Company. One or two sentences about your education and what you work on.
+
+Your Name is a short, factual description of who you are, where you are based and what you do. Keep it neutral and specific: this file is read by language models and search tools.
+
+Official website: https://example.com/
+Email: hello@example.com
+
+## Identity
+
+- Canonical site: https://example.com/
+- GitHub: https://github.com/your-username
+- LinkedIn: https://www.linkedin.com/in/your-username
+- YouTube: https://www.youtube.com/@yourusername
+- Mastodon: https://mastodon.social/@your_username
+- X: https://x.com/yourusername
+- CV: https://example.com/cv/
+- Selected projects: https://example.com/portfolio/
+
+## Current role
+
+Your Job Title at Your Company (https://example.com), working across the technologies and domains you want to be known for.
+
+## Education
+
+- Your University — Your Degree
+- Your School — Your Qualifications
+
+## Selected work
+
+- Project One: a one-line description
+- Project Two: a one-line description
+
+## Site map
+
+- [Home](https://example.com/): biography and identity
+- [Projects](https://example.com/projects): personal and professional projects
+- [Experience](https://example.com/experience): roles and activities
+- [Blog](https://example.com/blog): writing
+- [Music](https://example.com/music): recordings and compositions
+- [Photography](https://example.com/photography/): gallery
+- [CV](https://example.com/cv/): curriculum vitae
+- [Info](https://example.com/info): canonical profile links

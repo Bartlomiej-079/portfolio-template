@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Photo | Your Name</title>
+    <script>
+      (function () {
+        try {
+          var key = "portfolio-theme";
+          var stored = localStorage.getItem(key);
+          var theme = (stored === "dark" || stored === "light")
+            ? stored
+            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.style.colorScheme = theme;
+        } catch (_) {}
+        try {
+          // Default off; only enable when the user explicitly chose on.
+          if (localStorage.getItem("portfolio-perf-mode") === "on")
+            document.documentElement.setAttribute("data-perf-mode", "on");
+        } catch (_) {}
+        try {
+          // Default on; only skip when the user explicitly chose off.
+          if (localStorage.getItem("portfolio-video-bg") !== "off") {
+            document.documentElement.setAttribute("data-video-bg", "on");
+          }
+        } catch (_) {
+          document.documentElement.setAttribute("data-video-bg", "on");
+        }
+        try {
+          // Default off; only an explicit "on" enables the bubbles.
+          if (localStorage.getItem("portfolio-animations") === "on") {
+            document.documentElement.setAttribute("data-animations", "on");
+          }
+        } catch (_) {}
+        try {
+          var supported = /^(en|fr|it|ja|zh)$/;
+          var lang = "";
+          try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
+          if (!supported.test(lang)) {
+            lang = "";
+            var list = [];
+            try {
+              if (navigator.languages) list = list.concat(Array.prototype.slice.call(navigator.languages));
+              if (navigator.language) list.push(navigator.language);
+            } catch (_) {}
+            for (var li = 0; li < list.length && !lang; li += 1) {
+              var raw = String(list[li] || "").toLowerCase().replace(/_/g, "-");
+              var base = raw.split("-")[0];
+              if (supported.test(raw)) lang = raw;
+              else if (supported.test(base)) lang = base;
+            }
+          }
+          if (supported.test(lang)) document.documentElement.lang = lang;
+        } catch (_) {}
+        window.__SITE_ROOT__ = "/";
+      })();
+    </script>
+    <link rel="icon" type="image/png" href="../../assets/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="../../assets/css/styles.css" />
+    <link rel="stylesheet" href="photo-post.css" />
+  </head>
+  <body>
+    <div class="pp-shell">
+      <canvas id="bubbles" class="bubbles-canvas" aria-hidden="true"></canvas>
+
+      <!-- ── Sticky back header ───────────────────────────────── -->
+      <header class="pp-header" id="pp-header">
+        <a class="pp-back-link" href="../">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="pp-back-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          back to photography
+        </a>
+        <span class="pp-header-caption" id="pp-header-caption" aria-hidden="true"></span>
+      </header>
+
+      <!-- ── Main ────────────────────────────────────────────── -->
+      <main class="pp-main">
+
+        <div class="pp-loading" id="pp-loading">
+          <div class="pp-spinner"></div>
+          <p>loading…</p>
+        </div>
+
+        <div class="pp-error" id="pp-error" hidden>
+          <p>Photo not found.</p>
+          <a class="pp-back-link" href="../">← back to photography</a>
+        </div>
+
+        <article class="pp-article" id="pp-article" hidden>
+
+          <!-- Date + index counter -->
+          <div class="pp-eyebrow" id="pp-eyebrow"></div>
+
+          <!-- Title -->
+          <h1 class="pp-title" id="pp-title"></h1>
+
+          <!-- Hero image -->
+          <figure class="pp-figure" id="pp-figure">
+            <img class="pp-hero" id="pp-hero" src="" alt="" />
+          </figure>
+
+          <!-- Metadata table (camera, dimensions, GPS) -->
+          <div class="pp-meta-block" id="pp-meta-block"></div>
+
+          <!-- Description -->
+          <div class="pp-description" id="pp-description"></div>
+
+          <!-- Map (shown when lat/lng available) -->
+          <div class="pp-map-wrap" id="pp-map-wrap" hidden>
+            <div class="pp-map-label">location</div>
+            <iframe class="pp-map" id="pp-map" src="" loading="lazy" title="Photo location map"
+              referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe>
+            <div class="pp-map-coords" id="pp-map-coords"></div>
+          </div>
+
+          <!-- Tags -->
+          <div class="pp-tags" id="pp-tags"></div>
+
+          <!-- Prev / next navigation -->
+          <nav class="pp-nav" aria-label="Browse photos">
+            <a class="pp-nav-btn pp-nav-prev" id="pp-nav-prev" href="#">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+              previous
+            </a>
+            <a class="pp-nav-btn pp-nav-next" id="pp-nav-next" href="#">
+              next
+              <svg viewBox="0 0 24 24" aria-hidden="true" style="transform:scaleX(-1)"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+            </a>
+          </nav>
+
+          <!-- Bottom back link -->
+          <div class="pp-post-footer">
+            <a class="pp-back-link pp-back-link--bottom" href="../">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="pp-back-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+              back to photography
+            </a>
+          </div>
+
+        </article>
+      </main>
+
+      <footer class="site-footer" role="contentinfo"></footer>
+    </div>
+
+    <div id="custom-cursor" class="custom-cursor" aria-hidden="true">🚀</div>
+
+    <script src="../../assets/js/bubbles.js"></script>
+    <script src="../../assets/js/i18n.js?v=20260913b"></script>
+    <script src="../../assets/js/theme.js"></script>
+    <script src="../../assets/js/cursor.js?v=20260913b"></script>
+    <script>
+    (function () {
+      /* ── Paths ─────────────────────────────────────────────── */
+      // index.json lives at /photos/index.json (root-relative)
+      // photo.src values are "../photos/..." (relative to /photography/)
+      // We're at /photography/photo/ so we need to rebase them to "../../photos/..."
+      var PHOTOS_JSON = "../../photos/index.json";
+      var SRC_PREFIX_OLD = "../photos/";
+      var SRC_PREFIX_NEW = "../../photos/";
+
+      function fixSrc(src) {
+        if (!src) return src;
+        if (src.startsWith(SRC_PREFIX_OLD)) return SRC_PREFIX_NEW + src.slice(SRC_PREFIX_OLD.length);
+        return src;
+      }
+
+      /* ── URL param ─────────────────────────────────────────── */
+      function getIndex() {
+        var i = new URLSearchParams(window.location.search).get("i");
+        return i !== null ? parseInt(i, 10) : 0;
+      }
+
+      function photoUrl(i) { return "?i=" + i; }
+
+      /* ── Caption parsing ───────────────────────────────────── */
+      function parseCaption(caption) {
+        // "Place name — Location detail, Country, Month Year"
+        // or "Description, Place, Month Year"
+        var out = { title: caption, location: null, date: null };
+        if (!caption) return out;
+
+        var dateRx = /,?\s*\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{4})\b/i;
+        var yearRx = /,?\s*\b((?:19|20)\d{2})\b/;
+
+        var dm = caption.match(dateRx);
+        if (dm) {
+          out.date = dm[1] + " " + dm[2];
+          caption = caption.replace(dm[0], "").trim().replace(/,\s*$/, "").trim();
+        } else {
+          var ym = caption.match(yearRx);
+          if (ym) {
+            out.date = ym[1];
+            caption = caption.replace(ym[0], "").trim().replace(/,\s*$/, "").trim();
+          }
+        }
+
+        // Split on em-dash or en-dash for location
+        var dashParts = caption.split(/\s*[—–]\s*/);
+        if (dashParts.length >= 2) {
+          out.title = dashParts[0].trim();
+          out.location = dashParts.slice(1).join(" — ").trim();
+        } else {
+          // Comma-separated: last segment(s) are location
+          var commaParts = caption.split(/,\s*/);
+          if (commaParts.length >= 2) {
+            out.title = commaParts[0].trim();
+            out.location = commaParts.slice(1).join(", ").trim();
+          } else {
+            out.title = caption;
+          }
+        }
+        return out;
+      }
+
+      /* ── Helpers ───────────────────────────────────────────── */
+      function esc(str) {
+        return String(str || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+      }
+
+      function metaRow(label, value) {
+        return '<tr><td class="pp-meta-label">' + esc(label) + '</td>'
+             + '<td class="pp-meta-value">' + esc(String(value)) + '</td></tr>';
+      }
+
+      function show(el) { el.hidden = false; }
+      function hide(el) { el.hidden = true; }
+
+      /* ── Render ────────────────────────────────────────────── */
+      function render(photos, index) {
+        var photo = photos[index];
+        if (!photo) { showError(); return; }
+
+        var rawCaption = photo.caption || photo.alt || "";
+        var parsed = parseCaption(rawCaption);
+
+        // Page title
+        document.title = (parsed.title || rawCaption) + " | Your Name";
+
+        // Sticky header caption
+        var hc = document.getElementById("pp-header-caption");
+        if (hc) hc.textContent = parsed.title || rawCaption;
+
+        // Eyebrow: date + counter
+        var eyebrow = document.getElementById("pp-eyebrow");
+        if (eyebrow) {
+          var parts = [];
+          if (parsed.date) parts.push(parsed.date);
+          parts.push("Photo " + (index + 1) + " of " + photos.length);
+          eyebrow.textContent = parts.join("  ·  ");
+        }
+
+        // Title
+        var titleEl = document.getElementById("pp-title");
+        if (titleEl) titleEl.textContent = parsed.title || rawCaption;
+
+        // Hero
+        var heroEl = document.getElementById("pp-hero");
+        if (heroEl) {
+          heroEl.src = fixSrc(photo.src);
+          heroEl.alt = photo.alt || rawCaption;
+        }
+
+        // Metadata table
+        var metaEl = document.getElementById("pp-meta-block");
+        if (metaEl) {
+          var rows = "";
+          if (parsed.location) rows += metaRow("location", parsed.location);
+          if (parsed.date)     rows += metaRow("date", parsed.date);
+          if (photo.width && photo.height)
+            rows += metaRow("dimensions", photo.width + " × " + photo.height + " px");
+          if (photo.camera)      rows += metaRow("camera", photo.camera);
+          if (photo.lens)        rows += metaRow("lens", photo.lens);
+          if (photo.focal)       rows += metaRow("focal length", photo.focal);
+          if (photo.shutter)     rows += metaRow("shutter", photo.shutter);
+          if (photo.aperture)    rows += metaRow("aperture", photo.aperture);
+          if (photo.iso)         rows += metaRow("ISO", photo.iso);
+          if (photo.lat != null && photo.lng != null)
+            rows += metaRow("coordinates", photo.lat.toFixed(6) + ",  " + photo.lng.toFixed(6));
+
+          if (rows) {
+            metaEl.innerHTML = '<table class="pp-meta-table"><tbody>' + rows + '</tbody></table>';
+          }
+        }
+
+        // Description
+        var descEl = document.getElementById("pp-description");
+        if (descEl) {
+          var desc = photo.description || "";
+          if (desc) {
+            descEl.innerHTML = '<p>' + esc(desc) + '</p>';
+          } else {
+            descEl.hidden = true;
+          }
+        }
+
+        // Map
+        var mapWrap = document.getElementById("pp-map-wrap");
+        var mapFrame = document.getElementById("pp-map");
+        var mapCoords = document.getElementById("pp-map-coords");
+        if (mapWrap && mapFrame && photo.lat != null && photo.lng != null) {
+          var lat = photo.lat, lng = photo.lng;
+          var zoom = 13;
+          // OpenStreetMap iframe embed — no API key required
+          var bbox = [lng - 0.05, lat - 0.04, lng + 0.05, lat + 0.04].join("%2C");
+          mapFrame.src = "https://www.openstreetmap.org/export/embed.html"
+            + "?bbox=" + bbox
+            + "&layer=mapnik"
+            + "&marker=" + lat + "%2C" + lng;
+          if (mapCoords) mapCoords.textContent = lat.toFixed(6) + ", " + lng.toFixed(6);
+          show(mapWrap);
+        }
+
+        // Tags
+        var tagsEl = document.getElementById("pp-tags");
+        if (tagsEl && photo.tags && photo.tags.length) {
+          tagsEl.innerHTML = photo.tags.map(function(t) {
+            return '<span class="pp-tag">' + esc(t) + '</span>';
+          }).join("");
+        } else if (tagsEl) {
+          tagsEl.hidden = true;
+        }
+
+        // Prev / next
+        var prevEl = document.getElementById("pp-nav-prev");
+        var nextEl = document.getElementById("pp-nav-next");
+        if (prevEl) {
+          prevEl.href = index > 0 ? photoUrl(index - 1) : "#";
+          prevEl.classList.toggle("pp-nav-btn--disabled", index === 0);
+          if (index === 0) prevEl.setAttribute("aria-disabled", "true");
+        }
+        if (nextEl) {
+          nextEl.href = index < photos.length - 1 ? photoUrl(index + 1) : "#";
+          nextEl.classList.toggle("pp-nav-btn--disabled", index === photos.length - 1);
+          if (index === photos.length - 1) nextEl.setAttribute("aria-disabled", "true");
+        }
+
+        hide(document.getElementById("pp-loading"));
+        show(document.getElementById("pp-article"));
+      }
+
+      function showError() {
+        hide(document.getElementById("pp-loading"));
+        show(document.getElementById("pp-error"));
+      }
+
+      /* ── Sticky header caption on scroll ───────────────────── */
+      var heroWrap = document.getElementById("pp-figure");
+      var headerCap = document.getElementById("pp-header-caption");
+      window.addEventListener("scroll", function () {
+        if (!heroWrap || !headerCap) return;
+        headerCap.classList.toggle("is-visible", heroWrap.getBoundingClientRect().bottom < 60);
+      }, { passive: true });
+
+      /* ── Bootstrap ─────────────────────────────────────────── */
+      fetch(PHOTOS_JSON + "?_=" + Date.now())
+        .then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+        .then(function (photos) {
+          var i = getIndex();
+          if (isNaN(i) || i < 0 || i >= photos.length) i = 0;
+          render(photos, i);
+        })
+        .catch(function (e) {
+          console.error("Photo load failed:", e);
+          showError();
+        });
+    })();
+    </script>
+  </body>
+</html>

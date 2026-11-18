@@ -1,0 +1,153 @@
+/*
+ * blockquotes.css
+ * ───────────────
+ * Styles for rendered Markdown blockquotes inside .markdown-content.
+ * Edit this file to change the look of any `> quoted text` block.
+ *
+ * The rendered HTML structure is:
+ *   <blockquote>
+ *     <p>…text…</p>
+ *   </blockquote>
+ *
+ * All rules are scoped to .markdown-content so they only affect
+ * the main page renderer, not the 404 page (see the reset at the bottom).
+ *
+ * Quick reference — things you'll most likely want to tweak:
+ *   • Background tint         → blockquote { background }
+ *   • Speech mark size        → blockquote p::before / ::after { font-size }
+ *   • Speech mark colour      → blockquote p::before / ::after { color, opacity }
+ *   • Quote text style        → blockquote p { font-style, color }
+ *   • Fade-in speed           → blockquote { animation } + @keyframes bq-fade-in
+ *   • Outer spacing           → blockquote { margin, padding }
+ *   • Corner rounding         → blockquote { border-radius }
+ *   • Shadow depth            → blockquote { box-shadow }
+ */
+
+
+/* ── Fade-in keyframe ──────────────────────────────────────────── */
+
+@keyframes bq-fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ── Blockquote container ──────────────────────────────────────── */
+
+.markdown-content blockquote {
+  position: relative;
+  margin: 1.4rem 0 1.6rem;
+  padding: 1.1rem 1.5rem 1.1rem 2rem;
+
+  /* Subtle background tint — uses the site's hover surface colour */
+  background: var(--hover);
+
+  border-left: none;        /* No left border — bar is fully removed */
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+  /* Animate in when the page loads */
+  opacity: 0;
+  animation: bq-fade-in 0.7s ease forwards;
+}
+
+
+/* ── Opening speech mark ( " ) ─────────────────────────────────── */
+/*
+ * Rendered as a large watermark behind the quote text.
+ * Positioned relative to the <p> element (which has position: relative).
+ *
+ * Adjust `font-size` to make it bigger/smaller.
+ * Adjust `opacity` to make it more or less prominent (0 = invisible).
+ * Adjust `top` / `left` to shift its anchor point.
+ */
+
+.markdown-content blockquote p::before {
+  content: "\201C";           /* Left double quotation mark " */
+  position: absolute;
+  top: -0.05em;
+  left: -0.55em;
+  font-size: 3em;
+  line-height: 1;
+  color: var(--text);
+  opacity: 0.18;
+  font-style: normal;
+  pointer-events: none;
+}
+
+
+/* ── Closing speech mark ( " ) ─────────────────────────────────── */
+/*
+ * Mirror of the opening mark, anchored to the bottom-right of the <p>.
+ *
+ * Adjust `bottom` / `right` to shift its anchor point.
+ */
+
+.markdown-content blockquote p::after {
+  content: "\201D";           /* Right double quotation mark " */
+  position: absolute;
+  bottom: -0.55em;
+  right: -0.3em;
+  font-size: 3em;
+  line-height: 1;
+  color: var(--text);
+  opacity: 0.18;
+  font-style: normal;
+  pointer-events: none;
+}
+
+
+/* ── Quote text ────────────────────────────────────────────────── */
+/*
+ * `position: relative` is required so the ::before / ::after speech
+ * marks are positioned relative to this element rather than the page.
+ */
+
+.markdown-content blockquote p {
+  position: relative;
+  margin: 0;
+  font-style: italic;
+  color: var(--text-soft);
+}
+
+
+/* ── Justified-text variant ────────────────────────────────────── */
+/*
+ * When the page uses the .md-justified class, blockquote text
+ * should follow suit. This is a layout concern, not a style one,
+ * so it lives here rather than in a separate utilities file.
+ */
+
+.markdown-content.md-justified blockquote p,
+.md-justified blockquote p {
+  text-align: justify;
+}
+
+#demo-markdown.md-justified blockquote p,
+#error404-markdown.md-justified blockquote p {
+  text-align: justify;
+}
+
+
+/* ── 404 page reset ────────────────────────────────────────────── */
+/*
+ * The 404 page shares the .markdown-content class but has its own
+ * minimal blockquote design. All the decorative rules above are
+ * suppressed here so they don't bleed through.
+ */
+
+.error404-markdown blockquote {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0.2rem 0 0.2rem 0.7rem;
+  margin: 0.2rem 0 1rem;
+  animation: none;
+  opacity: 1;
+}
+
+.error404-markdown blockquote::before,
+.error404-markdown blockquote p::before,
+.error404-markdown blockquote p::after {
+  display: none;
+}

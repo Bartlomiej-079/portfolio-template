@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Demo</title>
+    <script>
+      (function () {
+        try {
+          var key = "portfolio-theme";
+          var stored = localStorage.getItem(key);
+          var useStored = stored === "dark" || stored === "light";
+          var theme = useStored
+            ? stored
+            : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.style.colorScheme = theme;
+        } catch (_) {
+          // Use CSS defaults when storage is unavailable.
+        }
+        try {
+          // Default off; only enable when the user explicitly chose on.
+          if (localStorage.getItem("portfolio-perf-mode") === "on") {
+            document.documentElement.setAttribute("data-perf-mode", "on");
+          }
+        } catch (_) {}
+        try {
+          // Default on; only skip when the user explicitly chose off.
+          if (localStorage.getItem("portfolio-video-bg") !== "off") {
+            document.documentElement.setAttribute("data-video-bg", "on");
+          }
+        } catch (_) {
+          document.documentElement.setAttribute("data-video-bg", "on");
+        }
+        try {
+          // Default off; only an explicit "on" enables the bubbles.
+          if (localStorage.getItem("portfolio-animations") === "on") {
+            document.documentElement.setAttribute("data-animations", "on");
+          }
+        } catch (_) {}
+        try {
+          var supported = /^(en|fr|it|ja|zh)$/;
+          var lang = "";
+          try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
+          if (!supported.test(lang)) {
+            lang = "";
+            var list = [];
+            try {
+              if (navigator.languages) list = list.concat(Array.prototype.slice.call(navigator.languages));
+              if (navigator.language) list.push(navigator.language);
+            } catch (_) {}
+            for (var li = 0; li < list.length && !lang; li += 1) {
+              var raw = String(list[li] || "").toLowerCase().replace(/_/g, "-");
+              var base = raw.split("-")[0];
+              if (supported.test(raw)) lang = raw;
+              else if (supported.test(base)) lang = base;
+            }
+          }
+          if (supported.test(lang)) document.documentElement.lang = lang;
+        } catch (_) {}
+      })();
+    </script>
+    <script>
+      (function () {
+        var assetVersion = "20260913b";
+        var pathname = window.location.pathname || "/";
+        var hostname = window.location.hostname || "";
+        var segments = pathname.split("/").filter(Boolean);
+        var isGithubPagesHost = /\.github\.io$/i.test(hostname);
+        var siteRoot = isGithubPagesHost && segments.length > 0 ? "/" + segments[0] + "/" : "/";
+
+        window.__SITE_ROOT__ = siteRoot;
+        window.__ASSET_VERSION__ = assetVersion;
+
+        var head = document.head;
+        var create = function (tagName, attrs) {
+          var node = document.createElement(tagName);
+          Object.keys(attrs).forEach(function (key) {
+            node.setAttribute(key, attrs[key]);
+          });
+          head.appendChild(node);
+        };
+
+        create("link", { rel: "preconnect", href: "https://fonts.googleapis.com" });
+        create("link", { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" });
+        create("link", {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap"
+        });
+        create("link", { rel: "stylesheet", href: siteRoot + "assets/css/motion.css?v=" + assetVersion });
+        create("link", { rel: "stylesheet", href: "https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" });
+        create("link", { rel: "stylesheet", href: siteRoot + "assets/css/highlight-theme.css?v=" + assetVersion });
+        create("link", { rel: "stylesheet", href: siteRoot + "assets/css/styles.css?v=" + assetVersion });
+        create("link", { rel: "icon", type: "image/png", href: siteRoot + "assets/images/favicon.png?v=" + assetVersion });
+      })();
+    </script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <canvas id="bubbles" class="bubbles-canvas" aria-hidden="true"></canvas>
+      <div class="app-frame" style="min-height: auto;">
+        <aside class="sidebar">
+          <a class="nav-btn" href="../">introduction</a>
+          <a class="nav-btn" href="../">personal projects</a>
+          <a class="nav-btn" href="../">experience</a>
+          <a class="nav-btn" href="../">resources</a>
+          <a class="nav-btn" href="../">blog</a>
+          <a class="nav-btn" href="../">info</a>
+          <a class="nav-btn is-active" href="./">demo</a>
+
+          <div class="sidebar-actions">
+            <a class="button" href="mailto:hello@example.com?subject=send%20a%20copy%20of%20your%20CV%20please">get cv</a>
+            <div class="socials">
+              <a class="icon-link" href="https://github.com/your-username" target="_blank" rel="noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M12 0C5.373 0 0 5.373 0 12a12 12 0 0 0 8.207 11.387c.6.111.793-.261.793-.577v-2.234c-3.338.727-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.808 1.305 3.493.998.107-.776.418-1.305.762-1.604-2.665-.304-5.467-1.334-5.467-5.93 0-1.31.469-2.381 1.236-3.221-.124-.304-.535-1.525.117-3.177 0 0 1.008-.322 3.301 1.23A11.52 11.52 0 0 1 12 5.8c1.02.005 2.047.138 3.006.404 2.292-1.552 3.3-1.23 3.3-1.23.653 1.653.242 2.874.118 3.177.768.84 1.236 1.91 1.236 3.22 0 4.609-2.806 5.626-5.479 5.922.43.372.823 1.102.823 2.222v3.293c0 .319.192.688.801.576A12.004 12.004 0 0 0 24 12c0-6.627-5.373-12-12-12Z" />
+                </svg>
+              </a>
+              <a class="icon-link" href="https://linkedin.com/in/your-username" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451c.978 0 1.778-.773 1.778-1.729V1.729C24 .774 23.2 0 22.225 0ZM7.119 20.452H3.555V9h3.564v11.452ZM5.337 7.433a2.065 2.065 0 1 1 0-4.129 2.065 2.065 0 0 1 0 4.129ZM20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286Z" />
+                </svg>
+              </a>
+              <a class="icon-link" href="https://instagram.com/your.username" target="_blank" rel="noreferrer" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.9A3.85 3.85 0 0 0 3.9 7.75v8.5A3.85 3.85 0 0 0 7.75 20.1h8.5a3.85 3.85 0 0 0 3.85-3.85v-8.5a3.85 3.85 0 0 0-3.85-3.85h-8.5Zm9.03 1.45a1.18 1.18 0 1 1 0 2.36 1.18 1.18 0 0 1 0-2.36ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.9A3.1 3.1 0 1 0 12 15.1 3.1 3.1 0 0 0 12 8.9Z" />
+                </svg>
+              </a>
+              <a class="icon-link" href="https://soundcloud.com/your-username" target="_blank" rel="noreferrer" aria-label="SoundCloud">
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M9.2 8.6c.34 0 .62.28.62.62v6.98a.62.62 0 1 1-1.24 0V9.22c0-.34.28-.62.62-.62Zm-2.08.95c.34 0 .62.28.62.62v6.03a.62.62 0 1 1-1.24 0v-6.03c0-.34.28-.62.62-.62Zm-2.08 1.3c.34 0 .62.28.62.62v4.73a.62.62 0 1 1-1.24 0v-4.73c0-.34.28-.62.62-.62Zm-2.08 1.65c.34 0 .62.28.62.62v3.08a.62.62 0 1 1-1.24 0v-3.08c0-.34.28-.62.62-.62Zm9.04 3.8h7.07a2.14 2.14 0 0 0 .34-4.26 3.56 3.56 0 0 0-3.31-2.25 3.6 3.6 0 0 0-1.62.39A4.4 4.4 0 0 0 11.99 8a.62.62 0 1 0 0 8.26Z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </aside>
+
+        <section class="content" style="padding: 1.5rem 1.5rem 2rem;">
+          <header class="tab-title-wrap" style="margin-bottom: 0.8rem;">
+            <h1 class="welcome shared-title" id="demo-title">demo</h1>
+            <p style="margin-top: 0.25rem;"><a class="button" id="demo-home-link" href="/">back home</a></p>
+          </header>
+          <article id="demo-markdown" class="markdown-content"></article>
+        </section>
+      </div>
+      <footer class="site-footer" role="contentinfo"></footer>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script>
+      (function () {
+        var siteRoot = window.__SITE_ROOT__ || "/";
+        var assetVersion = window.__ASSET_VERSION__ || "1";
+
+        var rewrite = function (src) {
+          if (/^(?:https?:)?\/\//i.test(src)) return src;
+          return siteRoot + src.replace(/^\/+/, "");
+        };
+
+        var scripts = [
+          "assets/js/highlight/highlight.min.js",
+          "assets/js/highlight/languages/javascript.min.js",
+          "assets/js/highlight/languages/typescript.min.js",
+          "assets/js/highlight/languages/python.min.js",
+          "assets/js/highlight/languages/sql.min.js",
+          "assets/js/highlight/languages/r.min.js",
+          "assets/js/highlight/languages/bash.min.js",
+          "assets/js/highlight/languages/json.min.js",
+          "assets/js/reveal.js",
+          "assets/js/bubbles.js",
+          "assets/js/i18n.js",
+          "assets/js/theme.js",
+          "assets/js/carousel.js",
+          "assets/js/demo.js"
+        ];
+
+        var appendScript = function (index) {
+          if (index >= scripts.length) return;
+          var script = document.createElement("script");
+          script.src = rewrite(scripts[index]) + "?v=" + assetVersion;
+          script.onload = function () {
+            appendScript(index + 1);
+          };
+          document.body.appendChild(script);
+        };
+
+        appendScript(0);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+    <meta name="color-scheme" content="light dark" />
+    <title data-i18n="meta.blogPostTitle">Blog Post | Your Name</title>
+    <meta name="description" content="Writing by Your Name on machine learning, quantitative finance, language, and design." />
+    <meta name="author" content="Your Name" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href="https://example.com/blog/" />
+    <link rel="author" href="https://example.com/" />
+    <link rel="me" href="https://github.com/your-username" />
+    <link rel="me" href="https://www.linkedin.com/in/your-username" />
+    <link rel="me" href="https://mastodon.social/@your_username" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Your Name" />
+    <meta property="og:title" content="Blog Post | Your Name" />
+    <meta property="og:description" content="Writing by Your Name." />
+    <meta property="og:url" content="https://example.com/blog/" />
+    <meta property="og:image" content="https://example.com/assets/images/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@yourusername" />
+    <meta name="twitter:creator" content="@yourusername" />
+    <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png" />
+    <link rel="manifest" href="../site.webmanifest" />
+    <script>
+      (function () {
+        try {
+          var key = "portfolio-theme";
+          var stored = localStorage.getItem(key);
+          var useStored = stored === "dark" || stored === "light";
+          var theme = useStored
+            ? stored
+            : (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.style.colorScheme = theme;
+        } catch (_) {}
+        try {
+          // Default off; only enable when the user explicitly chose on.
+          if (localStorage.getItem("portfolio-perf-mode") === "on") {
+            document.documentElement.setAttribute("data-perf-mode", "on");
+          }
+        } catch (_) {}
+        try {
+          // Default on; only skip when the user explicitly chose off.
+          if (localStorage.getItem("portfolio-video-bg") !== "off") {
+            document.documentElement.setAttribute("data-video-bg", "on");
+          }
+        } catch (_) {
+          document.documentElement.setAttribute("data-video-bg", "on");
+        }
+        try {
+          // Default off; only an explicit "on" enables the bubbles.
+          if (localStorage.getItem("portfolio-animations") === "on") {
+            document.documentElement.setAttribute("data-animations", "on");
+          }
+        } catch (_) {}
+        window.__SITE_ROOT__ = "/";
+        try {
+          var supported = /^(en|fr|it|ja|zh)$/;
+          var lang = "";
+          try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}
+          if (!supported.test(lang)) {
+            lang = "";
+            var list = [];
+            try {
+              if (navigator.languages) list = list.concat(Array.prototype.slice.call(navigator.languages));
+              if (navigator.language) list.push(navigator.language);
+            } catch (_) {}
+            for (var li = 0; li < list.length && !lang; li += 1) {
+              var raw = String(list[li] || "").toLowerCase().replace(/_/g, "-");
+              var base = raw.split("-")[0];
+              if (supported.test(raw)) lang = raw;
+              else if (supported.test(base)) lang = base;
+            }
+          }
+          if (supported.test(lang)) document.documentElement.lang = lang;
+        } catch (_) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--
+      Loaded without blocking the first paint: fetched at high priority as a
+      preload, then flipped from media="print" (which does not block rendering)
+      to media="all" once it arrives. The face already carries display=swap, so
+      text has always painted in the fallback first — this just stops the
+      stylesheet request from holding up that first paint too.
+    -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap" media="print" onload="this.media='all'; this.onload=null">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200..900&display=swap"></noscript>
+    <link rel="stylesheet" href="../assets/css/motion.css?v=20260912" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" as="style"
+          onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"></noscript>
+    <link rel="stylesheet" href="../assets/css/highlight-theme.css?v=20260506" />
+    <link rel="stylesheet" href="../assets/css/styles.css?v=20260913b" />
+    <link rel="stylesheet" href="../assets/css/blog-post.css?v=20260915" />
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+  </head>
+  <body>
+    <div class="bp-progress" id="bp-progress" aria-hidden="true"></div>
+
+    <div class="bp-shell">
+      <canvas id="bubbles" class="bubbles-canvas" aria-hidden="true"></canvas>
+      <header class="bp-header" id="bp-header">
+        <a class="bp-back-link" id="bp-back-link" href="/">
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="bp-back-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+          <span data-i18n="btn.backToBlog">back to blog</span>
+        </a>
+        <span class="bp-header-title" id="bp-header-title" aria-hidden="true"></span>
+      </header>
+
+      <main class="bp-main">
+        <div class="bp-loading" id="bp-loading" aria-label="Loading post">
+          <div class="bp-spinner"></div>
+          <p data-i18n="bp.loading">loading post…</p>
+        </div>
+
+        <div class="bp-error" id="bp-error" hidden>
+          <p class="bp-error-msg" id="bp-error-msg" data-i18n="bp.notFound">Post not found.</p>
+          <a class="bp-error-back" id="bp-error-back" href="/" data-i18n="btn.backToBlog">← back to blog</a>
+        </div>
+
+        <div class="bp-layout" id="bp-layout" hidden>
+          <article class="bp-article" id="bp-article">
+            <div class="bp-meta-bar">
+              <div class="bp-tags" id="bp-tags"></div>
+              <time class="bp-date" id="bp-date"></time>
+            </div>
+            <h1 class="bp-title" id="bp-title"></h1>
+            <p class="bp-author" id="bp-author" hidden></p>
+            <p class="bp-summary" id="bp-summary"></p>
+            <div class="bp-cover-wrap" id="bp-cover-wrap"></div>
+            <div class="bp-content markdown-content" id="bp-content"></div>
+            <div class="bp-post-footer">
+              <a class="bp-back-link bp-back-link--bottom" id="bp-back-link-bottom" href="/">
+                <svg viewBox="0 0 24 24" aria-hidden="true" class="bp-back-icon"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                <span data-i18n="btn.backToBlog">back to blog</span>
+              </a>
+            </div>
+          </article>
+
+          <aside class="bp-toc-sidebar" id="bp-toc-sidebar" aria-label="Table of contents" data-i18n-aria="aria.toc"></aside>
+        </div>
+      </main>
+
+      <footer class="site-footer" role="contentinfo"></footer>
+    </div>
+
+    <dialog id="bp-lightbox" class="bp-lightbox">
+      <div class="bp-lightbox-card">
+        <div class="bp-lightbox-controls">
+          <button id="bp-lbx-zoomout"   class="bp-lbx-btn">−</button>
+          <button id="bp-lbx-zoomreset" class="bp-lbx-btn">100%</button>
+          <button id="bp-lbx-zoomin"    class="bp-lbx-btn">+</button>
+          <button id="bp-lbx-newtab"    class="bp-lbx-btn" data-i18n="btn.open">open ↗</button>
+          <button id="bp-lbx-close"     class="bp-lbx-btn" data-i18n="btn.close">close</button>
+        </div>
+        <div class="bp-lightbox-img-wrap">
+          <img id="bp-lightbox-img" class="bp-lightbox-img" src="" alt="" />
+        </div>
+      </div>
+    </dialog>
+
+    <div id="custom-cursor" class="custom-cursor" aria-hidden="true">🚀</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+    <script src="../assets/js/highlight/highlight.min.js"></script>
+    <script src="../assets/js/highlight/languages/javascript.min.js"></script>
+    <script src="../assets/js/highlight/languages/typescript.min.js"></script>
+    <script src="../assets/js/highlight/languages/python.min.js"></script>
+    <script src="../assets/js/highlight/languages/sql.min.js"></script>
+    <script src="../assets/js/highlight/languages/r.min.js"></script>
+    <script src="../assets/js/highlight/languages/bash.min.js"></script>
+    <script src="../assets/js/highlight/languages/json.min.js"></script>
+    <script src="../assets/js/carousel.js?v=20260823"></script>
+    <script src="../assets/js/markdown.js?v=20260915"></script>
+    <script src="../assets/js/bubbles.js?v=20260802"></script>
+    <script src="../assets/js/i18n.js?v=20260915"></script>
+    <script src="../assets/js/seo.js?v=20260915"></script>
+    <script src="../assets/js/theme.js?v=20260915"></script>
+    <script src="../assets/js/cursor.js?v=20260913b"></script>
+    <script src="../assets/js/reveal.js?v=20260912"></script>
+    <script src="../assets/js/blog-post.js?v=20260918"></script>
+  </body>
+</html>

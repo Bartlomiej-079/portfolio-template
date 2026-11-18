@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <title>Your Name — Portfolio</title>
+    <meta name="description" content="Your Name&#8217;s portfolio: a supercut of selected projects, with screenshots and quotes from the people you have worked with." />
+    <meta name="author" content="Your Name" />
+    <link rel="canonical" href="https://example.com/portfolio/" />
+    <link rel="author" href="https://example.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Your Name" />
+    <meta property="og:title" content="Your Name — Portfolio" />
+    <meta property="og:description" content="A supercut of selected projects." />
+    <meta property="og:url" content="https://example.com/portfolio/" />
+    <meta property="og:image" content="https://example.com/assets/images/portfolio/hero-swirl.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@yourusername" />
+    <meta name="twitter:creator" content="@yourusername" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Your Name — Portfolio",
+      "url": "https://example.com/portfolio/",
+      "author": { "@id": "https://example.com/#person" },
+      "isPartOf": { "@id": "https://example.com/#website" }
+    }
+    </script>
+
+    <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/fraunces/Fraunces-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="../assets/fonts/fraunces/Fraunces-Italic-latin.woff2" crossorigin />
+    <link rel="preload" as="image" href="../assets/images/portfolio/hero-swirl.jpg" />
+    <script>
+      /* Flagged before first paint so the reveal states never flash. If the
+         interaction script fails to load, drop the flag and show everything. */
+      document.documentElement.className = "js";
+      setTimeout(function () {
+        if (!window.__portfolioReady) document.documentElement.className = "";
+      }, 3000);
+    </script>
+    <link rel="stylesheet" href="style.css?v=20260830" />
+  </head>
+
+  <body>
+    <div class="scroll-progress" aria-hidden="true"><i id="scroll-progress-bar"></i></div>
+
+    <nav class="floating-nav" aria-label="Site">
+      <a class="pill pill--cv" href="../cv/">&#8592;&nbsp;back&nbsp;to&nbsp;CV</a>
+      <a class="pill" href="../">&#8592;&nbsp;example.com</a>
+      <a class="pill" href="../assets/documents/portfolio_latest.pdf">portfolio&nbsp;pdf</a>
+    </nav>
+
+    <main class="sheet" id="sheet">
+
+      <!-- ═══════════════ HERO ═══════════════════════════════════ -->
+      <section class="chapter chapter--hero sparkle" style="--h: 205">
+        <div class="art art--hero">
+          <span class="art-hero-in" data-parallax="hero"><img src="../assets/images/portfolio/hero-swirl.jpg" alt="" width="1240" height="418" fetchpriority="high" /></span>
+          <span class="hero-aurora" aria-hidden="true"></span>
+          <span class="hero-vignette" aria-hidden="true"></span>
+          <span class="hero-grain" aria-hidden="true"></span>
+        </div>
+
+        <h1 class="hero-name reveal" style="--x: 27.3; --y: 24.6; --s: 60" data-delay="0">Your Name</h1>
+        <p class="hero-loc reveal" style="--x: 30.4; --y: 93.59; --s: 14" data-delay="90">Your City, Your Country</p>
+        <p class="hero-motto reveal" style="--x: 30.4; --y: 116.9; --s: 12" data-delay="170">Your motto goes <span class="u">here, with an underlined ending.</span></p>
+        <div class="hero-meta reveal" style="--x: 30.4; --y: 141.4; --s: 11" data-delay="250">
+          <p class="i">Your Job Title at Your Company</p>
+          <p class="i">Your Degree, Your University</p>
+          <p class="b"><a href="https://example.com">www.example.com</a> &#183; <a href="mailto:hello@example.com">hello@example.com</a></p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ PROJECT ONE ════════════════════════════════ -->
+      <section class="chapter" style="--h: 535">
+        <div class="art parallax" data-drift="11" data-spin="1.4" data-depth="26" style="--x: 385.68; --y: 187.4; --w: 209.28; --ih: 338.64">
+          <img src="../assets/images/portfolio/art-1.jpg" alt="" width="436" height="706" loading="lazy" />
+        </div>
+
+        <figure class="shot parallax sparkle" data-depth="-10" data-tilt="7" data-drift="6" data-rot="-0.9"
+                style="--x: 23.8386; --y: 14.71; --w: 390.38; --ih: 184.607; --r: 22">
+          <span class="shot-in"><span class="sheen" aria-hidden="true"></span><span class="glare" aria-hidden="true"></span><img src="../assets/images/portfolio/shot-1.jpg" alt="A placeholder screenshot of the first project" width="813" height="385" loading="lazy" /></span>
+        </figure>
+
+        <h2 class="title" style="--x: 30.4; --y: 205.28">Project One: A Web Application</h2>
+
+        <div class="prose" style="--x: 30.4; --y: 237.84">
+          <p><a href="https://example.com/">Project One</a> is a short description of what you built and who it was for. Two or three sentences work best: the problem, your approach, and the result.</p>
+
+          <p>Add a second paragraph for future plans, lessons learnt, or the technologies involved.</p>
+
+          <p><i>&#8220;A short testimonial from a colleague, client or supervisor goes here.&#8221;</i> &#8211; Name Surname, Job Title at Organisation.</p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ PROJECT TWO ═════════════════════════════ -->
+      <section class="chapter" style="--h: 465">
+        <div class="art parallax" data-drift="-11" data-spin="-1.4" data-depth="26" style="--x: 0.96; --y: 187.6; --w: 249.6; --ih: 257.76">
+          <img src="../assets/images/portfolio/art-2.jpg" alt="" width="520" height="537" loading="lazy" />
+        </div>
+
+        <figure class="shot parallax sparkle" data-depth="-10" data-tilt="7" data-drift="-6" data-rot="0.9"
+                style="--x: 210.522; --y: 8.19; --w: 365.358; --ih: 203.034; --r: 20">
+          <span class="shot-in"><span class="sheen" aria-hidden="true"></span><span class="glare" aria-hidden="true"></span><img src="../assets/images/portfolio/shot-2.jpg" alt="A placeholder screenshot of the second project" width="761" height="423" loading="lazy" /></span>
+        </figure>
+
+        <img class="laurel" src="../assets/images/portfolio/laurel.png" alt="Award" width="66" height="66" style="--x: 507.84; --y: 218.8" />
+        <h2 class="title" style="--x: 214; --y: 222.28">Project Two: A Research Piece</h2>
+
+        <div class="prose" style="--x: 214; --y: 254.84">
+          <p><a href="https://example.com/"><i>Project Two</i></a> was a collaboration. Say who you worked with, what question you asked, and what you found.</p>
+
+          <p><i>&#8220;Another quote, this time from a lecturer or collaborator.&#8221;</i> &#8211; Name Surname, Role.</p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ PROJECT THREE ═══════════════════════ -->
+      <section class="chapter" style="--h: 541">
+        <div class="art parallax" data-drift="11" data-spin="1.4" data-depth="26" style="--x: 289.44; --y: 278.44; --w: 304.08; --ih: 251.76">
+          <img src="../assets/images/portfolio/art-3.jpg" alt="" width="633" height="525" loading="lazy" />
+        </div>
+
+        <figure class="shot parallax sparkle" data-depth="-10" data-tilt="7" data-drift="6" data-rot="-0.9"
+                style="--x: 20.1101; --y: 8.47; --w: 356.774; --ih: 306.032; --r: 25.11; --border: #156082">
+          <span class="shot-in"><span class="sheen" aria-hidden="true"></span><span class="glare" aria-hidden="true"></span><img src="../assets/images/portfolio/shot-3.jpg" alt="A placeholder screenshot of the third project" width="743" height="638" loading="lazy" /></span>
+        </figure>
+
+        <img class="laurel" src="../assets/images/portfolio/laurel.png" alt="Award" width="66" height="66" style="--x: 390.96; --y: 320.92" />
+        <h2 class="title" style="--x: 27.3; --y: 325.36">Project Three: A Data Analysis</h2>
+
+        <div class="prose" style="--x: 27.3; --y: 357.92">
+          <p><a href="https://github.com/your-username"><i>A data investigation</i></a> with a named partner or dataset. State the headline number, such as <b>90% accuracy</b> or <b>2&#215; faster</b>.</p>
+
+          <p><i>&#8220;A third quote, if you have one.&#8221;</i> &#8211; Name Surname, Role.</p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ PROJECT FOUR ═══════════════════════════ -->
+      <section class="chapter" style="--h: 459">
+        <div class="art parallax" data-drift="-11" data-spin="-1.4" data-depth="26" style="--x: 0; --y: 162.96; --w: 305.76; --ih: 293.76">
+          <img src="../assets/images/portfolio/art-1.jpg" alt="" width="637" height="612" loading="lazy" />
+        </div>
+
+        <figure class="shot parallax sparkle" data-depth="-10" data-tilt="7" data-drift="-6" data-rot="0.9"
+                style="--x: 250.334; --y: 6.9; --w: 320.106; --ih: 323.24; --r: 24.81">
+          <span class="shot-in"><span class="sheen" aria-hidden="true"></span><span class="glare" aria-hidden="true"></span><img src="../assets/images/portfolio/shot-1.jpg" alt="A placeholder screenshot of the fourth project" width="667" height="673" loading="lazy" /></span>
+        </figure>
+
+        <img class="laurel" src="../assets/images/portfolio/laurel.png" alt="Award" width="66" height="66" style="--x: 512.16; --y: 343.44" />
+        <h2 class="title" style="--x: 190.4; --y: 347.88">Project Four: Big Data Pipeline</h2>
+
+        <div class="prose" style="--x: 190.4; --y: 380.2">
+          <p>A short description of a fourth project. Remove any section you do not need: each one is an independent <code>&lt;section class="chapter"&gt;</code> block in <code>portfolio/index.html</code>.</p>
+
+          <p><span class="accent">Add a one-line achievement here.</span></p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ OUTRO ══════════════════════════════════ -->
+      <section class="chapter" style="--h: 94">
+        <h2 class="title" style="--x: 16.5; --y: 6.76">Alas, this was just a supercut!</h2>
+
+        <div class="prose" style="--x: 16.5; --y: 39.32">
+          <p>To discover more projects that didn&#8217;t make this <a href="https://example.com/projects">PDF</a>, click the link. My <a href="https://github.com/your-username">GitHub can be found here</a>.</p>
+        </div>
+      </section>
+
+      <!-- ═══════════════ THE END ════════════════════════════════ -->
+      <section class="chapter chapter--end" style="--h: 76">
+        <p class="the-end" style="--x: 16.5; --y: 7.82; --s: 32">The End. La fin.</p>
+      </section>
+
+    </main>
+
+    <script src="portfolio.js?v=20260830" defer></script>
+  </body>
+</html>

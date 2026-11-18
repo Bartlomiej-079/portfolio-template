@@ -1,0 +1,24 @@
+{
+  "name": "portfolio-template",
+  "version": "1.0.0",
+  "description": "A multilingual, markdown-driven personal portfolio website template.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "python3 scripts/local_server.py 5500",
+    "build": "node scripts/generate-music-index.mjs && node scripts/generate-post-index.mjs",
+    "deploy": "npm run build && git push origin main"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/portfolio-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/your-username/portfolio-template/issues"
+  },
+  "homepage": "https://github.com/your-username/portfolio-template#readme"
+}

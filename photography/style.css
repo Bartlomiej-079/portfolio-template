@@ -1,0 +1,341 @@
+/* ── Photography page — local overrides only ─────────────────
+   The frame, sidebar, and footer are styled by ../assets/css/styles.css.
+   This file handles only the gallery and lightbox.
+   ─────────────────────────────────────────────────────────── */
+
+/* styles.css forces cursor:none for the main portfolio custom cursor —
+   restore the normal cursor on this standalone page */
+body,
+body * {
+  cursor: auto !important;
+}
+a, button, [role="button"], .gallery-item, .lb-nav, .lb-close, .nav-btn {
+  cursor: pointer !important;
+}
+
+/* nav-btn links: no underline */
+a.nav-btn {
+  text-decoration: none;
+}
+
+/* Allow content panel to scroll on this page */
+.photo-content {
+  overflow-y: auto;
+  padding: 0;
+}
+
+/* ── Description section ─────────────────────────────────────── */
+#photo-description {
+  padding: 0 1rem 1.5rem;
+  max-width: 100%;
+  animation: photo-desc-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+@keyframes photo-desc-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Tab wrapper — no special padding, let gallery fill it */
+.photo-tab {
+  display: block;
+  padding: 0 1rem 1rem;
+}
+
+/* ── Gallery title + intro ───────────────────────────────────── */
+.photo-content .tab-title-wrap {
+  padding: 0.75rem 1rem 0;
+}
+
+.photo-intro {
+  margin: -0.25rem 0 0.75rem;
+  padding: 0 0.1rem;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  font-style: italic;
+  line-height: 1.55;
+  opacity: 0;
+  transform: translateY(12px) scale(0.97);
+  animation: photo-intro-enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.5s forwards;
+}
+
+.photo-intro:empty { display: none; }
+
+@keyframes photo-intro-enter {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ── Gallery grid (CSS columns masonry) ─────────────────────── */
+.gallery {
+  columns: 3;
+  column-gap: 4px;
+  padding: 4px;
+}
+
+@media (max-width: 900px)  { .gallery { columns: 2; } }
+@media (max-width: 540px)  { .gallery { columns: 1; } }
+
+.loading-msg {
+  column-span: all;
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-soft);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* ── Gallery item ────────────────────────────────────────────── */
+.gallery-item {
+  break-inside: avoid;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin-bottom: 4px;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--text, #111) 6%, transparent);
+
+  /* scroll-reveal entrance (JS adds .is-visible) */
+  opacity: 0;
+  transform: scale(0.88) translateY(28px);
+  transition:
+    opacity   0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.26s ease;
+  transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0ms;
+}
+
+.gallery-item.is-visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* ── Hover — lift + edge glow ────────────────────────────────── */
+.gallery-item:hover {
+  box-shadow:
+    0 0 0 2px rgba(134, 239, 172, 0.9),
+    0 14px 44px rgba(0, 0, 0, 0.52),
+    0 3px 10px rgba(34, 197, 94, 0.28);
+  z-index: 2;
+}
+
+:root[data-theme="dark"] .gallery-item:hover {
+  box-shadow:
+    0 0 0 2px rgba(74, 222, 128, 0.95),
+    0 16px 48px rgba(0, 0, 0, 0.72),
+    0 4px 14px rgba(34, 197, 94, 0.45);
+}
+
+.gallery-item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.46s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              filter  0.30s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.07);
+  filter: brightness(0.80) saturate(1.08);
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(transparent 45%, rgba(0,0,0,0.62) 100%);
+  opacity: 0;
+  transition: opacity 0.26s ease;
+  pointer-events: none;
+}
+
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+
+.gallery-overlay-bottom {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.9rem 0.75rem 0.65rem;
+}
+
+.gallery-caption {
+  color: #fff;
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+  font-style: italic;
+  flex: 1;
+  min-width: 0;
+}
+
+.gallery-detail-btn {
+  display: inline-block;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  font-size: 0.7rem;
+  font-family: inherit;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  text-decoration: none;
+  padding: 0.2rem 0.5rem;
+  pointer-events: auto;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  white-space: nowrap;
+  cursor: pointer !important;
+}
+
+.gallery-detail-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Lightbox ────────────────────────────────────────────────── */
+.photo-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.93);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lb-backdrop-in 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes lb-backdrop-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.photo-lb[hidden] { display: none; }
+
+.lb-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  max-width: min(88vw, 1100px);
+  padding: 0 3.5rem;
+}
+
+.lb-img {
+  max-width: 100%;
+  max-height: calc(100dvh - 8rem);
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  will-change: transform, opacity;
+}
+
+/* Slide-in animations for lightbox navigation */
+@keyframes lb-slide-in-right {
+  from { opacity: 0; transform: translateX(60px) scale(0.96); }
+  to   { opacity: 1; transform: translateX(0)    scale(1);    }
+}
+@keyframes lb-slide-in-left {
+  from { opacity: 0; transform: translateX(-60px) scale(0.96); }
+  to   { opacity: 1; transform: translateX(0)     scale(1);    }
+}
+@keyframes lb-fade-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+.lb-img.lb-anim-next { animation: lb-slide-in-right 0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.lb-img.lb-anim-prev { animation: lb-slide-in-left  0.32s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.lb-img.lb-anim-open { animation: lb-fade-in        0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+.lb-caption {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.8rem;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  text-align: center;
+  font-family: inherit;
+}
+
+.lb-top-bar {
+  position: fixed;
+  top: 1rem;
+  right: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10001;
+}
+
+.lb-newtab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  padding: 0.28rem 0.6rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.14s, border-color 0.14s;
+}
+
+.lb-newtab svg {
+  width: 0.9em;
+  height: 0.9em;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.lb-newtab:hover { color: #fff; border-color: rgba(255,255,255,0.7); }
+
+.lb-close {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.30);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: inherit;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: lowercase;
+  padding: 0.28rem 0.6rem;
+  cursor: pointer;
+  transition: color 0.14s, border-color 0.14s;
+}
+.lb-close:hover { color: #fff; border-color: rgba(255,255,255,0.7); }
+
+.lb-nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 3rem;
+  line-height: 1;
+  padding: 0 1rem;
+  cursor: pointer;
+  transition: color 0.14s, transform 0.14s;
+}
+.lb-prev { left: 0; }
+.lb-next { right: 0; }
+.lb-nav:hover {
+  color: #fff;
+  transform: translateY(-50%) scale(1.1);
+}
+
+@media (max-width: 600px) {
+  .lb-nav  { font-size: 2rem; }
+  .lb-figure { padding: 0 2.5rem; }
+}

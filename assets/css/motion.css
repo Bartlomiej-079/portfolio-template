@@ -1,0 +1,320 @@
+@charset "UTF-8";
+
+/*!
+ * motion.css — reveal animations for your-username.github.io
+ *
+ * Replaces animate.css 3.5.0 (3339 lines / 152 keyframes / ~72KB) with only
+ * the vocabulary this site can actually reach: the four animations used in
+ * markdown, every target of ROTATION_EFFECT_ALIASES in script.js/demo.js, and
+ * the semantic `data-reveal` names used by assets/js/reveal.js.
+ *
+ * Paired with assets/js/reveal.js (IntersectionObserver), which replaces
+ * wow.js. Keyframes stay in CSS so they run on the compositor rather than
+ * being driven frame-by-frame from JS.
+ */
+
+/* ── Tokens ──────────────────────────────────────────────────────────── */
+
+:root {
+  --reveal-duration: 0.7s;
+  --reveal-distance: 24px;
+  --reveal-distance-sm: 12px;
+  /* Decelerating ease — fast out of the gate, settles gently. */
+  --reveal-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --reveal-ease-soft: cubic-bezier(0.16, 0.84, 0.44, 1);
+  --reveal-stagger: 60ms;
+}
+
+/* ── Base ────────────────────────────────────────────────────────────── */
+
+/*
+ * `.motion-ready` is set on <html> by reveal.js the moment it parses. Hiding
+ * is scoped to it so that if the script never runs — blocked, errored, no JS —
+ * content simply stays visible instead of being stranded invisible. wow.js
+ * hid nodes via inline style at init, which had the opposite failure mode.
+ */
+:root.motion-ready :is([data-reveal], .wow):not(.is-revealed) {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/*
+ * Every longhand the reveal depends on is pinned here, not just the ones it
+ * wants to change.
+ *
+ * Cards, tables, code blocks, accordions and the footer each carry their own
+ * `animation:` shorthand in styles.css — ambient gradient flows and shadow
+ * pulses, all of them `infinite`. The reveal rules below override
+ * `animation-name` alone, so the rest of that shorthand survived: the reveal
+ * inherited `infinite` and the element re-ran its fade-and-lift every 0.7s
+ * for as long as the page stayed open, which read as the whole page
+ * flickering with no way to stop it.
+ *
+ * `.animated.infinite` below is declared later at the same specificity, so
+ * the deliberate looping case still wins, as does the inline
+ * animation-iteration-count reveal.js writes for data-reveal-iteration.
+ */
+:is([data-reveal], .animated).is-revealed,
+.animated {
+  animation-duration: var(--reveal-duration);
+  animation-timing-function: var(--reveal-ease);
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-play-state: running;
+  animation-delay: 0s;
+}
+
+/* Drop the compositor hint once the animation has finished so long pages
+   don't hold hundreds of promoted layers. */
+.is-revealed {
+  will-change: auto;
+}
+
+/* ── Semantic reveal names (assets/js/reveal.js) ─────────────────────── */
+
+[data-reveal="fade"].is-revealed { animation-name: fadeIn; }
+[data-reveal="fade-up"].is-revealed { animation-name: fadeInUp; }
+[data-reveal="fade-down"].is-revealed { animation-name: fadeInDown; }
+[data-reveal="fade-left"].is-revealed { animation-name: fadeInLeft; }
+[data-reveal="fade-right"].is-revealed { animation-name: fadeInRight; }
+[data-reveal="rise"].is-revealed { animation-name: revealRise; }
+[data-reveal="lift"].is-revealed { animation-name: revealLift; }
+[data-reveal="zoom"].is-revealed { animation-name: zoomIn; }
+[data-reveal="blur"].is-revealed { animation-name: revealBlur; }
+[data-reveal="bounce"].is-revealed { animation-name: bounceIn; }
+[data-reveal="flip"].is-revealed { animation-name: flipInX; }
+
+/* ── Legacy animate.css class names ──────────────────────────────────── */
+
+/*
+ * 224 `.wow .animated .fadeInUp`-style annotations live in pages/*.md and
+ * archive/*.md. Keeping the class names working means none of that markdown
+ * has to change, and `wow:<className>` effects on the demo page keep
+ * resolving. reveal.js treats these as `data-reveal` equivalents.
+ */
+.animated.fadeIn { animation-name: fadeIn; }
+.animated.fadeInUp { animation-name: fadeInUp; }
+.animated.fadeInDown { animation-name: fadeInDown; }
+.animated.fadeInLeft { animation-name: fadeInLeft; }
+.animated.fadeInRight { animation-name: fadeInRight; }
+.animated.fadeOut { animation-name: fadeOut; }
+.animated.slideInUp { animation-name: slideInUp; }
+.animated.slideInDown { animation-name: slideInDown; }
+.animated.slideInLeft { animation-name: slideInLeft; }
+.animated.slideInRight { animation-name: slideInRight; }
+.animated.zoomIn { animation-name: zoomIn; }
+.animated.zoomOut { animation-name: zoomOut; }
+.animated.bounceIn { animation-name: bounceIn; }
+.animated.flipInX { animation-name: flipInX; }
+.animated.flipInY { animation-name: flipInY; }
+.animated.rollIn { animation-name: rollIn; }
+.animated.lightSpeedIn { animation-name: lightSpeedIn; }
+.animated.pulse { animation-name: pulse; }
+.animated.swing { animation-name: swing; }
+.animated.tada { animation-name: tada; }
+.animated.rubberBand { animation-name: rubberBand; }
+.animated.headShake { animation-name: headShake; }
+.animated.shake { animation-name: shake; }
+.animated.heartBeat { animation-name: heartBeat; animation-duration: 1.3s; }
+.animated.jello { animation-name: jello; transform-origin: center; }
+
+.animated.infinite { animation-iteration-count: infinite; }
+
+/* ── Keyframes ───────────────────────────────────────────────────────── */
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate3d(0, var(--reveal-distance), 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translate3d(0, calc(-1 * var(--reveal-distance)), 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translate3d(calc(-1 * var(--reveal-distance)), 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translate3d(var(--reveal-distance), 0, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Shorter travel than fadeInUp — for dense repeating rows (lists, table
+   rows, tags) where a full 24px lift reads as noise. */
+@keyframes revealRise {
+  from { opacity: 0; transform: translate3d(0, var(--reveal-distance-sm), 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+/* Rise with a touch of scale — for cards, which benefit from reading as
+   physical objects arriving rather than text fading up. */
+@keyframes revealLift {
+  from { opacity: 0; transform: translate3d(0, var(--reveal-distance), 0) scale(0.97); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+/* For imagery, where a defocus-to-focus reads better than a slide. */
+@keyframes revealBlur {
+  from { opacity: 0; filter: blur(10px); transform: scale(1.02); }
+  to { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+
+@keyframes slideInUp {
+  from { transform: translate3d(0, 100%, 0); visibility: visible; }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes slideInDown {
+  from { transform: translate3d(0, -100%, 0); visibility: visible; }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes slideInLeft {
+  from { transform: translate3d(-100%, 0, 0); visibility: visible; }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translate3d(100%, 0, 0); visibility: visible; }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale3d(0.93, 0.93, 0.93); }
+  50% { opacity: 1; }
+  to { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+
+@keyframes zoomOut {
+  from { opacity: 1; transform: scale3d(1, 1, 1); }
+  50% { opacity: 0; transform: scale3d(0.93, 0.93, 0.93); }
+  to { opacity: 0; }
+}
+
+@keyframes bounceIn {
+  from { opacity: 0; transform: scale3d(0.7, 0.7, 0.7); }
+  40% { opacity: 1; transform: scale3d(1.04, 1.04, 1.04); }
+  70% { transform: scale3d(0.985, 0.985, 0.985); }
+  to { opacity: 1; transform: scale3d(1, 1, 1); }
+}
+
+@keyframes flipInX {
+  from { opacity: 0; transform: perspective(400px) rotate3d(1, 0, 0, 70deg); }
+  60% { opacity: 1; transform: perspective(400px) rotate3d(1, 0, 0, -12deg); }
+  80% { transform: perspective(400px) rotate3d(1, 0, 0, 5deg); }
+  to { opacity: 1; transform: perspective(400px); }
+}
+
+@keyframes flipInY {
+  from { opacity: 0; transform: perspective(400px) rotate3d(0, 1, 0, 70deg); }
+  60% { opacity: 1; transform: perspective(400px) rotate3d(0, 1, 0, -12deg); }
+  80% { transform: perspective(400px) rotate3d(0, 1, 0, 5deg); }
+  to { opacity: 1; transform: perspective(400px); }
+}
+
+@keyframes rollIn {
+  from { opacity: 0; transform: translate3d(-100%, 0, 0) rotate3d(0, 0, 1, -120deg); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes lightSpeedIn {
+  from { opacity: 0; transform: translate3d(100%, 0, 0) skewX(-30deg); }
+  60% { opacity: 1; transform: skewX(20deg); }
+  80% { transform: skewX(-5deg); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes pulse {
+  from, to { transform: scale3d(1, 1, 1); }
+  50% { transform: scale3d(1.05, 1.05, 1.05); }
+}
+
+@keyframes heartBeat {
+  0%, 28%, 70% { transform: scale(1); }
+  14%, 42% { transform: scale(1.3); }
+}
+
+@keyframes swing {
+  20% { transform: rotate3d(0, 0, 1, 15deg); }
+  40% { transform: rotate3d(0, 0, 1, -10deg); }
+  60% { transform: rotate3d(0, 0, 1, 5deg); }
+  80% { transform: rotate3d(0, 0, 1, -5deg); }
+  to { transform: rotate3d(0, 0, 1, 0deg); }
+}
+
+@keyframes tada {
+  from, to { transform: scale3d(1, 1, 1); }
+  10%, 20% { transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg); }
+  30%, 50%, 70%, 90% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg); }
+  40%, 60%, 80% { transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg); }
+}
+
+@keyframes rubberBand {
+  from, to { transform: scale3d(1, 1, 1); }
+  30% { transform: scale3d(1.25, 0.75, 1); }
+  40% { transform: scale3d(0.75, 1.25, 1); }
+  50% { transform: scale3d(1.15, 0.85, 1); }
+  65% { transform: scale3d(0.95, 1.05, 1); }
+  75% { transform: scale3d(1.05, 0.95, 1); }
+}
+
+@keyframes headShake {
+  0% { transform: translateX(0); }
+  6.5% { transform: translateX(-6px) rotateY(-9deg); }
+  18.5% { transform: translateX(5px) rotateY(7deg); }
+  31.5% { transform: translateX(-3px) rotateY(-5deg); }
+  43.5% { transform: translateX(2px) rotateY(3deg); }
+  50% { transform: translateX(0); }
+}
+
+@keyframes shake {
+  from, to { transform: translate3d(0, 0, 0); }
+  10%, 30%, 50%, 70%, 90% { transform: translate3d(-8px, 0, 0); }
+  20%, 40%, 60%, 80% { transform: translate3d(8px, 0, 0); }
+}
+
+@keyframes jello {
+  from, 11.1%, to { transform: translate3d(0, 0, 0); }
+  22.2% { transform: skewX(-12.5deg) skewY(-12.5deg); }
+  33.3% { transform: skewX(6.25deg) skewY(6.25deg); }
+  44.4% { transform: skewX(-3.125deg) skewY(-3.125deg); }
+  55.5% { transform: skewX(1.5625deg) skewY(1.5625deg); }
+  66.6% { transform: skewX(-0.78125deg) skewY(-0.78125deg); }
+  77.7% { transform: skewX(0.390625deg) skewY(0.390625deg); }
+  88.8% { transform: skewX(-0.1953125deg) skewY(-0.1953125deg); }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────── */
+
+/*
+ * Never suppress the reveal outright — these elements start at opacity 0, so
+ * "no animation" would mean "no content". Collapse to a plain cross-fade with
+ * no travel, no scale and no blur instead.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :is([data-reveal], .animated, .wow).is-revealed,
+  .animated {
+    animation-name: fadeIn !important;
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  :root.motion-ready :is([data-reveal], .wow):not(.is-revealed) {
+    opacity: 1;
+  }
+}

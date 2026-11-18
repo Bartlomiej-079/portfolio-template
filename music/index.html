@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Your Name's Portfolio</title>
+    <!--
+      This directory holds the raw markdown source + index.json manifest for
+      music posts (fetched by assets/js/script.js). GitHub Pages resolves a
+      trailing-slash request for a directory with no index.html by serving
+      whatever file here is literally named "index.*" — that was index.json,
+      so visiting /music/ directly returned raw JSON instead of the site.
+      This file exists purely so the directory has a real index.html, which
+      takes priority and redirects into the SPA's music tab instead.
+    -->
+    <meta http-equiv="refresh" content="0; url=../?tab=music" />
+    <script>
+      (function () {
+        var isGhPages = /\.github\.io$/i.test(window.location.hostname);
+        var segments = window.location.pathname.split("/").filter(Boolean);
+        // On github.io the repo name is the first path segment (…/reponame/music/);
+        // on the custom domain "music" is the first segment and the root is "/".
+        var siteRoot = isGhPages && segments.length > 1 ? "/" + segments[0] + "/" : "/";
+        window.location.replace(siteRoot + "?tab=music");
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
