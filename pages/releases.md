@@ -24,5 +24,6 @@ Tutti gli orari sono in UTC (GMT+0). I numeri di versione seguono v{major}.{mino
 <ul>
 <li>v1.0.0 (2026-01-01 00:00): Initial release, created from the portfolio template.</li>
 <li data-commit="191c814">v1.0.1 (2026-11-18 15:31): first commit</li>
+<li data-commit="4695772">v1.0.2 (2026-11-18 15:49): innit</li>
 </ul>
 </details>
