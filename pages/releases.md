@@ -34,5 +34,6 @@ Wszystkie godziny podano w strefie UTC (GMT+0). Numery wersji mają format v{maj
 <li data-commit="7214f92">v1.0.6 (2026-11-18 16:45): Move site navigation to the top</li>
 <li data-commit="f09f1a8">v1.0.7 (2026-11-18 16:57): Center main content and navigation</li>
 <li data-commit="1783ff7">v1.0.8 (2026-11-18 17:25): Update site color palette</li>
+<li data-commit="e0ce865">v1.0.9 (2026-11-18 17:27): Personalize homepage greeting</li>
 </ul>
 </details>
