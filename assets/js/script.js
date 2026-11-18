@@ -6553,7 +6553,8 @@ if (IS_DEV) {
   let isOpen = false;
 
   function populateGrid() {
-    return fetch("/switcher/apps.json")
+    const siteRoot = getTabSiteRoot();
+    return fetch(siteRoot + "switcher/apps.json")
       .then((r) => {
         if (!r.ok) throw new Error("apps.json " + r.status);
         return r.json();
@@ -6572,7 +6573,7 @@ if (IS_DEV) {
           const icon = document.createElement("div");
           icon.className = "app-switcher-icon";
           const img = document.createElement("img");
-          img.src = "/switcher/icons/" + app.icon;
+          img.src = siteRoot + "switcher/icons/" + app.icon;
           img.alt = app.name;
           img.loading = "lazy";
           icon.appendChild(img);

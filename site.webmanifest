@@ -2,21 +2,21 @@
   "name": "Your Name",
   "short_name": "Your Name",
   "description": "Your Job Title at Your Company.",
-  "id": "https://example.com/",
-  "start_url": "/",
-  "scope": "/",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "lang": "en-GB",
   "background_color": "#fafffa",
   "theme_color": "#14532d",
   "icons": [
     {
-      "src": "/assets/images/apple-touch-icon.png",
+      "src": "assets/images/apple-touch-icon.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "/assets/images/favicon.png",
+      "src": "assets/images/favicon.png",
       "sizes": "595x582",
       "type": "image/png"
     }

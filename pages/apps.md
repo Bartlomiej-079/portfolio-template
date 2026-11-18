@@ -19,30 +19,30 @@ La griglia sotto è la copia locale del launcher. La fonte di verità è [`/swit
 ```
 
 <div class="ios-app-grid">
-  <a class="ios-app" href="https://example.com" aria-label="Portfolio" data-tooltip="my personal site — projects, writing, music, and more." target="_blank">
+  <a class="ios-app" href="./" aria-label="Portfolio" data-tooltip="my personal site — projects, writing, music, and more." target="_blank">
     <div class="ios-app-icon">
-      <img src="/switcher/icons/portfolio.png" alt="Portfolio"/>
+      <img src="switcher/icons/portfolio.png" alt="Portfolio"/>
     </div>
     <span class="ios-app-label">Portfolio</span>
   </a>
 
   <a class="ios-app" href="https://app-one.example.com" aria-label="App One" data-tooltip="a one-line description of your first app." target="_blank">
     <div class="ios-app-icon">
-      <img src="/switcher/icons/app-one.png" alt="App One"/>
+      <img src="switcher/icons/app-one.png" alt="App One"/>
     </div>
     <span class="ios-app-label">App One</span>
   </a>
 
   <a class="ios-app" href="https://app-two.example.com" aria-label="App Two" data-tooltip="a one-line description of your second app." target="_blank">
     <div class="ios-app-icon">
-      <img src="/switcher/icons/app-two.png" alt="App Two"/>
+      <img src="switcher/icons/app-two.png" alt="App Two"/>
     </div>
     <span class="ios-app-label">App Two</span>
   </a>
 
   <a class="ios-app" href="https://app-three.example.com" aria-label="App Three" data-tooltip="a one-line description of your third app." target="_blank">
     <div class="ios-app-icon">
-      <img src="/switcher/icons/app-three.png" alt="App Three"/>
+      <img src="switcher/icons/app-three.png" alt="App Three"/>
     </div>
     <span class="ios-app-label">App Three</span>
   </a>

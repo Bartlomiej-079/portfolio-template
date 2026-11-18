@@ -13,6 +13,12 @@ npm run build        # regenerates posts/index.json and music/index.json (needs 
 
 Open <http://localhost:5500>. Do not open `index.html` via `file://`: the pages fetch markdown at runtime.
 
+## Deploy to GitHub Pages
+
+The `Deploy to GitHub Pages` workflow builds the content indexes and deploys the repository when changes are pushed to `main`. To enable it, open **Settings → Pages** for the repository and set **Build and deployment → Source** to **GitHub Actions**. You can also start a deployment from the **Actions** tab with **Run workflow**.
+
+For a project site such as `https://<owner>.github.io/<repository>/`, keep the site at the repository root; the site detects and accounts for that path. If you rename the repository, GitHub Pages uses the new repository name in the site URL.
+
 ## Make it yours
 
 Search the whole repo for these placeholders and replace them:
