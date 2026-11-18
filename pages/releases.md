@@ -32,5 +32,6 @@ Wszystkie godziny podano w strefie UTC (GMT+0). Numery wersji mają format v{maj
 <li data-commit="6a3cb95">v1.0.4 (2026-11-18 16:21): Keep navigation at the top on mobile</li>
 <li data-commit="48473c8">v1.0.5 (2026-11-18 16:32): Enable Marie Kondo mode by default</li>
 <li data-commit="7214f92">v1.0.6 (2026-11-18 16:45): Move site navigation to the top</li>
+<li data-commit="f09f1a8">v1.0.7 (2026-11-18 16:57): Center main content and navigation</li>
 </ul>
 </details>
