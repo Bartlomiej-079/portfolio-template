@@ -30,5 +30,6 @@ Wszystkie godziny podano w strefie UTC (GMT+0). Numery wersji mają format v{maj
 <li data-commit="4695772">v1.0.2 (2026-11-18 15:49): innit</li>
 <li data-commit="40211f4">v1.0.3 (2026-11-18 16:13): Add Polish localization</li>
 <li data-commit="6a3cb95">v1.0.4 (2026-11-18 16:21): Keep navigation at the top on mobile</li>
+<li data-commit="48473c8">v1.0.5 (2026-11-18 16:32): Enable Marie Kondo mode by default</li>
 </ul>
 </details>
