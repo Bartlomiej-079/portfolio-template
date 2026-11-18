@@ -36,6 +36,7 @@ Your Job Title at Your Company (https://example.com), working across the technol
 
 - [Home](https://example.com/): biography and identity
 - [Projects](https://example.com/projects): personal and professional projects
+- [Designs gallery](https://example.com/designs): visual design and artwork
 - [Experience](https://example.com/experience): roles and activities
 - [Blog](https://example.com/blog): writing
 - [Music](https://example.com/music): recordings and compositions

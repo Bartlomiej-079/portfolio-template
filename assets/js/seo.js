@@ -67,6 +67,13 @@
       description: "Notes, cheat sheets, fonts, and other resources published by Your Name.",
       path: "/resources"
     },
+    designs: {
+      titleKey: "meta.title.designs",
+      title: "Designs Gallery — Your Name",
+      descriptionKey: "meta.description.designs",
+      description: "Visual design and artwork by Your Name.",
+      path: "/designs"
+    },
     music: {
       titleKey: "meta.title.music",
       title: "Music — Your Name",

@@ -1,6 +1,6 @@
 # Portfolio template
 
-A multilingual, markdown-driven personal site: home, projects, experience, resources, music, blog, photography, a standalone CV and portfolio, an apps launcher, light/dark themes, video and bubble backgrounds, and a settings page. It is a static site (no build step beyond two tiny index generators) and deploys as-is to GitHub Pages, Netlify or any static host.
+A multilingual, markdown-driven personal site: home, projects, experience, resources, a designs gallery, music, blog, photography, a standalone CV and portfolio, an apps launcher, light/dark themes, video and bubble backgrounds, and a settings page. It is a static site (no build step beyond two tiny index generators) and deploys as-is to GitHub Pages, Netlify or any static host.
 
 Every page ships in **English, French, Italian, Japanese, Mandarin Chinese and Polish**. All text is placeholder text: replace it, or delete the languages you don't need.
 
@@ -50,6 +50,7 @@ Two things to check at the end:
 | What | Where |
 | --- | --- |
 | Page content (all five languages) | `pages/*.md`: `home`, `projects`, `experience`, `resources`, `music`, `blog`, `info`, `apps`, `textbook-project` (a spare "featured project" tab), `releases`, `footer`, `settings`, `404`, `demo` |
+| Designs gallery | `index.html` (`tab-designs`) and `assets/images/portfolio/art-*.jpg` |
 | Blog posts | `posts/YYYY-MM-DD-slug.md`; run `npm run build` to refresh `posts/index.json` |
 | Music entries | `music/YYYY-MM-DD-slug.md`, audio in `assets/audio/`, scores in `music/scores/` |
 | Photography | `photos/` plus `photos/index.json` (caption, description, tags, coordinates); intro text in `photography/photography.md` |

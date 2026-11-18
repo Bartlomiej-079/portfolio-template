@@ -3,6 +3,7 @@ const DEFAULT_PAGE_TITLES = {
   projects: "projects i've worked on",
   experience: "experience",
   resources: "resources",
+  designs: "designs gallery",
   music: "music",
   blog: "blog",
   post: "blog post",
@@ -152,7 +153,7 @@ const VIEW_ICON_COLUMNS = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="
 const VIEW_ICON_CHEVRON = '<svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5z"/></svg>';
 const VIEW_ICON_CHECK = '<svg class="option-check" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>';
 
-const KNOWN_TABS = new Set(["home", "projects", "experience", "resources", "music", "blog", "info", "releases", "settings", "apps", "textbook-project"]);
+const KNOWN_TABS = new Set(["home", "projects", "experience", "resources", "designs", "music", "blog", "info", "releases", "settings", "apps", "textbook-project"]);
 /* /cv and its sub-pages are standalone documents under /cv/, not tabs —
    see cv/index.html. Nothing here routes them any more. */
 let markdownWatcherId = null;
@@ -3592,7 +3593,7 @@ function pickDefaultLanguage(languages) {
 let applyingPreferredLanguage = false;
 
 function applyLocalizedPageTitles() {
-  const keys = ["home", "projects", "experience", "resources", "music", "blog", "post", "info", "releases", "settings", "apps", "textbook-project"];
+  const keys = ["home", "projects", "experience", "resources", "designs", "music", "blog", "post", "info", "releases", "settings", "apps", "textbook-project"];
   keys.forEach((tab) => {
     const translated = t(`title.${tab}`);
     if (translated && translated !== `title.${tab}`) {
@@ -4587,6 +4588,7 @@ const NAV_ICONS = {
   projects: '<path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm13 0h-3v3h-3v3h3v-3h3v3h3v-3h-3z"/>',
   experience: '<path d="M20 6h-2.18c.07-.44.18-.86.18-1a3 3 0 0 0-6 0c0 .14.11.56.18 1H10C8.9 6 8 6.9 8 8v12c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-1a1 1 0 0 1 2 0c0 .5-.45 1-1 2-.55-1-1-1.5-1-2zm-3 3h4v1a2 2 0 0 0 4 0V8h2v12H10V8zM4 18H2V4h2v14zm2 2H4.5A2.5 2.5 0 0 1 2 17.5V4c0-1.1.9-2 2-2h2v18z"/>',
   resources: '<path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zm-2 14H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V6h8v2z"/>',
+  designs: '<path d="M12 3a9 9 0 1 0 0 18h1a2.5 2.5 0 0 0 0-5h-1.6a1.4 1.4 0 0 1 0-2.8h2.1A5.5 5.5 0 0 0 12 3zm-4.5 9a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm2.5-4a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm4 0a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6zm3 4a1.3 1.3 0 1 1 0-2.6 1.3 1.3 0 0 1 0 2.6z"/>',
   music: '<path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>',
   blog: '<path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1h-2zm3 18H5V8h14v11z"/>',
 };

@@ -74,6 +74,7 @@
                 <a class="footer-link" href="./projects" data-i18n="footer.projects">Projects</a>
                 <a class="footer-link" href="./experience" data-i18n="footer.experience">Experience</a>
                 <a class="footer-link" href="./resources" data-i18n="footer.resources">Resources</a>
+                <a class="footer-link" href="./designs" data-i18n="footer.designs">Designs gallery</a>
                 <a class="footer-link" href="./music" data-i18n="footer.music">Music</a>
                 <a class="footer-link" href="./blog" data-i18n="footer.blog">Blog</a>
                 <a class="footer-link" href="./photography" data-i18n="footer.photography">Photography</a>
