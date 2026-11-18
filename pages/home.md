@@ -1,21 +1,21 @@
 ```language-content hide borderless
 ::en
-## 👋 Hi, I'm Your Name! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
+## 👋 Hi, I'm Wiktor Brejnak! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
 
 ::fr
-## 👋 Salut, je suis Your Name ! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
+## 👋 Salut, je suis Wiktor Brejnak ! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
 
 ::zh
-## 👋 你好，我是 Your Name！ {lang="zh" .wow .animated .fadeInUp data-wow-delay="0.05s"}
+## 👋 你好，我是 Wiktor Brejnak！ {lang="zh" .wow .animated .fadeInUp data-wow-delay="0.05s"}
 
 ::ja
-## 👋 こんにちは、Your Name です！ {lang="ja" .wow .animated .fadeInUp data-wow-delay="0.05s"}
+## 👋 こんにちは、Wiktor Brejnak です！ {lang="ja" .wow .animated .fadeInUp data-wow-delay="0.05s"}
 
 ::it
-## 👋 Ciao, sono Your Name! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
+## 👋 Ciao, sono Wiktor Brejnak! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
 
 ::pl
-## 👋 Cześć, jestem Your Name! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
+## 👋 Cześć, jestem Wiktor Brejnak! {.wow .animated .fadeInUp data-wow-delay="0.05s"}
 
 ```
 
