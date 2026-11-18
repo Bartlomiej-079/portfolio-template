@@ -83,7 +83,7 @@ Delete either workflow if you don't want it.
 
 ## Keyboard shortcuts (built in)
 
-`⌘/Ctrl + ,` settings · `⌘/Ctrl + M` minimal ("Marie Kondo") mode · `⌘/Ctrl + /` performance mode · `⌘/Ctrl + ;` video background · `⌘/Ctrl + \` bubbles.
+Marie Kondo mode is enabled by default and remembers when turned off. `⌘/Ctrl + ,` settings · `⌘/Ctrl + M` toggle Marie Kondo mode · `⌘/Ctrl + /` performance mode · `⌘/Ctrl + ;` video background · `⌘/Ctrl + \` bubbles.
 
 ## Licence
 

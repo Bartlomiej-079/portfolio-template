@@ -40,6 +40,13 @@
           }
         } catch (_) {}
         try {
+          if (localStorage.getItem("portfolio-marie-kondo") !== "off") {
+            document.documentElement.setAttribute("data-marie-kondo", "on");
+          }
+        } catch (_) {
+          document.documentElement.setAttribute("data-marie-kondo", "on");
+        }
+        try {
           var supported = /^(en|fr|it|ja|zh|pl)$/;
           var lang = "";
           try { lang = String(localStorage.getItem("portfolio-language") || "").toLowerCase(); } catch (_) {}

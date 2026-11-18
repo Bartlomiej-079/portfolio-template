@@ -160,12 +160,13 @@
           }
         } catch (_) {}
         try {
-          // Default off. Set before first paint so the native cursor is
-          // restored straight away (styles.css hides it otherwise).
-          if (localStorage.getItem("portfolio-marie-kondo") === "on") {
+          // Default on; only skip when the user explicitly chose off.
+          if (localStorage.getItem("portfolio-marie-kondo") !== "off") {
             document.documentElement.setAttribute("data-marie-kondo", "on");
           }
-        } catch (_) {}
+        } catch (_) {
+          document.documentElement.setAttribute("data-marie-kondo", "on");
+        }
         try {
           // Default on; only skip when the user explicitly chose off.
           if (localStorage.getItem("portfolio-video-bg") !== "off") {

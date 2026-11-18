@@ -158,7 +158,7 @@
     if (!primaryVideoSrc) return;
 
     const attemptPlay = function (video) {
-      if (!video) return;
+      if (!video || !videoBgEnabled) return;
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch(function () {
@@ -177,13 +177,13 @@
 
     const video = document.createElement("video");
     video.className = "site-footer-video";
-    video.setAttribute("autoplay", "");
+    if (videoBgEnabled) video.setAttribute("autoplay", "");
     video.setAttribute("muted", "");
     video.setAttribute("loop", "");
     video.setAttribute("playsinline", "");
     video.setAttribute("preload", "metadata");
     video.setAttribute("aria-hidden", "true");
-    video.autoplay = true;
+    video.autoplay = videoBgEnabled;
     video.muted = true;
     video.defaultMuted = true;
     video.loop = true;
@@ -210,7 +210,7 @@
     if (!videoSrc) return;
 
     const attemptPlay = function (video) {
-      if (!video) return;
+      if (!video || !videoBgEnabled) return;
       const playPromise = video.play();
       if (playPromise && typeof playPromise.catch === "function") {
         playPromise.catch(function () {
@@ -230,13 +230,13 @@
 
       const video = document.createElement("video");
       video.className = "app-frame-video";
-      video.setAttribute("autoplay", "");
+      if (videoBgEnabled) video.setAttribute("autoplay", "");
       video.setAttribute("muted", "");
       video.setAttribute("loop", "");
       video.setAttribute("playsinline", "");
       video.setAttribute("preload", "metadata");
       video.setAttribute("aria-hidden", "true");
-      video.autoplay = true;
+      video.autoplay = videoBgEnabled;
       video.muted = true;
       video.defaultMuted = true;
       video.loop = true;
@@ -501,6 +501,17 @@
       return false;
     }
   }
+
+  function hasMarieKondoPreference() {
+    try {
+      const preference = window.localStorage.getItem(MARIE_KONDO_KEY);
+      return preference === "on" || preference === "off";
+    } catch {
+      return false;
+    }
+  }
+
+  const enableMarieKondoByDefault = !hasMarieKondoPreference();
 
   function persistMarieKondoMode(enabled) {
     try {
@@ -909,6 +920,9 @@
   }
 
   async function initializeTheme() {
+    if (enableMarieKondoByDefault) {
+      setMarieKondoMode(true, { dispatch: false });
+    }
     injectAppFrameVideo();
     ensureFooterToggle();
     const footer = document.querySelector(".site-footer");

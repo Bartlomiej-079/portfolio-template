@@ -7492,7 +7492,7 @@ if (IS_DEV) {
     if (window.siteTheme && typeof window.siteTheme.getMarieKondoMode === "function") {
       return Boolean(window.siteTheme.getMarieKondoMode());
     }
-    try { return localStorage.getItem(MARIE_KONDO_KEY) === "on"; } catch (_) { return false; }
+    try { return localStorage.getItem(MARIE_KONDO_KEY) !== "off"; } catch (_) { return true; }
   }
 
   function applyMarieKondo(enabled) {
@@ -7964,7 +7964,7 @@ if (IS_DEV) {
     if (window.siteTheme && typeof window.siteTheme.getMarieKondoMode === "function") {
       return Boolean(window.siteTheme.getMarieKondoMode());
     }
-    try { return localStorage.getItem(MARIE_KONDO_KEY) === "on"; } catch (_) { return false; }
+    try { return localStorage.getItem(MARIE_KONDO_KEY) !== "off"; } catch (_) { return true; }
   }
 
   function dismissed() {

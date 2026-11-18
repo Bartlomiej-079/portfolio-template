@@ -43,6 +43,13 @@
           }
         } catch (_) {}
         try {
+          if (localStorage.getItem("portfolio-marie-kondo") !== "off") {
+            document.documentElement.setAttribute("data-marie-kondo", "on");
+          }
+        } catch (_) {
+          document.documentElement.setAttribute("data-marie-kondo", "on");
+        }
+        try {
           // Default on; only skip when the user explicitly chose off.
           if (localStorage.getItem("portfolio-video-bg") !== "off") {
             document.documentElement.setAttribute("data-video-bg", "on");

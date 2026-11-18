@@ -17,6 +17,13 @@
           document.documentElement.style.colorScheme = theme;
         } catch (_) {}
         try {
+          if (localStorage.getItem("portfolio-marie-kondo") !== "off") {
+            document.documentElement.setAttribute("data-marie-kondo", "on");
+          }
+        } catch (_) {
+          document.documentElement.setAttribute("data-marie-kondo", "on");
+        }
+        try {
           // Default off; only enable when the user explicitly chose on.
           if (localStorage.getItem("portfolio-perf-mode") === "on")
             document.documentElement.setAttribute("data-perf-mode", "on");
