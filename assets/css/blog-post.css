@@ -38,7 +38,7 @@ body,
   left: 0;
   height: 3px;
   width: 0%;
-  background: linear-gradient(90deg, #22c55e, #16a34a);
+  background: linear-gradient(90deg, #68C7EC, #299ec9);
   z-index: 300;
   transition: width 80ms linear;
 }
@@ -145,7 +145,7 @@ body,
   width: 2rem;
   height: 2rem;
   border: 2px solid var(--border);
-  border-top-color: #22c55e;
+  border-top-color: #68C7EC;
   border-radius: 50%;
   animation: bp-spin 0.75s linear infinite;
 }
@@ -249,7 +249,7 @@ body,
 .bp-toc-link.is-active {
   color: var(--text-strong);
   font-weight: 600;
-  border-left-color: #22c55e;
+  border-left-color: #68C7EC;
 }
 
 /* Collapse sidebar below 900px — post fills full width */
@@ -317,7 +317,7 @@ body,
   margin: 0 0 2.5rem;
   font-style: italic;
   padding-left: 1.1rem;
-  border-left: 3px solid #22c55e;
+  border-left: 3px solid #68C7EC;
   animation: bp-fade-up 0.55s ease 0.2s both;
 }
 
@@ -381,7 +381,7 @@ body,
 }
 
 .bp-content a:hover {
-  color: #16a34a;
+  color: #167fa2;
 }
 
 .bp-content img {
@@ -396,7 +396,7 @@ body,
 .bp-content blockquote {
   margin: 2rem 0;
   padding: 0.6rem 1.25rem;
-  border-left: 3px solid #22c55e;
+  border-left: 3px solid #68C7EC;
   color: var(--text-soft);
   font-style: italic;
   font-size: 1.05rem;
@@ -469,7 +469,7 @@ body,
 .bp-location-icon {
   width: 1rem;
   height: 1rem;
-  fill: #22c55e;
+  fill: #68C7EC;
   flex-shrink: 0;
   vertical-align: -0.15em;
   margin-right: 0.2em;

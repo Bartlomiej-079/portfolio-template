@@ -107,7 +107,7 @@ html, body, .pp-shell, .pp-shell * { cursor: auto !important; }
   width: 1.75rem;
   height: 1.75rem;
   border: 2px solid var(--border);
-  border-top-color: #22c55e;
+  border-top-color: #68C7EC;
   border-radius: 50%;
   animation: pp-spin 0.75s linear infinite;
 }
