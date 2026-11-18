@@ -197,7 +197,8 @@ html:not([data-marie-kondo="on"]) body * {
   box-shadow: 10px 10px 0 var(--shadow-strong);
   animation: footer-shadow-pulse var(--shadow-pulse-duration) ease-in-out infinite;
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
   overflow: visible;
   /* Do not create a stacking context here (no backdrop-filter / isolation /
    * z-index). The bubbles canvas is a sibling that must sit between this
@@ -279,20 +280,21 @@ html:not([data-marie-kondo="on"]) body * {
 }
 
 .sidebar {
-  border-right: 2px solid rgba(34, 197, 94, 0.28);
-  padding: 0.85rem 1rem 0.85rem;
+  border-bottom: 2px solid rgba(34, 197, 94, 0.28);
+  padding: 0.65rem 1rem;
   background: rgba(220, 252, 231, 0.3);
   backdrop-filter: blur(var(--glass-blur-sidebar)) saturate(var(--glass-saturate)) hue-rotate(2deg);
   -webkit-backdrop-filter: blur(var(--glass-blur-sidebar)) saturate(var(--glass-saturate)) hue-rotate(2deg);
   display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
   position: sticky;
   top: 0;
-  height: 100vh;
-  height: 100dvh;
-  overflow-y: auto;
-  scroll-padding-bottom: 1rem;
+  min-width: 0;
+  height: auto;
+  overflow: visible;
   box-sizing: border-box;
 }
 
@@ -319,7 +321,7 @@ html:not([data-marie-kondo="on"]) body * {
 
 :root[data-theme="dark"] .sidebar {
   background: rgba(15, 38, 26, 0.55);
-  border-right-color: rgba(34, 197, 94, 0.18);
+  border-bottom-color: rgba(34, 197, 94, 0.18);
 }
 
 :root[data-theme="dark"] .sidebar::before {
@@ -390,21 +392,14 @@ html:not([data-marie-kondo="on"]) body * {
 }
 
 .sidebar-actions {
-  margin-top: auto;
+  margin: 0 0 0 auto;
   flex-shrink: 0;
   border: 2px solid var(--border);
   background: var(--surface-solid);
-  padding: 0.7rem 0.75rem;
-  display: grid;
-  gap: 0.3rem;
-}
-
-@media (min-width: 769px) {
-  .sidebar-actions {
-    position: absolute;
-    bottom: 3.5rem;
-    width: calc(100% - 2rem);
-  }
+  padding: 0.4rem 0.55rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .socials {
@@ -4056,11 +4051,8 @@ html.motion-ready:is([data-perf-mode="on"], [data-marie-kondo="on"]) .markdown-c
 
   .sidebar {
     border-right: 0;
-    border-bottom: 2px solid var(--border);
     padding: 0.65rem;
     position: static;
-    height: auto;
-    overflow-y: visible;
   }
 
   .content {
