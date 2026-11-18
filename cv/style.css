@@ -1012,7 +1012,7 @@ a:hover .ico { fill: var(--link-hot); transform: translateY(-0.12em) scale(1.12)
 @media (max-width: 900px) {
   :root { --u: 1px; }
 
-  .sheet { max-width: 720px; padding: 0 20px 56px; }
+  .sheet { max-width: 720px; padding: calc(56px + env(safe-area-inset-top)) 20px 56px; }
 
   /* The watermarks are a background wash in the single column; clipping
      each section to its own box stops them widening the page. */
@@ -1085,7 +1085,14 @@ a:hover .ico { fill: var(--link-hot); transform: translateY(-0.12em) scale(1.12)
   .standfirst { font-size: 16px; max-width: none; margin-top: 12px; }
   .crumb { font-size: 14px; }
 
-  .floating-nav { top: auto; bottom: 12px; right: 12px; }
+  .floating-nav {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: auto;
+    left: max(12px, env(safe-area-inset-left));
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
   .floating-nav .pill {
     font-size: 11.5px;
     padding: 6px 11px;
@@ -1097,7 +1104,7 @@ a:hover .ico { fill: var(--link-hot); transform: translateY(-0.12em) scale(1.12)
 }
 
 @media (max-width: 420px) {
-  .sheet { padding: 0 15px 40px; }
+  .sheet { padding: calc(56px + env(safe-area-inset-top)) 15px 40px; }
   .prose, .bullets { font-size: 15px; }
 }
 

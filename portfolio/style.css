@@ -992,7 +992,14 @@ body.past-hero .floating-nav .pill--cv {
   .hero-meta { font-size: clamp(12.5px, 3.4vw, 15px); line-height: 1.42; }
   .hero-meta p + p { margin-top: 1px; }
 
-  .floating-nav { top: auto; bottom: 12px; right: 12px; }
+  .floating-nav {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: auto;
+    left: max(12px, env(safe-area-inset-left));
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
   .floating-nav .pill {
     font-size: 11.5px;
     padding: 6px 11px;
