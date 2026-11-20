@@ -62,7 +62,7 @@
 </div>
 
 <div class="site-footer-inner site-footer-inner--nav wow animated fadeIn" data-wow-delay="0.25s">
-    <p class="site-footer-tiny" data-i18n-html="footer.releaseLog">First publication: January 1st 2026. Latest update: November 18th 2026. See release log <a href="./releases">here.</a></p>
+    <p class="site-footer-tiny" data-i18n-html="footer.releaseLog">First publication: January 1st 2026. Latest update: November 20th 2026. See release log <a href="./releases">here.</a></p>
     <div class="site-footer-social" id="footer-social-links">
         <details class="footer-nav-accordion" id="footer-nav-accordion">
             <summary class="footer-nav-summary">

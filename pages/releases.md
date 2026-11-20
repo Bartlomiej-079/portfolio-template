@@ -36,5 +36,6 @@ Wszystkie godziny podano w strefie UTC (GMT+0). Numery wersji mają format v{maj
 <li data-commit="1783ff7">v1.0.8 (2026-11-18 17:25): Update site color palette</li>
 <li data-commit="e0ce865">v1.0.9 (2026-11-18 17:27): Personalize homepage greeting</li>
 <li data-commit="4724590">v1.0.10 (2026-11-18 17:55): Replace music nav tab with designs gallery</li>
+<li data-commit="571ccda">v1.0.11 (2026-11-20 11:44): chore: deploy Polish localization</li>
 </ul>
 </details>
