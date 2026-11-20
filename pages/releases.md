@@ -38,5 +38,6 @@ Wszystkie godziny podano w strefie UTC (GMT+0). Numery wersji mają format v{maj
 <li data-commit="4724590">v1.0.10 (2026-11-18 17:55): Replace music nav tab with designs gallery</li>
 <li data-commit="571ccda">v1.0.11 (2026-11-20 11:44): chore: deploy Polish localization</li>
 <li data-commit="49747bf">v1.0.12 (2026-11-20 11:51): fix: show Polish name and flag in language dropdown</li>
+<li data-commit="2d2d31f">v1.0.13 (2026-11-20 14:58): this is cool</li>
 </ul>
 </details>
