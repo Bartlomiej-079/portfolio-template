@@ -40,25 +40,37 @@
 
 /* ── Light mode ─────────────────────────────────────────────────── */
 :root {
-  --glass-blur:          14px;   /* was 24px — reduce to taste */
-  --glass-saturate:      150%;   /* was 180% */
-  --glass-blur-card:     12px;   /* cards */
-  --glass-blur-modal:    24px;   /* modals / lightbox */
-  --glass-blur-subtle:   7px;    /* chips, nav buttons */
-  --glass-blur-sidebar:  16px;   /* sidebar panel */
+  --glass-blur: 14px;
+  /* was 24px — reduce to taste */
+  --glass-saturate: 150%;
+  /* was 180% */
+  --glass-blur-card: 12px;
+  /* cards */
+  --glass-blur-modal: 24px;
+  /* modals / lightbox */
+  --glass-blur-subtle: 7px;
+  /* chips, nav buttons */
+  --glass-blur-sidebar: 16px;
+  /* sidebar panel */
 
-  --glass-bg:            rgba(255, 255, 255, 0.40);  /* was 0.52 */
-  --glass-bg-strong:     rgba(255, 255, 255, 0.60);  /* was 0.72 */
-  --glass-border:        rgba(255, 255, 255, 0.62);
-  --glass-shadow:        rgba(0, 15, 15, 0.10);
-  --glass-highlight:     rgba(255, 255, 255, 0.78);  /* was 0.88 */
+  --glass-bg: rgba(255, 255, 255, 0.40);
+  /* was 0.52 */
+  --glass-bg-strong: rgba(255, 255, 255, 0.60);
+  /* was 0.72 */
+  --glass-border: rgba(255, 255, 255, 0.62);
+  --glass-shadow: rgba(20, 83, 45, 0.10);
+  --glass-highlight: rgba(255, 255, 255, 0.78);
+  /* was 0.88 */
 }
 
 /* ── Dark mode ──────────────────────────────────────────────────── */
 :root[data-theme="dark"] {
-  --glass-bg:            rgba(0, 15, 15, 0.55);
-  --glass-bg-strong:     rgba(3, 24, 26, 0.70);
-  --glass-border:        rgba(255, 255, 255, 0.09);
-  --glass-shadow:        rgba(0, 0, 0, 0.42);
-  --glass-highlight:     rgba(255, 255, 255, 0.05); /* was 0.06 */
+  --glass-bg: rgba(12, 24, 18, 0.45);
+  /* was 0.52 */
+  --glass-bg-strong: rgba(15, 30, 22, 0.62);
+  /* was 0.72 */
+  --glass-border: rgba(255, 255, 255, 0.09);
+  --glass-shadow: rgba(0, 0, 0, 0.38);
+  --glass-highlight: rgba(255, 255, 255, 0.05);
+  /* was 0.06 */
 }
